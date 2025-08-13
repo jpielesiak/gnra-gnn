@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 from typing import List, Tuple
 from itertools import combinations
-
+import random
 import numpy as np
 import pandas as pd
 from rnapolis.parser_v2 import parse_cif_atoms
@@ -295,11 +295,18 @@ def processIntoSequences(dfs: List[pd.DataFrame]) -> pd.DataFrame:
         if "auth_comp_id" not in df.columns:
             print("Warning: 'auth_comp_id' column not found in DataFrame")
             continue
-        # legal_letters = {"C", "U", "G", "A"}
-        # df2 = df[df["auth_comp_id"].isin(legal_letters)]
-        # if len(df2) != 8:
-        #     print(f"Skipping DataFrame with {len(df2)} rows after filtering (expected 8)")
-        #     print(df)
+        legal_letters = {"C", "U", "G", "A"}
+        df2 = df[df["auth_comp_id"].isin(legal_letters)]
+        if len(df2) != 8:
+            print(f" DataFrame with illegal letters detected, saving to incorrectDf folder")
+            r = random.randint(0, 10000) #random seed id to ensure file name is unique
+            #get the first value of source_file column
+            if "source_file" not in df.columns: 
+                print("Warning: 'source_file' column not found in DataFrame")
+                df["source_file"] = "unknown"       
+            name = df["source_file"].iloc[0]
+
+            df.to_csv(f'incorrectDf/incorrect{name}_{r}.csv', index=False)
         #     continue
         sequence = "".join(df["auth_comp_id"].tolist())
         sequences.append(sequence)
@@ -353,17 +360,19 @@ def processForSeqAndNtCords():
     negative_dfs_seqs.to_csv('negative_seq.csv', index=False)
 
 if __name__ == "__main__":
-    #read geometric_features.csv file as dataframe
-    geometric_features_file = "geometric_features.csv"
+    processForSeqAndNtCords()
+
+    # #read geometric_features.csv file as dataframe
+    # geometric_features_file = "geometric_features.csv"
     
-    if not os.path.exists(geometric_features_file):
-        print(f"File {geometric_features_file} does not exist. Please run the previous script to generate it.")
-        exit(1)
-    #open geometric_features.csv as dataframe
-    gf = pd.read_csv(geometric_features_file)
-    df= filterOutIndexes(gf)
-    df.to_csv('filtered_geometric_features.csv', index=False)
-    #processForSeqAndNtCords()
+    # if not os.path.exists(geometric_features_file):
+    #     print(f"File {geometric_features_file} does not exist. Please run the previous script to generate it.")
+    #     exit(1)
+    # #open geometric_features.csv as dataframe
+    # gf = pd.read_csv(geometric_features_file)
+    # df= filterOutIndexes(gf)
+    # df.to_csv('filtered_geometric_features.csv', index=False)
+    
 
 # C:\Users\jmp\Downloads\rnative-competition-tests\gnra-gnn\08-data-extraction-GNN.py
 # /mnt/c/Users/jmp/Downloads/rnative-competition-tests/gnra-gnn/08-data-extraction-GNN.py

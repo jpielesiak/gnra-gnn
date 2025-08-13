@@ -1,0 +1,9 @@
+group_PDB,id,type_symbol,label_atom_id,label_alt_id,label_comp_id,label_asym_id,label_entity_id,label_seq_id,pdbx_PDB_ins_code,Cartn_x,Cartn_y,Cartn_z,occupancy,B_iso_or_equiv,pdbx_formal_charge,auth_seq_id,auth_comp_id,auth_asym_id,auth_atom_id,pdbx_PDB_model_num,source_file
+ATOM,272099,C,C1',,C,AD,54,2248,,-103.078,-51.968,19.818,1.0,19.4,,2248,C,DA,C1',1,loops_5j7l_0077
+ATOM,272119,C,C1',,U,AD,54,2249,,-101.395,-51.797,14.618,1.0,27.59,,2249,U,DA,C1',1,loops_5j7l_0077
+ATOM,272139,C,C1',,G,AD,54,2250,,-101.94,-56.772,7.906,1.0,21.46,,2250,G,DA,C1',1,loops_5j7l_0077
+HETATM,272163,C,C1',,OMG,AD,54,2251,,-93.736,-53.989,9.625,1.0,21.65,,2251,OMG,DA,C1',1,loops_5j7l_0077
+ATOM,272186,C,C1',,G,AD,54,2252,,-93.085,-49.558,12.396,1.0,27.78,,2252,G,DA,C1',1,loops_5j7l_0077
+ATOM,272209,C,C1',,G,AD,54,2253,,-94.422,-44.448,12.205,1.0,32.44,,2253,G,DA,C1',1,loops_5j7l_0077
+ATOM,272232,C,C1',,C,AD,54,2254,,-98.48,-40.705,11.197,1.0,36.52,,2254,C,DA,C1',1,loops_5j7l_0077
+ATOM,272252,C,C1',,G,AD,54,2255,,-103.881,-40.91,11.781,1.0,30.48,,2255,G,DA,C1',1,loops_5j7l_0077

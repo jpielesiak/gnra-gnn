@@ -1,0 +1,9 @@
+group_PDB,id,type_symbol,label_atom_id,label_alt_id,label_comp_id,label_asym_id,label_entity_id,label_seq_id,pdbx_PDB_ins_code,Cartn_x,Cartn_y,Cartn_z,occupancy,B_iso_or_equiv,pdbx_formal_charge,auth_seq_id,auth_comp_id,auth_asym_id,auth_atom_id,pdbx_PDB_model_num,source_file
+ATOM,32485,C,C1',,G,A,1,1514,,-79.806,11.712,3.027,1.0,44.46,,1514,G,AA,C1',1,HL_5J7L_031
+ATOM,32508,C,C1',,G,A,1,1515,,-84.891,10.005,2.589,1.0,47.46,,1515,G,AA,C1',1,HL_5J7L_031
+HETATM,32531,C,C1',,2MG,A,1,1516,,-89.476,9.021,-0.168,1.0,50.03,,1516,2MG,AA,C1',1,HL_5J7L_031
+ATOM,32555,C,C1',,G,A,1,1517,,-95.053,5.939,-5.358,1.0,51.13,,1517,G,AA,C1',1,HL_5J7L_031
+HETATM,32577,C,C1',,MA6,A,1,1518,,-94.329,10.579,-7.983,1.0,45.85,,1518,MA6,AA,C1',1,HL_5J7L_031
+HETATM,32601,C,C1',,MA6,A,1,1519,,-93.833,15.709,-8.701,1.0,47.84,,1519,MA6,AA,C1',1,HL_5J7L_031
+ATOM,32626,C,C1',,C,A,1,1520,,-90.592,16.208,-4.283,1.0,50.2,,1520,C,AA,C1',1,HL_5J7L_031
+ATOM,32646,C,C1',,C,A,1,1521,,-89.33,16.502,1.337,1.0,47.87,,1521,C,AA,C1',1,HL_5J7L_031

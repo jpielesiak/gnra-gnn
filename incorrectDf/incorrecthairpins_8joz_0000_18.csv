@@ -1,0 +1,9 @@
+group_PDB,id,type_symbol,label_atom_id,label_alt_id,label_comp_id,label_asym_id,label_entity_id,label_seq_id,pdbx_PDB_ins_code,Cartn_x,Cartn_y,Cartn_z,occupancy,B_iso_or_equiv,pdbx_formal_charge,auth_seq_id,auth_comp_id,auth_asym_id,auth_atom_id,pdbx_PDB_model_num,source_file
+ATOM,2748,C,C1',,U,B,2,32,,1.638,-0.052,23.027,1.0,35.9,,31,U,B,C1',1,hairpins_8joz_0000
+HETATM,2765,C,C1',,OMC,B,2,33,,0.358,-0.851,28.395,1.0,35.57,,32,OMC,B,C1',1,hairpins_8joz_0000
+ATOM,2789,C,C1',,U,B,2,34,,-2.221,-4.445,35.15,1.0,31.7,,33,U,B,C1',1,hairpins_8joz_0000
+HETATM,2819,C,C1',,CM0,B,2,35,,-8.427,-9.95,33.382,1.0,31.37,,34,CM0,B,C1',1,hairpins_8joz_0000
+ATOM,2834,C,C1',,G,B,2,36,,-6.842,-1.785,36.297,1.0,34.66,,35,G,B,C1',1,hairpins_8joz_0000
+ATOM,2857,C,C1',,A,B,2,37,,-9.29,2.888,34.904,1.0,39.08,,36,A,B,C1',1,hairpins_8joz_0000
+HETATM,2879,C,C1',,ZJS,B,2,38,,-6.706,7.237,33.914,1.0,46.89,,37,ZJS,B,C1',1,hairpins_8joz_0000
+ATOM,2906,C,C1',,A,B,2,39,,-2.245,9.071,32.658,1.0,47.88,,38,A,B,C1',1,hairpins_8joz_0000
