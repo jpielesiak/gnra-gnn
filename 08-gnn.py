@@ -349,73 +349,74 @@ def test(loader):
 
 
 
-#MAIN
-data = pd.read_csv("./database/database_C1'.csv", sep=',', index_col=0)
-data= data.map(parse_point)
-data['class'] = 1
-data
+# #MAIN
+# data = pd.read_csv("./database/database_C1'.csv", sep=',', index_col=0)
+# data= data.map(parse_point)
+# data['class'] = 1
+# data
 
-#stems
-d1 = pd.read_csv("./stems_database_C1'.csv", sep=',', index_col=0)
-# for column in d1.columns[:-1]:
-#     if d1[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
-#         d1[column] = pd.to_numeric(d1[column])
-    #d1[column] = d1[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
-d1=d1.map(parse_point)
-d1 = d1.reset_index(drop=True)
+# #stems
+# d1 = pd.read_csv("./stems_database_C1'.csv", sep=',', index_col=0)
+# # for column in d1.columns[:-1]:
+# #     if d1[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
+# #         d1[column] = pd.to_numeric(d1[column])
+#     #d1[column] = d1[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
+# d1=d1.map(parse_point)
+# d1 = d1.reset_index(drop=True)
 
-#hairpins
-d2 = pd.read_csv("./hairpins_database_C1'.csv", index_col=0, sep=',')
-# for column in d2.columns[:-1]:
-#     if d2[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
-#         d2[column] = pd.to_numeric(d2[column])
-#     d2[column] = d2[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
-d2=d2.map(parse_point)
-d2 = d2.reset_index(drop=True)
-d2
+# #hairpins
+# d2 = pd.read_csv("./hairpins_database_C1'.csv", index_col=0, sep=',')
+# # for column in d2.columns[:-1]:
+# #     if d2[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
+# #         d2[column] = pd.to_numeric(d2[column])
+# #     d2[column] = d2[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
+# d2=d2.map(parse_point)
+# d2 = d2.reset_index(drop=True)
+# d2
 
-#internal loops
-d3 = pd.read_csv("./loops_database_C1'.csv", sep=',', index_col=0)
-# for column in d3.columns[:-1]:
-#     if d3[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
-#         d3[column] = pd.to_numeric(d3[column])
-    #d3[column] = d3[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
-d3=d3.map(parse_point)
-d3 = d3.reset_index(drop=True)
-d3
+# #internal loops
+# d3 = pd.read_csv("./loops_database_C1'.csv", sep=',', index_col=0)
+# # for column in d3.columns[:-1]:
+# #     if d3[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
+# #         d3[column] = pd.to_numeric(d3[column])
+#     #d3[column] = d3[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
+# d3=d3.map(parse_point)
+# d3 = d3.reset_index(drop=True)
+# d3
 
-#ends
-d4 = pd.read_csv("./ends_database_C1'.csv", sep=',', index_col=0)
-# for column in d4.columns[:-1]:
-#     if d4[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
-#         d4[column] = pd.to_numeric(d4[column])
-#     d4[column] = d4[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
-d4=d4.map(parse_point)
-d4 = d4.reset_index(drop=True)
-d4
+# #ends
+# d4 = pd.read_csv("./ends_database_C1'.csv", sep=',', index_col=0)
+# # for column in d4.columns[:-1]:
+# #     if d4[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
+# #         d4[column] = pd.to_numeric(d4[column])
+# #     d4[column] = d4[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
+# d4=d4.map(parse_point)
+# d4 = d4.reset_index(drop=True)
+# d4
 
-#mix
-d5 = pd.read_csv("./mix_database_C1'.csv", sep=',', index_col=0)
-# for column in d5.columns[:-1]:
-#     if d5[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
-#         d5[column] = pd.to_numeric(d5[column])
-    #d5[column] = d5[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
-d5=d5.map(parse_point)
-d5 = d5.reset_index(drop=True)
-d5
+# #mix
+# d5 = pd.read_csv("./mix_database_C1'.csv", sep=',', index_col=0)
+# # for column in d5.columns[:-1]:
+# #     if d5[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
+# #         d5[column] = pd.to_numeric(d5[column])
+#     #d5[column] = d5[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
+# d5=d5.map(parse_point)
+# d5 = d5.reset_index(drop=True)
+# d5
 
-#mix_with_seqs_assigned
-d5v2 = pd.read_csv("./mix_database_C1_v2'.csv", sep=',', index_col=0)
-# for column in d5v2.columns[:-1]:
-#     if d5v2[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
-#        d5v2[column] = pd.to_numeric(d5v2[column])
-    #d5v2[column] = d5v2[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
-d5v2=d5v2.map(parse_point)
-d5v2 = d5v2.reset_index(drop=True)
-d5v2
-
-data_full = pd.concat([data, d1, d2, d3, d4, d5v2[:70]])
-data_full
+# #mix_with_seqs_assigned
+# d5v2 = pd.read_csv("./mix_database_C1_v2'.csv", sep=',', index_col=0)
+# # for column in d5v2.columns[:-1]:
+# #     if d5v2[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
+# #        d5v2[column] = pd.to_numeric(d5v2[column])
+#     #d5v2[column] = d5v2[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
+# d5v2=d5v2.map(parse_point)
+# d5v2 = d5v2.reset_index(drop=True)
+# d5v2
+dpos = pd.read_csv("positve.csv", sep=',', index_col=0)
+dneg = pd.read_csv("negative.csv", sep=',', index_col=0)
+data_full = pd.concat([dneg, dpos])
+print(data_full)
 
 # Reading sequences data from CSV file
 import csv
