@@ -1,9 +1,0 @@
-group_PDB,id,type_symbol,label_atom_id,label_alt_id,label_comp_id,label_asym_id,label_entity_id,label_seq_id,pdbx_PDB_ins_code,Cartn_x,Cartn_y,Cartn_z,occupancy,B_iso_or_equiv,pdbx_formal_charge,auth_seq_id,auth_comp_id,auth_asym_id,auth_atom_id,pdbx_PDB_model_num,source_file
-HETATM,3702,C,C1',,CFZ,D,2,10,,-9.315,34.31,25.891,1.0,46.54,,10,CFZ,U,C1',1,HL_3AGV_001
-HETATM,3722,C,C1',,CFZ,D,2,11,,-12.59,38.973,24.453,1.0,51.23,,11,CFZ,U,C1',1,HL_3AGV_001
-ATOM,3744,C,C1',,G,D,2,12,,-11.59,43.135,21.755,1.0,83.08,,12,G,U,C1',1,HL_3AGV_001
-ATOM,3767,C,C1',,A,D,2,13,,-9.614,45.681,14.945,1.0,107.08,,13,A,U,C1',1,HL_3AGV_001
-ATOM,3789,C,C1',,A,D,2,14,,-7.411,48.641,18.246,1.0,109.41,,14,A,U,C1',1,HL_3AGV_001
-ATOM,3811,C,C1',,A,D,2,15,,-7.356,52.332,23.601,1.0,103.49,,15,A,U,C1',1,HL_3AGV_001
-ATOM,3833,C,C1',,G,D,2,16,,-7.657,48.488,26.757,1.0,72.87,,16,G,U,C1',1,HL_3AGV_001
-ATOM,3856,C,C1',,G,D,2,17,,-8.923,44.545,29.447,1.0,52.5,,17,G,U,C1',1,HL_3AGV_001

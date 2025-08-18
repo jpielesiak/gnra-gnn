@@ -1,0 +1,9 @@
+group_PDB,id,type_symbol,label_atom_id,label_alt_id,label_comp_id,label_asym_id,label_entity_id,label_seq_id,pdbx_PDB_ins_code,Cartn_x,Cartn_y,Cartn_z,occupancy,B_iso_or_equiv,pdbx_formal_charge,auth_seq_id,auth_comp_id,auth_asym_id,auth_atom_id,pdbx_PDB_model_num,source_file
+ATOM,11178,C,C1',,G,A,1,521,,-108.289,14.552,-46.765,1.0,57.07,,521,G,AA,C1',1,HL_5J7L_205
+ATOM,11201,C,C1',,C,A,1,522,,-104.561,19.051,-47.436,1.0,54.47,,522,C,AA,C1',1,HL_5J7L_205
+ATOM,11221,C,C1',,A,A,1,523,,-99.921,21.144,-45.89,1.0,56.01,,523,A,AA,C1',1,HL_5J7L_205
+ATOM,11243,C,C1',,G,A,1,524,,-92.91,24.802,-48.136,1.0,56.2,,524,G,AA,C1',1,HL_5J7L_205
+ATOM,11266,C,C1',,C,A,1,525,,-93.955,27.984,-43.453,1.0,56.54,,525,C,AA,C1',1,HL_5J7L_205
+ATOM,11286,C,C1',,C,A,1,526,,-98.159,29.977,-40.474,1.0,59.05,,526,C,AA,C1',1,HL_5J7L_205
+HETATM,11306,C,C1',,G7M,A,1,527,,-102.277,26.629,-40.596,1.0,60.57,,527,G7M,AA,C1',1,HL_5J7L_205
+ATOM,11330,C,C1',,C,A,1,528,,-107.07,24.417,-43.254,1.0,61.39,,528,C,AA,C1',1,HL_5J7L_205

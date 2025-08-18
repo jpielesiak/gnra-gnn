@@ -422,37 +422,53 @@ print(data_full)
 import csv
 seqs = []
 
-with open("./database/database_C1'_seqs.csv", 'r') as csvfile:
-    csvreader = csv.reader(csvfile)
-    for row in csvreader:
-        seqs.append(row[0])
+# with open("./database/database_C1'_seqs.csv", 'r') as csvfile:
+#     csvreader = csv.reader(csvfile)
+#     for row in csvreader:
+#         seqs.append(row[0])
 
-with open("./stems_database_C1'_seqs.csv", 'r') as csvfile:
-    csvreader = csv.reader(csvfile)
-    for row in csvreader:
-        seqs.append(row[0])
+# with open("./stems_database_C1'_seqs.csv", 'r') as csvfile:
+#     csvreader = csv.reader(csvfile)
+#     for row in csvreader:
+#         seqs.append(row[0])
 
-with open("./hairpins_database_C1'_seqs.csv", 'r') as csvfile:
-    csvreader = csv.reader(csvfile)
-    for row in csvreader:
-        seqs.append(row[0])
+# with open("./hairpins_database_C1'_seqs.csv", 'r') as csvfile:
+#     csvreader = csv.reader(csvfile)
+#     for row in csvreader:
+#         seqs.append(row[0])
 
-with open("./loops_database_C1'_seqs.csv", 'r') as csvfile:
-    csvreader = csv.reader(csvfile)
-    for row in csvreader:
-        seqs.append(row[0])
+# with open("./loops_database_C1'_seqs.csv", 'r') as csvfile:
+#     csvreader = csv.reader(csvfile)
+#     for row in csvreader:
+#         seqs.append(row[0])
 
-with open("./ends_database_C1'_seqs.csv", 'r') as csvfile:
-    csvreader = csv.reader(csvfile)
-    for row in csvreader:
-        seqs.append(row[0])
+# with open("./ends_database_C1'_seqs.csv", 'r') as csvfile:
+#     csvreader = csv.reader(csvfile)
+#     for row in csvreader:
+#         seqs.append(row[0])
 
-with open("./mix_database_C1'_seqs_v2.csv", 'r') as csvfile:
+# with open("./mix_database_C1'_seqs_v2.csv", 'r') as csvfile:
+#     csvreader = csv.reader(csvfile)
+#     for row in csvreader:
+#         if len(seqs) == data_full.shape[0]:
+#             break
+#         seqs.append(row[0])
+with open("positve_seq.csv", 'r') as csvfile:
     csvreader = csv.reader(csvfile)
     for row in csvreader:
         if len(seqs) == data_full.shape[0]:
             break
         seqs.append(row[0])
+with open("negative_seq.csv", 'r') as csvfile:
+    csvreader = csv.reader(csvfile)
+    for row in csvreader:
+        if len(seqs) == data_full.shape[0]:
+            break
+        seqs.append(row[0])        
+
+
+
+
 
 planar_angles_full = []
 cols =[]

@@ -1,9 +1,0 @@
-group_PDB,id,type_symbol,label_atom_id,label_alt_id,label_comp_id,label_asym_id,label_entity_id,label_seq_id,pdbx_PDB_ins_code,Cartn_x,Cartn_y,Cartn_z,occupancy,B_iso_or_equiv,pdbx_formal_charge,auth_seq_id,auth_comp_id,auth_asym_id,auth_atom_id,pdbx_PDB_model_num,source_file
-ATOM,41007,C,C1',,G,A,1,1931,,110.947,-1.766,1.252,1.0,66.43,,1910,G,1A,C1',1,hairpins_9dfe_0017
-HETATM,41027,C,C1',,PSU,A,1,1932,,108.796,1.545,4.918,1.0,61.38,,1911,PSU,1A,C1',1,hairpins_9dfe_0017
-ATOM,41050,C,C1',,A,A,1,1933,,105.655,3.729,11.335,1.0,60.28,,1912,A,1A,C1',1,hairpins_9dfe_0017
-ATOM,41072,C,C1',,A,A,1,1934,,108.463,6.021,18.682,1.0,83.92,,1913,A,1A,C1',1,hairpins_9dfe_0017
-ATOM,41094,C,C1',,C,A,1,1935,,109.28,-2.708,21.439,1.0,78.32,,1914,C,1A,C1',1,hairpins_9dfe_0017
-HETATM,41112,C,C1',,5MU,A,1,1936,,107.247,-6.474,18.769,1.0,71.5,,1915,5MU,1A,C1',1,hairpins_9dfe_0017
-ATOM,41135,C,C1',,A,A,1,1937,,103.783,-7.068,15.095,1.0,70.23,,1916,A,1A,C1',1,hairpins_9dfe_0017
-HETATM,41154,C,C1',,PSU,A,1,1938,,101.655,-5.032,11.04,1.0,69.12,,1917,PSU,1A,C1',1,hairpins_9dfe_0017

@@ -1,9 +1,0 @@
-group_PDB,id,type_symbol,label_atom_id,label_alt_id,label_comp_id,label_asym_id,label_entity_id,label_seq_id,pdbx_PDB_ins_code,Cartn_x,Cartn_y,Cartn_z,occupancy,B_iso_or_equiv,pdbx_formal_charge,auth_seq_id,auth_comp_id,auth_asym_id,auth_atom_id,pdbx_PDB_model_num,source_file
-ATOM,2168,C,C1',,C,B,2,79,,40.234,-17.981,150.763,1.0,101.7,,79,C,B,C1',1,stems_7jnh_0001
-ATOM,2188,C,C1',,U,B,2,80,,44.847,-16.316,154.199,1.0,102.06,,80,U,B,C1',1,stems_7jnh_0001
-ATOM,2208,C,C1',,C,B,2,81,,46.117,-15.365,158.731,1.0,114.57,,81,C,B,C1',1,stems_7jnh_0001
-ATOM,2228,C,C1',,A,B,2,82,,45.66,-14.305,164.108,1.0,112.1,,82,A,B,C1',1,stems_7jnh_0001
-ATOM,2250,C,C1',,G,B,2,83,,43.113,-15.152,168.565,1.0,127.74,,83,G,B,C1',1,stems_7jnh_0001
-ATOM,2273,C,C1',,C,B,2,84,,40.067,-18.129,171.142,1.0,133.32,,84,C,B,C1',1,stems_7jnh_0001
-ATOM,2293,C,C1',,C,B,2,85,,36.05,-22.035,172.536,1.0,152.96,,85,C,B,C1',1,stems_7jnh_0001
-HETATM,2316,C,C1',,CCC,B,2,86,,34.53,-27.286,173.144,1.0,167.97,,86,CCC,B,C1',1,stems_7jnh_0001

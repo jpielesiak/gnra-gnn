@@ -1,9 +1,0 @@
-group_PDB,id,type_symbol,label_atom_id,label_alt_id,label_comp_id,label_asym_id,label_entity_id,label_seq_id,pdbx_PDB_ins_code,Cartn_x,Cartn_y,Cartn_z,occupancy,B_iso_or_equiv,pdbx_formal_charge,auth_seq_id,auth_comp_id,auth_asym_id,auth_atom_id,pdbx_PDB_model_num,source_file
-HETATM,10167,C,C1',,GTP,B,2,1,,-40.434,12.997,-36.961,1.0,159.54,,1,GTP,A,C1',1,stems_5f9r_0000
-ATOM,10190,C,C1',,G,B,2,2,,-37.111,9.631,-32.833,1.0,147.35,,2,G,A,C1',1,stems_5f9r_0000
-ATOM,10213,C,C1',,C,B,2,3,,-35.274,5.365,-29.161,1.0,130.03,,3,C,A,C1',1,stems_5f9r_0000
-ATOM,10233,C,C1',,G,B,2,4,,-35.516,0.656,-26.551,1.0,112.52,,4,G,A,C1',1,stems_5f9r_0000
-ATOM,10256,C,C1',,C,B,2,5,,-38.065,-3.674,-25.846,1.0,107.22,,5,C,A,C1',1,stems_5f9r_0000
-ATOM,10276,C,C1',,A,B,2,6,,-41.696,-7.818,-27.226,1.0,88.78,,6,A,A,C1',1,stems_5f9r_0000
-ATOM,10298,C,C1',,U,B,2,7,,-44.751,-10.08,-31.361,1.0,90.03,,7,U,A,C1',1,stems_5f9r_0000
-ATOM,10318,C,C1',,A,B,2,8,,-45.611,-10.396,-36.764,1.0,91.87,,8,A,A,C1',1,stems_5f9r_0000

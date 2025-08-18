@@ -257,11 +257,11 @@ def processedIntoCoordinates(dfs: List[pd.DataFrame],arePositive:bool) -> pd.Dat
         if "auth_comp_id" not in df.columns:
             print("Warning: 'auth_comp_id' column not found in DataFrame")
             continue
-        # legal_letters = {"C", "U", "G", "A"}
-        # df = df[df["auth_comp_id"].isin(legal_letters)]
-        # if len(df) != 8:
-        #     print(f"Skipping DataFrame with {len(df)} rows after filtering (expected 8)")
-        #     continue
+        legal_letters = {"C", "U", "G", "A"}
+        df = df[df["auth_comp_id"].isin(legal_letters)]
+        if len(df) != 8:
+            print(f"Skipping DataFrame with {len(df)} rows after filtering (expected 8)")
+            continue
         # Extract coordinates and format them
         coordinates = [
             f"{row['Cartn_x']},{row['Cartn_y']},{row['Cartn_z']}"
@@ -299,15 +299,15 @@ def processIntoSequences(dfs: List[pd.DataFrame]) -> pd.DataFrame:
         df2 = df[df["auth_comp_id"].isin(legal_letters)]
         if len(df2) != 8:
             print(f" DataFrame with illegal letters detected, saving to incorrectDf folder")
-            r = random.randint(0, 10000) #random seed id to ensure file name is unique
-            #get the first value of source_file column
-            if "source_file" not in df.columns: 
-                print("Warning: 'source_file' column not found in DataFrame")
-                df["source_file"] = "unknown"       
-            name = df["source_file"].iloc[0]
+            # r = random.randint(0, 10000) #random seed id to ensure file name is unique
+            # #get the first value of source_file column
+            # if "source_file" not in df.columns: 
+            #     print("Warning: 'source_file' column not found in DataFrame")
+            #     df["source_file"] = "unknown"       
+            # name = df["source_file"].iloc[0]
 
-            df.to_csv(f'incorrectDf/incorrect{name}_{r}.csv', index=False)
-        #     continue
+            # df.to_csv(f'incorrectDf/incorrect{name}_{r}.csv', index=False)
+            continue
         sequence = "".join(df["auth_comp_id"].tolist())
         sequences.append(sequence)
 
@@ -359,16 +359,48 @@ def processForSeqAndNtCords():
     positive_dfs_seqs.to_csv('positve_seq.csv', index=False)
     negative_dfs_seqs.to_csv('negative_seq.csv', index=False)
 
+def filterIncorrectFromDataset(df):
+    #open incorrectDf folder and get the names of incorrect positions
+    #currently, the incorrectDf folder has names built like incorrect{name}_{r}.csv
+    #what we therefore need is to get the names, and then remove the incorrect rows from the df
+    incorrect_files = glob.glob("incorrectDf/incorrect*.csv")   
+    # Extract the original name between 'incorrect' and the last '_' (before the random number)
+    incorrect_names = []
+    for f in incorrect_files:
+        base = os.path.basename(f)
+        if base.startswith("incorrect") and base.endswith(".csv"):
+            # Remove 'incorrect' prefix and '.csv' suffix
+            name = base[len("incorrect"):-4]
+            # Remove the last '_<random>' part
+            name = "_".join(name.split("_")[:-1])
+            incorrect_names.append(name)
+    print(f"incorrect files: {incorrect_names}")
+    #now we have a list of incorrect names, we can filter out the rows from the df
+    filtered_df = df[~df["source_file"].isin(incorrect_names)]
+    return filtered_df
+
 if __name__ == "__main__":
     processForSeqAndNtCords()
 
-    # #read geometric_features.csv file as dataframe
+    #read geometric_features.csv file as dataframe
     # geometric_features_file = "geometric_features.csv"
     
     # if not os.path.exists(geometric_features_file):
     #     print(f"File {geometric_features_file} does not exist. Please run the previous script to generate it.")
     #     exit(1)
-    # #open geometric_features.csv as dataframe
+    #open geometric_features.csv as dataframe
+
+    #remove the rows with incorrect names from the geometric_features.csv
+    # gf = pd.read_csv(geometric_features_file)
+    # gf2 =  filterIncorrectFromDataset(gf)
+    # gf2.to_csv('geometric_features_filtered.csv', index=False)
+
+    #remove unnecesary columns from the geometric_features.csv
+    # geometric_features_file = "geometric_features_filtered.csv"
+    
+    # if not os.path.exists(geometric_features_file):
+    #     print(f"File {geometric_features_file} does not exist. Please run the previous script to generate it.")
+    #     exit(1)
     # gf = pd.read_csv(geometric_features_file)
     # df= filterOutIndexes(gf)
     # df.to_csv('filtered_geometric_features.csv', index=False)

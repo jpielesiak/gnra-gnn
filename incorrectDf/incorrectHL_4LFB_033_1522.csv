@@ -1,9 +1,0 @@
-group_PDB,id,type_symbol,label_atom_id,label_alt_id,label_comp_id,label_asym_id,label_entity_id,label_seq_id,pdbx_PDB_ins_code,Cartn_x,Cartn_y,Cartn_z,occupancy,B_iso_or_equiv,pdbx_formal_charge,auth_seq_id,auth_comp_id,auth_asym_id,auth_atom_id,pdbx_PDB_model_num,source_file
-ATOM,10726,C,C1',,G,A,1,505,,182.635,89.89,14.843,1.0,78.04,,521,G,A,C1',1,HL_4LFB_033
-ATOM,10749,C,C1',,C,A,1,506,,178.105,93.23,12.793,1.0,71.62,,522,C,A,C1',1,HL_4LFB_033
-ATOM,10769,C,C1',,A,A,1,507,,175.144,93.959,8.49,1.0,82.29,,523,A,A,C1',1,HL_4LFB_033
-ATOM,10791,C,C1',,G,A,1,508,,167.767,95.323,5.897,1.0,72.43,,524,G,A,C1',1,HL_4LFB_033
-ATOM,10814,C,C1',,C,A,1,509,,170.323,99.249,2.399,1.0,67.36,,525,C,A,C1',1,HL_4LFB_033
-ATOM,10834,C,C1',,C,A,1,510,,174.445,102.986,2.654,1.0,74.37,,526,C,A,C1',1,HL_4LFB_033
-HETATM,10854,C,C1',,7MG,A,1,511,,178.31,100.474,5.463,1.0,74.44,,527,7MG,A,C1',1,HL_4LFB_033
-ATOM,10878,C,C1',,C,A,1,512,,181.313,99.467,10.389,1.0,74.69,,528,C,A,C1',1,HL_4LFB_033
