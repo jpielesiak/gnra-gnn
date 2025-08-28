@@ -351,7 +351,7 @@ def processForSeqAndNtCords():
     else:
         positive_dfs = pd.DataFrame()
     if negative_dfs:
-        negative_dfs_cord = processedIntoCoordinates(negative_dfs,True)
+        negative_dfs_cord = processedIntoCoordinates(negative_dfs,False)
         negative_dfs_seqs = processIntoSequences(negative_dfs)
         
     positive_dfs_cord.to_csv('positve.csv', index=False)

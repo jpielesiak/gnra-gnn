@@ -470,77 +470,77 @@ with open("negative_seq.csv", 'r') as csvfile:
 
 
 
-planar_angles_full = []
-cols =[]
-def is_bad(cell):
-    return isinstance(cell, str) and (',' in cell or cell.startswith('['))
+# planar_angles_full = []
+# cols =[]
+# def is_bad(cell):
+#     return isinstance(cell, str) and (',' in cell or cell.startswith('['))
 
-bad_cells = data_full.map(is_bad)
-print("Bad cells:\n", bad_cells.any())  # Shows which columns have bad entries
-print(data_full.map(lambda x: x.shape if isinstance(x, np.ndarray) else None))
+# bad_cells = data_full.map(is_bad)
+# print("Bad cells:\n", bad_cells.any())  # Shows which columns have bad entries
+# print(data_full.map(lambda x: x.shape if isinstance(x, np.ndarray) else None))
 
-for row in data_full.iloc[:, :-1].values:
-    tmp = []
-    for i in range(len(row) - 2):
-        for j in range(i + 1, len(row) - 1):
-            for k in range(j + 1, len(row)):
-                print(f'{row[i]} ]]] {row[j]} ]]] {row[k]} {i},{j},{k}')
-                tmp.append(count_planar_angle_piel(row[i], row[j], row[k]))
-                if len(cols) < 20:
-                    cols.append((i, j, k))
-    planar_angles_full.append(tmp)
+# for row in data_full.iloc[:, :-1].values:
+#     tmp = []
+#     for i in range(len(row) - 2):
+#         for j in range(i + 1, len(row) - 1):
+#             for k in range(j + 1, len(row)):
+#                 print(f'{row[i]} ]]] {row[j]} ]]] {row[k]} {i},{j},{k}')
+#                 tmp.append(count_planar_angle_piel(row[i], row[j], row[k]))
+#                 if len(cols) < 20:
+#                     cols.append((i, j, k))
+#     planar_angles_full.append(tmp)
+# # for row in data_full.iloc[:,:-1].iterrows():
+# #     tmp = []
+# #     for i in range(len(row[1]) - 2):
+# #         for j in range(i + 1, len(row[1]) - 1):
+# #             for k in range(j + 1, len(row[1])):
+# #                 print(f'{row[1][i]} ]]] {row[1][j]} ]]] {row[1][k]} {i} ,{j},{k}')
+# #                 tmp.append(count_planar_angle(row[1][i], row[1][j], row[1][k]))
+# #                 if len(cols) < 20:
+# #                     cols.append((i,j,k))
+# #     planar_angles_full.append(tmp)
+
+# planar_angles_full = pd.DataFrame(planar_angles_full)
+# planar_angles_full.columns=cols
+# print(planar_angles_full)
+
+
+# torsion_angles = []
+# cols=[]
 # for row in data_full.iloc[:,:-1].iterrows():
 #     tmp = []
-#     for i in range(len(row[1]) - 2):
-#         for j in range(i + 1, len(row[1]) - 1):
-#             for k in range(j + 1, len(row[1])):
-#                 print(f'{row[1][i]} ]]] {row[1][j]} ]]] {row[1][k]} {i} ,{j},{k}')
-#                 tmp.append(count_planar_angle(row[1][i], row[1][j], row[1][k]))
-#                 if len(cols) < 20:
-#                     cols.append((i,j,k))
-#     planar_angles_full.append(tmp)
+#     for i in range(len(row[1])-3):  
+#         for j in range(i+1, len(row[1])-2):  
+#             for k in range(j+1, len(row[1])-1):
+#                 for l in range(k+1, len(row[1])):
+#                     tmp.append(count_torsion_angle(row[1][i], row[1][j], row[1][k], row[1][l]))
+#                     if len(cols) < 15:
+#                         cols.append((i,j,k,l))
+#     # for combo in combinations(row[1], 4):
+#     #     tmp.append(count_torsion_angle(combo[0], combo[1], combo[2], combo[3]))
+#     torsion_angles.append(tmp)
 
-planar_angles_full = pd.DataFrame(planar_angles_full)
-planar_angles_full.columns=cols
-print(planar_angles_full)
+# torsion_angles_full = pd.DataFrame(torsion_angles)
+# torsion_angles_full.columns=cols
 
-
-torsion_angles = []
-cols=[]
-for row in data_full.iloc[:,:-1].iterrows():
-    tmp = []
-    for i in range(len(row[1])-3):  
-        for j in range(i+1, len(row[1])-2):  
-            for k in range(j+1, len(row[1])-1):
-                for l in range(k+1, len(row[1])):
-                    tmp.append(count_torsion_angle(row[1][i], row[1][j], row[1][k], row[1][l]))
-                    if len(cols) < 15:
-                        cols.append((i,j,k,l))
-    # for combo in combinations(row[1], 4):
-    #     tmp.append(count_torsion_angle(combo[0], combo[1], combo[2], combo[3]))
-    torsion_angles.append(tmp)
-
-torsion_angles_full = pd.DataFrame(torsion_angles)
-torsion_angles_full.columns=cols
-
-### SKALOWANIE ZEBY NIE BYLO UJEMNYCH ###
-for i in range(torsion_angles_full.shape[0]):
-    torsion_angles_full.iloc[i] = torsion_angles_full.iloc[i].apply(lambda x: x+360 if x < 0 else x)
+# ### SKALOWANIE ZEBY NIE BYLO UJEMNYCH ###
+# for i in range(torsion_angles_full.shape[0]):
+#     torsion_angles_full.iloc[i] = torsion_angles_full.iloc[i].apply(lambda x: x+360 if x < 0 else x)
     
-print(torsion_angles_full)
+# print(torsion_angles_full)
 
 
-distances_full = []
-for row in data_full.iloc[:,:-1].iterrows():
-    tmp = []
-    for j in range(0,len(row[1])):
-        for k in range(j+1, len(row[1])):
-            tmp.append(count_euclid_dist(row[1][j], row[1][k]))
-    distances_full.append(tmp)
+# distances_full = []
+# for row in data_full.iloc[:,:-1].iterrows():
+#     tmp = []
+#     for j in range(0,len(row[1])):
+#         for k in range(j+1, len(row[1])):
+#             tmp.append(count_euclid_dist(row[1][j], row[1][k]))
+#     distances_full.append(tmp)
 
-distances_full = pd.DataFrame(distances_full)
-distances_full.columns = [(j,k) for j in range(0, data.shape[1]-1) for k in range(j+1, data.shape[1]-1)]
-print(distances_full)
+# distances_full = pd.DataFrame(distances_full)
+# distances_full.columns = [(j,k) for j in range(0, data.shape[1]-1) for k in range(j+1, data.shape[1]-1)]
+# print(distances_full)
 
 #CREATING THE DATAFRAME
 #CREATING THE DATAFRAME
@@ -548,8 +548,8 @@ print(distances_full)
 #CREATING THE DATAFRAME
 #CREATING THE DATAFRAME
 #CREATING THE DATAFRAME
-df = pd.concat([planar_angles_full, torsion_angles_full, distances_full], axis=1)
-
+#df = pd.concat([planar_angles_full, torsion_angles_full, distances_full], axis=1)
+df = pd.read_csv("filtered_geometric_features.csv", sep=',', index_col=0)
 
 
 
@@ -560,7 +560,7 @@ print(f'Shapiro-Wilk Test: Statistic={stat}, p-value={p_value}')
 
 
 data_full = data_full.reset_index(drop=True)   #base dataframe with nucleotides coords and class
-y = data_full['class']
+y = data_full['is_positive']  #labels
 
 data_full.iloc[180]
 
