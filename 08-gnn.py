@@ -235,6 +235,9 @@ def get_graph_hot_encoding(row, cols):
 
         return graph
 
+def get_all_indexes_from_string(string):
+    #string might contain any number of single digit numbers following one another, e.g ts125 this function will return [1,2,5]
+    return [int(char) for char in string if char.isdigit()]
 
 def get_graph_hot_encoding_continuity(row, cols):
         edges_dict = {(0,1): [], (0,2): [], (0,3): [], (0,4): [], (0,5): [], 
@@ -245,6 +248,10 @@ def get_graph_hot_encoding_continuity(row, cols):
 
         for i in range(len(cols)):
             weigth = row[i]
+            cols_indexes = get_all_indexes_from_string(cols[i])
+            if len(cols_indexes) == 2 and 7 not in cols_indexes: #ignore any indexes that are 7 (8th nucleotide, as we only want nucleotides from 1 to 6)
+                print(cols_indexes)
+                edges_dict[(cols_indexes[0]-1, cols_indexes[1]-1)].append(weigth)
             #if len(cols[i]) == 4:
                 # edges_dict[(cols[i][0], cols[i][1])].append(weigth)
                 # edges_dict[(cols[i][0], cols[i][2])].append(weigth)
@@ -257,11 +264,9 @@ def get_graph_hot_encoding_continuity(row, cols):
             #     edges_dict[(cols[i][0], cols[i][2])].append(weigth)
             #     edges_dict[(cols[i][1], cols[i][2])].append(weigth)
             #else:
-            if len(cols[i])==2:
-                print("edge added between nodes ", cols[i][0], " and ", cols[i][1], " with weight ", weigth)
-                edges_dict[(cols[i][0], cols[i][1])].append(weigth)
-            else :
-                print("Skipping column with unexpected length:", cols[i], "Length:", len(cols[i]))
+            # if len(cols[i])==2:
+            #     edges_dict[(cols[i][0], cols[i][1])].append(weigth)
+           
 
         edge_attr = []
         edge_index_list = []
