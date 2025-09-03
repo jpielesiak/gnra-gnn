@@ -37,6 +37,17 @@ import copy
 #chyba niepotrzebny:
 #import seaborn as sns
 
+def read_sequences(path, max_len):
+    with open(path, 'r') as csvfile:
+        csvreader = csv.reader(csvfile)
+        for row in csvreader:
+            if len(seqs) >= max_len:
+                break
+            seq = row[0].strip()
+            # Only keep rows with uppercase letters (A-Z), ignore headers like "sequence"
+            if re.fullmatch(r"[A-Z]+", seq):
+                seqs.append(seq)
+
 
 def parse_point(cell):
     if pd.isna(cell):
@@ -219,7 +230,7 @@ def get_graph_hot_encoding(row, cols):
                 num_classes=num_classes
             ).to(torch.float32)
 
-        y = torch.tensor([row['class']], dtype=torch.int64)
+        y = torch.tensor([row['is_positive']], dtype=torch.int64)
         graph = Data(edge_index=edge_index_list, edge_attr=edge_attr, y=y, x=x)
 
         return graph
@@ -247,7 +258,10 @@ def get_graph_hot_encoding_continuity(row, cols):
             #     edges_dict[(cols[i][1], cols[i][2])].append(weigth)
             #else:
             if len(cols[i])==2:
+                print("edge added between nodes ", cols[i][0], " and ", cols[i][1], " with weight ", weigth)
                 edges_dict[(cols[i][0], cols[i][1])].append(weigth)
+            else :
+                print("Skipping column with unexpected length:", cols[i], "Length:", len(cols[i]))
 
         edge_attr = []
         edge_index_list = []
@@ -275,7 +289,7 @@ def get_graph_hot_encoding_continuity(row, cols):
             num_classes=num_classes
         ).to(torch.float32)
 
-        y = torch.tensor([row['class']], dtype=torch.int64)
+        y = torch.tensor([row['is_positive']], dtype=torch.int64)
 
         graph = Data(edge_index=edge_index_symmetric, edge_attr=edge_attr_symmetric, y=y, x=x)
         return graph
@@ -413,8 +427,13 @@ def test(loader):
 # d5v2=d5v2.map(parse_point)
 # d5v2 = d5v2.reset_index(drop=True)
 # d5v2
-dpos = pd.read_csv("positve.csv", sep=',', index_col=0)
-dneg = pd.read_csv("negative.csv", sep=',', index_col=0)
+dpos = pd.read_csv("positve.csv", sep=',', index_col=None)#, index_col=0)
+
+print(dpos)
+
+dneg = pd.read_csv("negative.csv", sep=',', index_col=None)#, index_col=0)
+
+print(dneg)
 data_full = pd.concat([dneg, dpos])
 print(data_full)
 
@@ -453,19 +472,26 @@ seqs = []
 #         if len(seqs) == data_full.shape[0]:
 #             break
 #         seqs.append(row[0])
-with open("positve_seq.csv", 'r') as csvfile:
-    csvreader = csv.reader(csvfile)
-    for row in csvreader:
-        if len(seqs) == data_full.shape[0]:
-            break
-        seqs.append(row[0])
-with open("negative_seq.csv", 'r') as csvfile:
-    csvreader = csv.reader(csvfile)
-    for row in csvreader:
-        if len(seqs) == data_full.shape[0]:
-            break
-        seqs.append(row[0])        
+# with open("positve_seq.csv", 'r') as csvfile:
+#     csvreader = csv.reader(csvfile)
+#     for row in csvreader:
+#         if len(seqs) == data_full.shape[0]:
+#             break
+#         seqs.append(row[0])
+# with open("negative_seq.csv", 'r') as csvfile:
+#     csvreader = csv.reader(csvfile)
+#     for row in csvreader:
+#         if len(seqs) == data_full.shape[0]:
+#             break
+#         seqs.append(row[0])        
+# Use shape[0] as maximum allowed
+max_len = data_full.shape[0]
 
+read_sequences("positve_seq.csv", max_len)
+read_sequences("negative_seq.csv", max_len)
+#add a column to data_full with sequences
+data_full['seq'] = seqs
+print(data_full)
 
 
 
@@ -583,7 +609,7 @@ print(("Recall is"), recall_score(y_test, y_pred_GNB) * 100)
 print(("F1 is"), f1_score(y_test, y_pred_GNB) * 100)
 
 df_d = df.copy()
-df_d['class'] = y
+df_d['is_positive'] = y
 
 
 
