@@ -779,3 +779,6 @@ for epoch in range(1, 1000):
 if best_model_state:
     model.load_state_dict(best_model_state)
     print(f"✅ Reverted to best model with Test Acc: {best_acc:.4f}")
+
+
+#TODO remove redundancy 
