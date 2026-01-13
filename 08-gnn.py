@@ -8,7 +8,7 @@ from itertools import combinations
 
 
 from sklearn import preprocessing 
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import StratifiedKFold, train_test_split
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler
@@ -330,7 +330,8 @@ def train():
     model.train()
     for data in train_loader:  # Iterate in batches over the training dataset.  Make France great again
          edge_weight = data.edge_attr[:, 0]  # Only use weights, ignore is_consecutive_flag
-         out = model(data.x, data.edge_index, data.edge_weight, data.batch)  # Perform a single forward pass.
+         out = model(data.x, data.edge_index, edge_weight, data.batch)  # Perform a single forward pass.
+         #out= model(data.x, data.edge_index, data.edge_weight, data.batch)
         #  print(out)
         #  print(data.y)
          loss = criterion(out, data.y)  # Compute the loss.
@@ -345,7 +346,7 @@ def test(loader):
      correct = 0
      for data in loader:  # Iterate in batches over the training/test dataset.
          edge_weight = data.edge_attr[:, 0]  # Only use weights
-         out = model(data.x, data.edge_index, data.edge_weight, data.batch)  
+         out = model(data.x, data.edge_index, edge_weight, data.batch)  #data.edge_weight
          #print(out)
          pred = out.argmax(dim=1)  # Use the class with highest probability.
          #print(pred)
@@ -433,6 +434,10 @@ def test(loader):
 # d5v2 = d5v2.reset_index(drop=True)
 # d5v2
 dpos = pd.read_csv("positve.csv", sep=',', index_col=None)#, index_col=0)
+
+    
+
+
 
 print(dpos)
 
@@ -596,22 +601,85 @@ y = data_full['is_positive']  #labels
 data_full.iloc[180]
 
 
+#use k-fold cross validation
+# K-fold cross-validation setup
+n_splits = 5
+skf = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=42)
 
-#GAUSSIAN BAYASES
-X_train, X_test, y_train, y_test = train_test_split(df, y, test_size=0.2, random_state=12)
+print(f"\nUsing {n_splits}-fold stratified cross-validation.")
 
-gnb = GaussianNB()
-model_GNB = gnb.fit(X_train, y_train)
+# Prepare containers for cross-validated metrics
+cv_results = {
+    "GaussianNB": {"accuracy": [], "precision": [], "recall": [], "f1": []},
+    "SVM": {"accuracy": [], "precision": [], "recall": [], "f1": []},
+}
 
-y_pred_GNB = model_GNB.predict(X_test)
+# Reset indices to be safe
+df = df.reset_index(drop=True)
+y = y.reset_index(drop=True)
 
-confusion_GNB = confusion_matrix(y_test, y_pred_GNB)
-print(confusion_GNB)
-print(("Accuracy is"), accuracy_score(y_test, y_pred_GNB) * 100)
-print(("Accuracy is"), accuracy_score(y_test, y_pred_GNB) * 100)
-print(("Presisions is"), precision_score(y_test, y_pred_GNB) * 100)
-print(("Recall is"), recall_score(y_test, y_pred_GNB) * 100)
-print(("F1 is"), f1_score(y_test, y_pred_GNB) * 100)
+for fold, (train_idx, test_idx) in enumerate(skf.split(df, y)):
+    print(f"\n--- Fold {fold + 1}/{n_splits} ---")
+    X_train, X_test = df.iloc[train_idx], df.iloc[test_idx]
+    y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
+
+    # Gaussian Naive Bayes
+    gnb = GaussianNB()
+    gnb.fit(X_train, y_train)
+    y_pred_gnb = gnb.predict(X_test)
+
+    cv_results["GaussianNB"]["accuracy"].append(accuracy_score(y_test, y_pred_gnb))
+    cv_results["GaussianNB"]["precision"].append(precision_score(y_test, y_pred_gnb))
+    cv_results["GaussianNB"]["recall"].append(recall_score(y_test, y_pred_gnb))
+    cv_results["GaussianNB"]["f1"].append(f1_score(y_test, y_pred_gnb))
+
+    # SVM (with StandardScaler per fold)
+    scaler_fold = StandardScaler()
+    X_train_scaled = scaler_fold.fit_transform(X_train)
+    X_test_scaled = scaler_fold.transform(X_test)
+
+    clf = svm.SVC()
+    clf.fit(X_train_scaled, y_train)
+    y_pred_svm = clf.predict(X_test_scaled)
+
+    cv_results["SVM"]["accuracy"].append(accuracy_score(y_test, y_pred_svm))
+    cv_results["SVM"]["precision"].append(precision_score(y_test, y_pred_svm))
+    cv_results["SVM"]["recall"].append(recall_score(y_test, y_pred_svm))
+    cv_results["SVM"]["f1"].append(f1_score(y_test, y_pred_svm))
+
+# Show mean CV results
+print("\nCross-validation results (mean over folds):")
+for name, metrics in cv_results.items():
+    print(f"\n{name}:")
+    print(f"  Accuracy: {np.mean(metrics['accuracy']):.4f}")
+    print(f"  Precision: {np.mean(metrics['precision']):.4f}")
+    print(f"  Recall: {np.mean(metrics['recall']):.4f}")
+    print(f"  F1: {np.mean(metrics['f1']):.4f}")
+
+# Keep standardized copy for GNN
+scaler = StandardScaler()
+df_std = pd.DataFrame(scaler.fit_transform(df))
+df_std.columns = df.columns
+
+# Build a graph-ready DataFrame (features, seq, label)
+seqs_series = pd.Series(seqs, name='seq')
+if len(seqs_series) > df_std.shape[0]:
+    seqs_series = seqs_series.iloc[: df_std.shape[0]].reset_index(drop=True)
+elif len(seqs_series) < df_std.shape[0]:
+    seqs_series = pd.Series([''] * df_std.shape[0], name='seq')
+
+# df_graph used later for GNN folds
+df_graph = df_std.reset_index(drop=True).copy()
+df_graph['seq'] = seqs_series
+df_graph['is_positive'] = y.reset_index(drop=True).astype(int)
+
+#GAUSSIAN BAYASES  # <- single-split block removed (using StratifiedKFold above)
+# old single-split code removed (replaced with StratifiedKFold above)
+# single-split fit removed; model is trained inside the StratifiedKFold loop above
+
+# single-split prediction removed; predictions are computed in the CV loop above
+
+# Single-split GNB evaluation removed — see cross-validation summary above
 
 df_d = df.copy()
 df_d['is_positive'] = y
@@ -625,65 +693,12 @@ df_d['is_positive'] = y
 #     plt.title(f'Feature Density Plot for {feature}')
 #     plt.show()
 
-means = model_GNB.theta_
-stds = np.sqrt(model_GNB.var_)
+# Per-fold statistics (means/stds and single-split diagnostics removed) — use CV summaries above for performance assessment
 
-# DataFrame ze średnimi cech dla każdej klasy
-df_means = pd.DataFrame(means.T, columns=[f'Class {i}' for i in range(means.shape[0])], index=df.columns)
-print("Means of features for each class:")
-print(df_means)
+# Single-split SVM evaluation removed — SVM results are reported above from StratifiedKFold cross-validation
+# df_std remains defined above and will be used to construct graph datasets for the GNN.
 
-# DataFrame z odchyleniami standardowymi cech dla każdej klasy
-df_stds = pd.DataFrame(stds.T, columns=[f'Class {i}' for i in range(stds.shape[0])], index=df.columns)
-print("Standard deviations of features for each class:")
-print(df_stds)
-# Find indices of misclassified instances
-
-misclassified_indices = (y_test != y_pred_GNB)
-misclassified_indices = misclassified_indices[misclassified_indices].index
-misclassified_true_labels = y_test[misclassified_indices]
-
-print(f"Indices wrongly assigned and their correct classes {misclassified_true_labels}")
-
-#STANDARYZACJA
-
-scaler = StandardScaler()
-df_std = pd.DataFrame(scaler.fit_transform(df))
-df_std.columns=df.columns
-
-X_train, X_test, y_train, y_test = train_test_split(df_std, y, test_size=0.2, random_state=12)   #lepszy wynik po standaryzacji
-
-clf = svm.SVC()
-clf.fit(X_train, y_train)
-
-y_pred_SVM = clf.predict(X_test)
-
-confusion_SVM = confusion_matrix(y_test, y_pred_SVM)
-print(confusion_SVM)
-print(("Accuracy is"), accuracy_score(y_test, y_pred_SVM) * 100)
-
-# Perform PCA to reduce to 2 dimensions
-pca = PCA(n_components=2)
-X_train_pca = pca.fit_transform(X_train)
-X_test_pca = pca.transform(X_test)
-
-# Train the SVM classifier on the PCA-transformed data
-clf = svm.SVC()  
-clf.fit(X_train_pca, y_train)
-
-# Predict on the PCA-transformed test set
-y_pred_SVM = clf.predict(X_test_pca)
-
-# Confusion matrix and accuracy
-confusion_SVM = confusion_matrix(y_test, y_pred_SVM)
-print(confusion_SVM)
-print("Accuracy is", accuracy_score(y_test, y_pred_SVM) * 100)
-
-misclassified_indices = (y_test != y_pred_SVM)
-misclassified_indices = misclassified_indices[misclassified_indices].index
-misclassified_true_labels = y_test[misclassified_indices]
-
-print(f"Indices wrongly assigned and their correct classes {misclassified_true_labels}")
+# Removed single-split misclassification listing; use per-fold diagnostics if needed
 
 
 
@@ -693,92 +708,71 @@ print(f"Indices wrongly assigned and their correct classes {misclassified_true_l
 
 
 
-#GNN
-df_std_nucs = df_std.copy()
-df_std_nucs['seq'] = seqs
-df_nucs = df.copy()
-df_nucs['seq'] = seqs
-X_train, X_test, y_train, y_test = train_test_split(df_std_nucs, y, test_size=0.2, random_state=12)
-df_train = pd.concat([X_train, y_train], axis=1).reset_index(drop=True)
-df_test = pd.concat([X_test, y_test], axis=1).reset_index(drop=True)
+# GNN — use Stratified K-Fold to train and evaluate the graph network
+# We'll reuse the previously prepared `df_graph` (features standardized, with 'seq' and 'is_positive')
+print("\nUsing StratifiedKFold for GNN training/evaluation...")
 
-cols = df_train.columns[:-2]
-train_dataset = df_train.apply(lambda x: get_graph_hot_encoding_continuity(x, cols), axis=1)
-test_dataset = df_test.apply(lambda x: get_graph_hot_encoding_continuity(x, cols), axis=1)
+gnn_fold_results = []
+for fold, (train_idx, test_idx) in enumerate(skf.split(df_graph.drop(columns=['seq','is_positive']), df_graph['is_positive'])):
+    print(f"\n--- GNN Fold {fold + 1}/{n_splits} ---")
 
-print(f'Number of training graphs: {len(train_dataset)}')
-print(f'Number of test graphs: {len(test_dataset)}')
+    df_train = df_graph.iloc[train_idx].reset_index(drop=True)
+    df_test = df_graph.iloc[test_idx].reset_index(drop=True)
 
-data = train_dataset[0]  # Get the first graph object.
+    cols = df_train.columns[:-2]  # all feature columns
+    train_dataset = df_train.apply(lambda x: get_graph_hot_encoding_continuity(x, cols), axis=1)
+    test_dataset = df_test.apply(lambda x: get_graph_hot_encoding_continuity(x, cols), axis=1)
 
-print(data)
-print('=============================================================')
+    print(f'Number of training graphs: {len(train_dataset)}')
+    print(f'Number of test graphs: {len(test_dataset)}')
 
-# Gather some statistics about the first graph.
-print(f'Number of nodes: {data.num_nodes}')
-print(f'Number of edges: {data.num_edges}')
-print(f'Average node degree: {data.num_edges / data.num_nodes:.2f}')
-print(f'Has isolated nodes: {data.has_isolated_nodes()}')
-print(f'Has self-loops: {data.has_self_loops()}')
-print(f'Is undirected: {data.is_undirected()}')
+    # DataLoaders
+    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+    test_loader = DataLoader(test_dataset, batch_size=32)
 
-print('=============================================================')
-print(data.x)
-print(data.y)
-print(data.edge_index)
-print(data.edge_attr)
-#print(data.edge_weight)
+    # Initialize model, optimizer, loss
+    model = GCN(hidden_channels=64)
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+    criterion = torch.nn.CrossEntropyLoss()
 
-#można regulować rozmiar batcha
-train_loader = DataLoader(train_dataset, batch_size=32)
-test_loader = DataLoader(test_dataset, batch_size=32)
+    # Per-fold early stopping
+    best_model_state = None
+    best_acc = 0.0
+    no_improve_counter = 0
+    max_no_improve = 10
+    acc_history = []
 
-for step, data in enumerate(train_loader):
-    print(f'Step {step + 1}:')
-    print('=======')
-    print(f'Number of graphs in the current batch: {data.num_graphs}')
-    print(data)
-    print()
+    max_epochs = 200
+    for epoch in range(1, max_epochs + 1):
+        train()
+        train_acc = test(train_loader)
+        test_acc = test(test_loader)
 
+        if test_acc > best_acc:
+            best_acc = test_acc
+            best_model_state = copy.deepcopy(model.state_dict())
+            no_improve_counter = 0
+        else:
+            no_improve_counter += 1
 
-model = GCN(hidden_channels=64)
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
-criterion = torch.nn.CrossEntropyLoss()
+        acc_history.append(test_acc)
+        print(f'Epoch: {epoch:03d}, Train Acc: {train_acc:.4f}, Test Acc: {test_acc:.4f}')
 
-best_model_state = None
-best_acc = 0.0
-no_improve_counter = 0
-max_no_improve = 10
-acc_history = []
+        if no_improve_counter >= max_no_improve:
+            print("Early stopping due to no improvement")
+            break
 
-for epoch in range(1, 1000):
-    train()
-    train_acc = test(train_loader)
-    test_acc = test(test_loader)
+    # Restore best model for this fold (for reporting)
+    if best_model_state:
+        model.load_state_dict(best_model_state)
 
-    # Save current model state if it improves
-    if test_acc > best_acc:
-        best_acc = test_acc
-        best_model_state = copy.deepcopy(model.state_dict())
-        no_improve_counter = 0
-    else:
-        no_improve_counter += 1
+    print(f"Fold {fold + 1} best Test Acc: {best_acc:.4f}")
+    gnn_fold_results.append(best_acc)
 
-    acc_history.append(test_acc)
-
-    print(f'Epoch: {epoch:03d}, Train Acc: {train_acc:.4f}, Test Acc: {test_acc:.4f}')
-
-    # Early stopping if last 10 test acc values are decreasing
-    if len(acc_history) >= 30:
-        recent_accs = acc_history[-10:]
-        # if all(x >= y for x, y in zip(recent_accs, recent_accs[1:])):
-            # print("🔁 Accuracy has been decreasing for 10 epochs — early stopping.")
-            # break
-
-# Restore best model
-if best_model_state:
-    model.load_state_dict(best_model_state)
-    print(f"✅ Reverted to best model with Test Acc: {best_acc:.4f}")
+# Final GNN CV summary
+print("\nGNN cross-validation results:")
+print(f"  Per-fold test accuracy: {gnn_fold_results}")
+print(f"  Mean test accuracy: {np.mean(gnn_fold_results):.4f} (std: {np.std(gnn_fold_results):.4f})")
 
 
 #TODO remove redundancy 
