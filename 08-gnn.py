@@ -5,7 +5,7 @@ import re
 import ast
 import csv
 from itertools import combinations
-
+import json, os
 
 from sklearn import preprocessing 
 from sklearn.model_selection import StratifiedKFold, train_test_split
@@ -501,6 +501,7 @@ read_sequences("positve_seq.csv", max_len)
 read_sequences("negative_seq.csv", max_len)
 #add a column to data_full with sequences
 data_full['seq'] = seqs
+print("DATA FULL WITH SEQS:")
 print(data_full)
 
 
@@ -585,11 +586,53 @@ print(data_full)
 #CREATING THE DATAFRAME
 #CREATING THE DATAFRAME
 #df = pd.concat([planar_angles_full, torsion_angles_full, distances_full], axis=1)
-df = pd.read_csv("filtered_geometric_features.csv", sep=',', index_col=0)
+dftofilter = pd.read_csv("filtered_geometric_features.csv", sep=',', index_col=0)
+
+#filter the dataframe to remove the clusters of data. 
 
 
 
+# Load clusters.json and flatten all "members" lists into one list of strings
 
+clusters_path = "clusters.json"
+all_cluster_members = []
+if os.path.exists(clusters_path):
+    with open(clusters_path, 'r') as f:
+        clusters_data = json.load(f)
+    # Normalize to a list of cluster dicts
+    if isinstance(clusters_data, dict):
+        # if clusters are stored under a top-level key (like 'clusters'), use it
+        if 'clusters' in clusters_data and isinstance(clusters_data['clusters'], list):
+            clusters_list = clusters_data['clusters']
+        else:
+            # otherwise assume dict values are cluster dicts
+            clusters_list = [v for v in clusters_data.values() if isinstance(v, dict)]
+    elif isinstance(clusters_data, list):
+        clusters_list = clusters_data
+    else:
+        clusters_list = []
+
+    for cluster in clusters_list:
+        members = cluster.get('members') if isinstance(cluster, dict) else None
+        if isinstance(members, list):
+            all_cluster_members.extend([str(m) for m in members])
+        elif isinstance(members, str):
+            # try splitting comma-separated string
+            parts = [s.strip() for s in members.split(',') if s.strip()]
+            all_cluster_members.extend(parts)
+else:
+    print(f"clusters.json not found at {clusters_path}")
+
+print(f"Total cluster members collected: {len(all_cluster_members)}")
+print(f"Sample cluster members: {all_cluster_members[:10]}")
+
+#remove .cif from all_cluster_members strings
+all_cluster_members = [m.replace('.cif', '') for m in all_cluster_members]
+# remove all rows from dftofilter where the source_file (which is the filename without .cif) is in all_cluster_members
+print(dftofilter)
+df = dftofilter[~dftofilter.index.isin(all_cluster_members)]
+print(df)
+#df = dftofilter 
 
 stat, p_value = shapiro(df)
 print(f'Shapiro-Wilk Test: Statistic={stat}, p-value={p_value}')
