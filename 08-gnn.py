@@ -250,7 +250,7 @@ def get_graph_hot_encoding_continuity(row, cols):
             weigth = row[i]
             cols_indexes = get_all_indexes_from_string(cols[i])
             if len(cols_indexes) == 2 and 7 not in cols_indexes: #ignore any indexes that are 7 (8th nucleotide, as we only want nucleotides from 1 to 6)
-                print(cols_indexes)
+                #print(cols_indexes)
                 edges_dict[(cols_indexes[0]-1, cols_indexes[1]-1)].append(weigth)
             #if len(cols[i]) == 4:
                 # edges_dict[(cols[i][0], cols[i][1])].append(weigth)
@@ -638,9 +638,9 @@ stat, p_value = shapiro(df)
 print(f'Shapiro-Wilk Test: Statistic={stat}, p-value={p_value}')
 
 
-data_full = data_full.reset_index(drop=True)   #base dataframe with nucleotides coords and class
-y = data_full['is_positive']  #labels
-
+# data_full = data_full.reset_index(drop=True)   #base dataframe with nucleotides coords and class
+# y = data_full['is_positive']  #labels
+y = df['gnra']
 data_full.iloc[180]
 
 
@@ -816,6 +816,9 @@ for fold, (train_idx, test_idx) in enumerate(skf.split(df_graph.drop(columns=['s
 print("\nGNN cross-validation results:")
 print(f"  Per-fold test accuracy: {gnn_fold_results}")
 print(f"  Mean test accuracy: {np.mean(gnn_fold_results):.4f} (std: {np.std(gnn_fold_results):.4f})")
-
-
+print("NA OKO:")
+print(cv_results["GaussianNB"]["accuracy"])
+print(cv_results["GaussianNB"]["recall"])
+print(cv_results["GaussianNB"]["precision"])
+print(cv_results["GaussianNB"]["f1"])
 #TODO remove redundancy 
