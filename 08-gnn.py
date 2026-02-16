@@ -763,11 +763,12 @@ df = df.reset_index(drop=True)
 y = y.reset_index(drop=True)
 
 for fold, (train_idx, test_idx) in enumerate(skf.split(df, y)):
+
     print(f"\n--- Fold {fold + 1}/{n_splits} ---")
     X_train, X_test = df.iloc[train_idx], df.iloc[test_idx]
     y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
 
-    # Gaussian Naive Bayes
+    # --- Gaussian Naive Bayes ---
     gnb = GaussianNB()
     gnb.fit(X_train, y_train)
     y_pred_gnb = gnb.predict(X_test)
@@ -777,7 +778,19 @@ for fold, (train_idx, test_idx) in enumerate(skf.split(df, y)):
     cv_results["GaussianNB"]["recall"].append(recall_score(y_test, y_pred_gnb))
     cv_results["GaussianNB"]["f1"].append(f1_score(y_test, y_pred_gnb))
 
-    # SVM (with StandardScaler per fold)
+    # Per-epoch-like metrics for GNB (simulate as only one step per fold)
+    gnb_metrics = {
+        'epochs': [1],
+        'train_acc': [accuracy_score(y_train, gnb.predict(X_train))],
+        'test_acc': [accuracy_score(y_test, y_pred_gnb)],
+        'train_f1': [f1_score(y_train, gnb.predict(X_train), zero_division=0)],
+        'test_f1': [f1_score(y_test, y_pred_gnb, zero_division=0)],
+        'train_mcc': [matthews_corrcoef(y_train, gnb.predict(X_train))],
+        'test_mcc': [matthews_corrcoef(y_test, y_pred_gnb)]
+    }
+    plot_model_metrics_during_training(gnb_metrics, 'GaussianNB', fold_number=fold+1, save_path=f'gnb_metrics_fold_{fold+1}.png')
+
+    # --- SVM (with StandardScaler per fold) ---
     scaler_fold = StandardScaler()
     X_train_scaled = scaler_fold.fit_transform(X_train)
     X_test_scaled = scaler_fold.transform(X_test)
@@ -790,6 +803,18 @@ for fold, (train_idx, test_idx) in enumerate(skf.split(df, y)):
     cv_results["SVM"]["precision"].append(precision_score(y_test, y_pred_svm))
     cv_results["SVM"]["recall"].append(recall_score(y_test, y_pred_svm))
     cv_results["SVM"]["f1"].append(f1_score(y_test, y_pred_svm))
+
+    # Per-epoch-like metrics for SVM (simulate as only one step per fold)
+    svm_metrics = {
+        'epochs': [1],
+        'train_acc': [accuracy_score(y_train, clf.predict(X_train_scaled))],
+        'test_acc': [accuracy_score(y_test, y_pred_svm)],
+        'train_f1': [f1_score(y_train, clf.predict(X_train_scaled), zero_division=0)],
+        'test_f1': [f1_score(y_test, y_pred_svm, zero_division=0)],
+        'train_mcc': [matthews_corrcoef(y_train, clf.predict(X_train_scaled))],
+        'test_mcc': [matthews_corrcoef(y_test, y_pred_svm)]
+    }
+    plot_model_metrics_during_training(svm_metrics, 'SVM', fold_number=fold+1, save_path=f'svm_metrics_fold_{fold+1}.png')
 
 # Show mean CV results
 print("\nCross-validation results (mean over folds):")
