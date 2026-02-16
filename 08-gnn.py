@@ -351,18 +351,100 @@ def train():
          optimizer.step()  # Update parameters based on gradients.
          optimizer.zero_grad()  # Clear gradients.
 
-def test(loader):
+def test(loader, return_predictions=False):
      model.eval()
 
      correct = 0
-     for data in loader:  # Iterate in batches over the training/test dataset.
-         edge_weight = data.edge_attr[:, 0]  # Only use weights
-         out = model(data.x, data.edge_index, edge_weight, data.batch)  #data.edge_weight
-         #print(out)
-         pred = out.argmax(dim=1)  # Use the class with highest probability.
-         #print(pred)
-         correct += int((pred == data.y).sum())  # Check against ground-truth labels.
-     return correct / len(loader.dataset)  # Derive ratio of correct predictions.
+     all_preds = []
+     all_labels = []
+     
+     with torch.no_grad():
+         for data in loader:  # Iterate in batches over the training/test dataset.
+             edge_weight = data.edge_attr[:, 0]  # Only use weights
+             out = model(data.x, data.edge_index, edge_weight, data.batch)  #data.edge_weight
+             pred = out.argmax(dim=1)  # Use the class with highest probability.
+             correct += int((pred == data.y).sum())  # Check against ground-truth labels.
+             
+             if return_predictions:
+                 all_preds.extend(pred.cpu().numpy().tolist())
+                 all_labels.extend(data.y.cpu().numpy().tolist())
+     
+     accuracy = correct / len(loader.dataset)
+     
+     if return_predictions:
+         return accuracy, np.array(all_preds), np.array(all_labels)
+     
+     return accuracy
+
+def plot_model_metrics_during_training(epoch_data, model_name, fold_number=None, save_path=None):
+    """
+    Plot accuracy, F1, and MCC metrics during model training.
+    
+    Parameters:
+    -----------
+    epoch_data : dict
+        Dictionary with keys 'epochs', 'train_acc', 'test_acc', 'train_f1', 'test_f1', 
+        'train_mcc', 'test_mcc' containing lists of values for each epoch
+    model_name : str
+        Name of the model (e.g., 'GNN', 'SVM', 'GaussianNB')
+    fold_number : int, optional
+        Fold number for title/filename
+    save_path : str, optional
+        Path to save the figure. If None, won't save.
+    """
+    
+    fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+    fig.suptitle(
+        f'{model_name} Metrics During Training{f" - Fold {fold_number}" if fold_number else ""}',
+        fontsize=14, fontweight='bold'
+    )
+    
+    epochs = epoch_data.get('epochs', [])
+    
+    # Plot 1: Accuracy
+    ax = axes[0]
+    if 'train_acc' in epoch_data:
+        ax.plot(epochs, epoch_data['train_acc'], 'b-', label='Train Accuracy', linewidth=2, marker='o', markersize=3)
+    if 'test_acc' in epoch_data:
+        ax.plot(epochs, epoch_data['test_acc'], 'r-', label='Test Accuracy', linewidth=2, marker='s', markersize=3)
+    ax.set_xlabel('Epoch')
+    ax.set_ylabel('Accuracy')
+    ax.set_title('Accuracy over Epochs')
+    ax.legend()
+    ax.grid(True, alpha=0.3)
+    
+    # Plot 2: F1 Score
+    ax = axes[1]
+    if 'train_f1' in epoch_data:
+        ax.plot(epochs, epoch_data['train_f1'], 'b-', label='Train F1', linewidth=2, marker='o', markersize=3)
+    if 'test_f1' in epoch_data:
+        ax.plot(epochs, epoch_data['test_f1'], 'r-', label='Test F1', linewidth=2, marker='s', markersize=3)
+    ax.set_xlabel('Epoch')
+    ax.set_ylabel('F1 Score')
+    ax.set_title('F1 Score over Epochs')
+    ax.legend()
+    ax.grid(True, alpha=0.3)
+    
+    # Plot 3: MCC
+    ax = axes[2]
+    if 'train_mcc' in epoch_data:
+        ax.plot(epochs, epoch_data['train_mcc'], 'b-', label='Train MCC', linewidth=2, marker='o', markersize=3)
+    if 'test_mcc' in epoch_data:
+        ax.plot(epochs, epoch_data['test_mcc'], 'r-', label='Test MCC', linewidth=2, marker='s', markersize=3)
+    ax.set_xlabel('Epoch')
+    ax.set_ylabel('MCC')
+    ax.set_title('Matthews Correlation Coefficient over Epochs')
+    ax.legend()
+    ax.grid(True, alpha=0.3)
+    
+    plt.tight_layout()
+    
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Chart saved to {save_path}")
+    
+    #plt.show()
+    return fig
 
 
 
@@ -806,13 +888,40 @@ for fold, (train_idx, test_idx) in enumerate(skf.split(df_graph.drop(columns=['i
     best_acc = 0.0
     no_improve_counter = 0
     max_no_improve = 10
-    acc_history = []
+    
+    # Tracking metrics for plotting
+    epoch_metrics = {
+        'epochs': [],
+        'train_acc': [],
+        'test_acc': [],
+        'train_f1': [],
+        'test_f1': [],
+        'train_mcc': [],
+        'test_mcc': []
+    }
 
     max_epochs = 200
     for epoch in range(1, max_epochs + 1):
         train()
-        train_acc = test(train_loader)
-        test_acc = test(test_loader)
+        
+        # Get predictions to calculate F1 and MCC
+        train_acc, train_preds, train_labels = test(train_loader, return_predictions=True)
+        test_acc, test_preds, test_labels = test(test_loader, return_predictions=True)
+        
+        # Calculate F1 and MCC
+        train_f1 = f1_score(train_labels, train_preds, zero_division=0)
+        test_f1 = f1_score(test_labels, test_preds, zero_division=0)
+        train_mcc = matthews_corrcoef(train_labels, train_preds)
+        test_mcc = matthews_corrcoef(test_labels, test_preds)
+        
+        # Store metrics
+        epoch_metrics['epochs'].append(epoch)
+        epoch_metrics['train_acc'].append(train_acc)
+        epoch_metrics['test_acc'].append(test_acc)
+        epoch_metrics['train_f1'].append(train_f1)
+        epoch_metrics['test_f1'].append(test_f1)
+        epoch_metrics['train_mcc'].append(train_mcc)
+        epoch_metrics['test_mcc'].append(test_mcc)
 
         if test_acc > best_acc:
             best_acc = test_acc
@@ -821,8 +930,7 @@ for fold, (train_idx, test_idx) in enumerate(skf.split(df_graph.drop(columns=['i
         else:
             no_improve_counter += 1
 
-        acc_history.append(test_acc)
-        print(f'Epoch: {epoch:03d}, Train Acc: {train_acc:.4f}, Test Acc: {test_acc:.4f}')
+        print(f'Epoch: {epoch:03d}, Train Acc: {train_acc:.4f}, Test Acc: {test_acc:.4f}, Test F1: {test_f1:.4f}, Test MCC: {test_mcc:.4f}')
 
         if no_improve_counter >= max_no_improve:
             print("Early stopping due to no improvement")
@@ -831,6 +939,9 @@ for fold, (train_idx, test_idx) in enumerate(skf.split(df_graph.drop(columns=['i
     # Restore best model for this fold (for reporting)
     if best_model_state:
         model.load_state_dict(best_model_state)
+
+    # Plot metrics during training for this fold
+    plot_model_metrics_during_training(epoch_metrics, 'GNN', fold_number=fold+1, save_path=f'gnn_training_metrics_fold_{fold+1}.png')
 
     # Evaluate restored model on test set to collect predictions and compute metrics
     model.eval()
