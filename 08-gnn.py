@@ -19,6 +19,8 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import recall_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import f1_score
+from sklearn.metrics import matthews_corrcoef
+from sklearn.metrics import classification_report
 from sklearn import svm
 from sklearn.decomposition import PCA
 
@@ -239,6 +241,8 @@ def get_all_indexes_from_string(string):
     #string might contain any number of single digit numbers following one another, e.g ts125 this function will return [1,2,5]
     return [int(char) for char in string if char.isdigit()]
 
+
+#TODO: upewnić się że ta funkcja jest kompatybilna z nowymi danymi
 def get_graph_hot_encoding_continuity(row, cols):
         edges_dict = {(0,1): [], (0,2): [], (0,3): [], (0,4): [], (0,5): [], 
                       (1,2): [], (1,3): [], (1,4): [], (1,5): [], 
@@ -298,6 +302,13 @@ def get_graph_hot_encoding_continuity(row, cols):
 
         graph = Data(edge_index=edge_index_symmetric, edge_attr=edge_attr_symmetric, y=y, x=x)
         return graph
+
+def display_graph_and_weights(graph):
+    print("Edge Index:")
+    print(graph.edge_index)
+    print("\nEdge Attributes (weights):")
+    print(graph.edge_attr)
+
 class GCN(torch.nn.Module):
     def __init__(self, hidden_channels):
         super(GCN, self).__init__()
@@ -637,12 +648,20 @@ print(df)
 stat, p_value = shapiro(df)
 print(f'Shapiro-Wilk Test: Statistic={stat}, p-value={p_value}')
 
+#REBALANCING THE DATASET BY REDUCING THE NUMBER OF NEGATIVE SAMPLES ('gnra' = false)
+num_positive = df[df['gnra'] == True].shape[0]
+negatives = df[df['gnra'] == False]
+negatives_downsampled = negatives.sample(n=num_positive*2, random_state=42)
+df = pd.concat([df[df['gnra'] == True], negatives_downsampled])
 
 # data_full = data_full.reset_index(drop=True)   #base dataframe with nucleotides coords and class
 # y = data_full['is_positive']  #labels
 y = df['gnra']
 data_full.iloc[180]
 
+
+#remove the 'gnra' column from df to get only features
+df = df.drop(columns=['gnra'])
 
 #use k-fold cross validation
 # K-fold cross-validation setup
@@ -754,15 +773,19 @@ df_d['is_positive'] = y
 # GNN — use Stratified K-Fold to train and evaluate the graph network
 # We'll reuse the previously prepared `df_graph` (features standardized, with 'seq' and 'is_positive')
 print("\nUsing StratifiedKFold for GNN training/evaluation...")
-
-gnn_fold_results = []
-for fold, (train_idx, test_idx) in enumerate(skf.split(df_graph.drop(columns=['seq','is_positive']), df_graph['is_positive'])):
+print("Graph DataFrame head:=======================================================")
+print(df_graph)
+print("Graph DataFrame columns:")
+print(df_graph.columns)
+#print(df_graph['gnra'])
+gnn_fold_results = []#                                                        removed 'seq' from columns that are dropped
+for fold, (train_idx, test_idx) in enumerate(skf.split(df_graph.drop(columns=['is_positive']), df_graph['is_positive'])):
     print(f"\n--- GNN Fold {fold + 1}/{n_splits} ---")
 
     df_train = df_graph.iloc[train_idx].reset_index(drop=True)
     df_test = df_graph.iloc[test_idx].reset_index(drop=True)
 
-    cols = df_train.columns[:-2]  # all feature columns
+    cols = df_train.columns[:-1]  # all feature columns
     train_dataset = df_train.apply(lambda x: get_graph_hot_encoding_continuity(x, cols), axis=1)
     test_dataset = df_test.apply(lambda x: get_graph_hot_encoding_continuity(x, cols), axis=1)
 
@@ -809,13 +832,64 @@ for fold, (train_idx, test_idx) in enumerate(skf.split(df_graph.drop(columns=['s
     if best_model_state:
         model.load_state_dict(best_model_state)
 
-    print(f"Fold {fold + 1} best Test Acc: {best_acc:.4f}")
-    gnn_fold_results.append(best_acc)
+    # Evaluate restored model on test set to collect predictions and compute metrics
+    model.eval()
+    y_true = []
+    y_pred = []
+    with torch.no_grad():
+        for data in test_loader:
+            edge_weight = data.edge_attr[:, 0]
+            out = model(data.x, data.edge_index, edge_weight, data.batch)
+            pred = out.argmax(dim=1)
+            y_true.extend(data.y.cpu().numpy().tolist())
+            y_pred.extend(pred.cpu().numpy().tolist())
 
+    # Diagnostic outputs to detect collapsed predictions / class imbalance
+    try:
+        print('y_true dist:', np.bincount(y_true) if len(y_true) > 0 else 'empty')
+    except Exception:
+        print('y_true dist: could not compute bincount')
+    try:
+        print('y_pred dist:', np.bincount(y_pred) if len(y_pred) > 0 else 'empty')
+    except Exception:
+        print('y_pred dist: could not compute bincount')
+    try:
+        print('unique preds:', np.unique(y_pred, return_counts=True))
+    except Exception:
+        pass
+
+    try:
+        print('confusion matrix:\n', confusion_matrix(y_true, y_pred))
+    except Exception:
+        print('confusion matrix: failed')
+
+    try:
+        print('classification report:\n', classification_report(y_true, y_pred, zero_division=0))
+    except Exception as e:
+        print('classification report: failed', e)
+
+    fold_acc = accuracy_score(y_true, y_pred)
+    fold_f1 = f1_score(y_true, y_pred, zero_division=0)
+    fold_mcc = matthews_corrcoef(y_true, y_pred)
+    print(f"Fold {fold + 1} best Test Acc: {best_acc:.4f}")
+    print(f"Fold {fold + 1} metrics: Acc={fold_acc:.4f}, F1={fold_f1:.4f}, MCC={fold_mcc:.4f}")
+    gnn_fold_results.append({'accuracy': fold_acc, 'f1': fold_f1, 'mcc': fold_mcc})
+# print("------------------------------------------------------")
+# display_graph_and_weights(train_dataset.iloc[0])  # Display the first graph's edge index and attributes for verification
+# print("------------------------------------------------------")
+# display_graph_and_weights(test_dataset.iloc[0])
+# print("------------------------------------------------------")
 # Final GNN CV summary
 print("\nGNN cross-validation results:")
-print(f"  Per-fold test accuracy: {gnn_fold_results}")
-print(f"  Mean test accuracy: {np.mean(gnn_fold_results):.4f} (std: {np.std(gnn_fold_results):.4f})")
+accs = [d['accuracy'] for d in gnn_fold_results]
+f1s = [d['f1'] for d in gnn_fold_results]
+mccs = [d['mcc'] for d in gnn_fold_results]
+print(f"  Per-fold accuracy: {accs}")
+print(f"  Per-fold F1: {f1s}")
+print(f"  Per-fold MCC: {mccs}")
+print(f"  Mean accuracy: {np.mean(accs):.4f} (std: {np.std(accs):.4f})")
+print(f"  Mean F1: {np.mean(f1s):.4f} (std: {np.std(f1s):.4f})")
+print(f"  Mean MCC: {np.mean(mccs):.4f} (std: {np.std(mccs):.4f})")
 print("NA OKO:")
 print(cv_results["GaussianNB"]["accuracy"])
 print(cv_results["GaussianNB"]["recall"])
