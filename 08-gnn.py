@@ -7,6 +7,8 @@ import csv
 from itertools import combinations
 import json, os
 
+filter_script = __import__('08b-filter-pdb-by-date')
+
 from sklearn import preprocessing 
 from sklearn.model_selection import StratifiedKFold, train_test_split
 from sklearn.metrics import confusion_matrix
@@ -731,20 +733,36 @@ stat, p_value = shapiro(df)
 print(f'Shapiro-Wilk Test: Statistic={stat}, p-value={p_value}')
 
 #REBALANCING THE DATASET BY REDUCING THE NUMBER OF NEGATIVE SAMPLES ('gnra' = false)
-num_positive = df[df['gnra'] == True].shape[0]
-negatives = df[df['gnra'] == False]
-negatives_downsampled = negatives.sample(n=num_positive*2, random_state=42)
-df = pd.concat([df[df['gnra'] == True], negatives_downsampled])
+# num_positive = df[df['gnra'] == True].shape[0]
+# negatives = df[df['gnra'] == False]
+# negatives_downsampled = negatives.sample(n=num_positive*2, random_state=42)
+# df = pd.concat([df[df['gnra'] == True], negatives_downsampled])
+
+
+
 
 # data_full = data_full.reset_index(drop=True)   #base dataframe with nucleotides coords and class
 # y = data_full['is_positive']  #labels
+
+
+#DIVIDING DATASET BY DATES
+pre,post = filter_script.filter_pandas_dataframe_by_date(df,'rna_pdb_release_dates.csv','2025-01-20T00:00:00+0000')
+print(f"number of rows in df: {df.shape[0]}")
+print("============================================ DF PRE selected date============================================")
+print(pre)
+print("============================================ DF POST selected date ============================================")
+print(post)
+print("============================================ END ============================================")
 y = df['gnra']
+y_pre = pre['gnra']
+y_post = post['gnra']
 data_full.iloc[180]
 
 
 #remove the 'gnra' column from df to get only features
 df = df.drop(columns=['gnra'])
-
+pre = pre.drop(columns=['gnra'])
+post = post.drop(columns=['gnra'])
 #use k-fold cross validation
 # K-fold cross-validation setup
 n_splits = 5
@@ -760,6 +778,8 @@ cv_results = {
 
 # Reset indices to be safe
 df = df.reset_index(drop=True)
+pre = pre.reset_index(drop=True)
+post = post.reset_index(drop=True)
 y = y.reset_index(drop=True)
 
 for fold, (train_idx, test_idx) in enumerate(skf.split(df, y)):
