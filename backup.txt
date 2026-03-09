@@ -1,0 +1,504 @@
+
+#when the dataset was not divided in two halves
+for fold, (train_idx, test_idx) in enumerate(skf.split(df, y)):
+
+    print(f"\n--- Fold {fold + 1}/{n_splits} ---")
+    X_train, X_test = df.iloc[train_idx], df.iloc[test_idx]
+    y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
+
+    # --- Gaussian Naive Bayes ---
+    gnb = GaussianNB()
+    gnb.fit(X_train, y_train)
+    y_pred_gnb = gnb.predict(X_test)
+
+    cv_results["GaussianNB"]["accuracy"].append(accuracy_score(y_test, y_pred_gnb))
+    cv_results["GaussianNB"]["precision"].append(precision_score(y_test, y_pred_gnb))
+    cv_results["GaussianNB"]["recall"].append(recall_score(y_test, y_pred_gnb))
+    cv_results["GaussianNB"]["f1"].append(f1_score(y_test, y_pred_gnb))
+
+    # Per-epoch-like metrics for GNB (simulate as only one step per fold)
+    gnb_metrics = {
+        'epochs': [1],
+        'train_acc': [accuracy_score(y_train, gnb.predict(X_train))],
+        'test_acc': [accuracy_score(y_test, y_pred_gnb)],
+        'train_f1': [f1_score(y_train, gnb.predict(X_train), zero_division=0)],
+        'test_f1': [f1_score(y_test, y_pred_gnb, zero_division=0)],
+        'train_mcc': [matthews_corrcoef(y_train, gnb.predict(X_train))],
+        'test_mcc': [matthews_corrcoef(y_test, y_pred_gnb)]
+    }
+    plot_model_metrics_during_training(gnb_metrics, 'GaussianNB', fold_number=fold+1, save_path=f'gnb_metrics_fold_{fold+1}.png')
+
+    # --- SVM (with StandardScaler per fold) ---
+    scaler_fold = StandardScaler()
+    X_train_scaled = scaler_fold.fit_transform(X_train)
+    X_test_scaled = scaler_fold.transform(X_test)
+
+    clf = svm.SVC()
+    clf.fit(X_train_scaled, y_train)
+    y_pred_svm = clf.predict(X_test_scaled)
+
+    cv_results["SVM"]["accuracy"].append(accuracy_score(y_test, y_pred_svm))
+    cv_results["SVM"]["precision"].append(precision_score(y_test, y_pred_svm))
+    cv_results["SVM"]["recall"].append(recall_score(y_test, y_pred_svm))
+    cv_results["SVM"]["f1"].append(f1_score(y_test, y_pred_svm))
+
+    # Per-epoch-like metrics for SVM (simulate as only one step per fold)
+    svm_metrics = {
+        'epochs': [1],
+        'train_acc': [accuracy_score(y_train, clf.predict(X_train_scaled))],
+        'test_acc': [accuracy_score(y_test, y_pred_svm)],
+        'train_f1': [f1_score(y_train, clf.predict(X_train_scaled), zero_division=0)],
+        'test_f1': [f1_score(y_test, y_pred_svm, zero_division=0)],
+        'train_mcc': [matthews_corrcoef(y_train, clf.predict(X_train_scaled))],
+        'test_mcc': [matthews_corrcoef(y_test, y_pred_svm)]
+    }
+    plot_model_metrics_during_training(svm_metrics, 'SVM', fold_number=fold+1, save_path=f'svm_metrics_fold_{fold+1}.png')
+
+# Show mean CV results
+print("\nCross-validation results (mean over folds):")
+for name, metrics in cv_results.items():
+    print(f"\n{name}:")
+    print(f"  Accuracy: {np.mean(metrics['accuracy']):.4f}")
+    print(f"  Precision: {np.mean(metrics['precision']):.4f}")
+    print(f"  Recall: {np.mean(metrics['recall']):.4f}")
+    print(f"  F1: {np.mean(metrics['f1']):.4f}")
+
+# Keep standardized copy for GNN
+scaler = StandardScaler()
+df_std = pd.DataFrame(scaler.fit_transform(df))
+df_std.columns = df.columns
+
+# Build a graph-ready DataFrame (features, seq, label)
+seqs_series = pd.Series(seqs, name='seq')
+if len(seqs_series) > df_std.shape[0]:
+    seqs_series = seqs_series.iloc[: df_std.shape[0]].reset_index(drop=True)
+elif len(seqs_series) < df_std.shape[0]:
+    seqs_series = pd.Series([''] * df_std.shape[0], name='seq')
+
+# df_graph used later for GNN folds
+df_graph = df_std.reset_index(drop=True).copy()
+df_graph['seq'] = seqs_series
+df_graph['is_positive'] = y.reset_index(drop=True).astype(int)
+
+#GAUSSIAN BAYASES  # <- single-split block removed (using StratifiedKFold above)
+# old single-split code removed (replaced with StratifiedKFold above)
+# single-split fit removed; model is trained inside the StratifiedKFold loop above
+
+# single-split prediction removed; predictions are computed in the CV loop above
+
+# Single-split GNB evaluation removed — see cross-validation summary above
+
+df_d = df.copy()
+df_d['is_positive'] = y
+
+
+
+# Wykresy gęstości cech dla każdej klasy
+# for feature in list(df.columns):  # Pomijamy kolumnę 'label'
+#     plt.figure(figsize=(10, 6))
+#     sns.kdeplot(data=df_d, x=feature, hue='class', fill=True)
+#     plt.title(f'Feature Density Plot for {feature}')
+#     plt.show()
+
+# Per-fold statistics (means/stds and single-split diagnostics removed) — use CV summaries above for performance assessment
+
+# Single-split SVM evaluation removed — SVM results are reported above from StratifiedKFold cross-validation
+# df_std remains defined above and will be used to construct graph datasets for the GNN.
+
+# Removed single-split misclassification listing; use per-fold diagnostics if needed
+
+
+
+
+
+
+
+
+
+# GNN — use Stratified K-Fold to train and evaluate the graph network
+# We'll reuse the previously prepared `df_graph` (features standardized, with 'seq' and 'is_positive')
+print("\nUsing StratifiedKFold for GNN training/evaluation...")
+print("Graph DataFrame head:=======================================================")
+print(df_graph)
+print("Graph DataFrame columns:")
+print(df_graph.columns)
+#print(df_graph['gnra'])
+gnn_fold_results = []#                                                        removed 'seq' from columns that are dropped
+for fold, (train_idx, test_idx) in enumerate(skf.split(df_graph.drop(columns=['is_positive']), df_graph['is_positive'])):
+    print(f"\n--- GNN Fold {fold + 1}/{n_splits} ---")
+
+    df_train = df_graph.iloc[train_idx].reset_index(drop=True)
+    df_test = df_graph.iloc[test_idx].reset_index(drop=True)
+
+    cols = df_train.columns[:-1]  # all feature columns
+    train_dataset = df_train.apply(lambda x: get_graph_hot_encoding_continuity(x, cols), axis=1)
+    test_dataset = df_test.apply(lambda x: get_graph_hot_encoding_continuity(x, cols), axis=1)
+
+    print(f'Number of training graphs: {len(train_dataset)}')
+    print(f'Number of test graphs: {len(test_dataset)}')
+
+    # DataLoaders
+    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+    test_loader = DataLoader(test_dataset, batch_size=32)
+
+    # Initialize model, optimizer, loss
+    model = GCN(hidden_channels=64)
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+    criterion = torch.nn.CrossEntropyLoss()
+
+    # Per-fold early stopping
+    best_model_state = None
+    best_acc = 0.0
+    no_improve_counter = 0
+    max_no_improve = 10
+    
+    # Tracking metrics for plotting
+    epoch_metrics = {
+        'epochs': [],
+        'train_acc': [],
+        'test_acc': [],
+        'train_f1': [],
+        'test_f1': [],
+        'train_mcc': [],
+        'test_mcc': []
+    }
+
+    max_epochs = 200
+    for epoch in range(1, max_epochs + 1):
+        train()
+        
+        # Get predictions to calculate F1 and MCC
+        train_acc, train_preds, train_labels = test(train_loader, return_predictions=True)
+        test_acc, test_preds, test_labels = test(test_loader, return_predictions=True)
+        
+        # Calculate F1 and MCC
+        train_f1 = f1_score(train_labels, train_preds, zero_division=0)
+        test_f1 = f1_score(test_labels, test_preds, zero_division=0)
+        train_mcc = matthews_corrcoef(train_labels, train_preds)
+        test_mcc = matthews_corrcoef(test_labels, test_preds)
+        
+        # Store metrics
+        epoch_metrics['epochs'].append(epoch)
+        epoch_metrics['train_acc'].append(train_acc)
+        epoch_metrics['test_acc'].append(test_acc)
+        epoch_metrics['train_f1'].append(train_f1)
+        epoch_metrics['test_f1'].append(test_f1)
+        epoch_metrics['train_mcc'].append(train_mcc)
+        epoch_metrics['test_mcc'].append(test_mcc)
+
+        if test_acc > best_acc:
+            best_acc = test_acc
+            best_model_state = copy.deepcopy(model.state_dict())
+            no_improve_counter = 0
+        else:
+            no_improve_counter += 1
+
+        print(f'Epoch: {epoch:03d}, Train Acc: {train_acc:.4f}, Test Acc: {test_acc:.4f}, Test F1: {test_f1:.4f}, Test MCC: {test_mcc:.4f}')
+
+        if no_improve_counter >= max_no_improve:
+            print("Early stopping due to no improvement")
+            break
+
+    # Restore best model for this fold (for reporting)
+    if best_model_state:
+        model.load_state_dict(best_model_state)
+
+    # Plot metrics during training for this fold
+    plot_model_metrics_during_training(epoch_metrics, 'GNN', fold_number=fold+1, save_path=f'gnn_training_metrics_fold_{fold+1}.png')
+
+    # Evaluate restored model on test set to collect predictions and compute metrics
+    model.eval()
+    y_true = []
+    y_pred = []
+    with torch.no_grad():
+        for data in test_loader:
+            edge_weight = data.edge_attr[:, 0]
+            out = model(data.x, data.edge_index, edge_weight, data.batch)
+            pred = out.argmax(dim=1)
+            y_true.extend(data.y.cpu().numpy().tolist())
+            y_pred.extend(pred.cpu().numpy().tolist())
+
+    # Diagnostic outputs to detect collapsed predictions / class imbalance
+    try:
+        print('y_true dist:', np.bincount(y_true) if len(y_true) > 0 else 'empty')
+    except Exception:
+        print('y_true dist: could not compute bincount')
+    try:
+        print('y_pred dist:', np.bincount(y_pred) if len(y_pred) > 0 else 'empty')
+    except Exception:
+        print('y_pred dist: could not compute bincount')
+    try:
+        print('unique preds:', np.unique(y_pred, return_counts=True))
+    except Exception:
+        pass
+
+    try:
+        print('confusion matrix:\n', confusion_matrix(y_true, y_pred))
+    except Exception:
+        print('confusion matrix: failed')
+
+    try:
+        print('classification report:\n', classification_report(y_true, y_pred, zero_division=0))
+    except Exception as e:
+        print('classification report: failed', e)
+
+    fold_acc = accuracy_score(y_true, y_pred)
+    fold_f1 = f1_score(y_true, y_pred, zero_division=0)
+    fold_mcc = matthews_corrcoef(y_true, y_pred)
+    print(f"Fold {fold + 1} best Test Acc: {best_acc:.4f}")
+    print(f"Fold {fold + 1} metrics: Acc={fold_acc:.4f}, F1={fold_f1:.4f}, MCC={fold_mcc:.4f}")
+    gnn_fold_results.append({'accuracy': fold_acc, 'f1': fold_f1, 'mcc': fold_mcc})
+# print("------------------------------------------------------")
+# display_graph_and_weights(train_dataset.iloc[0])  # Display the first graph's edge index and attributes for verification
+# print("------------------------------------------------------")
+# display_graph_and_weights(test_dataset.iloc[0])
+# print("------------------------------------------------------")
+# Final GNN CV summary
+print("\nGNN cross-validation results:")
+accs = [d['accuracy'] for d in gnn_fold_results]
+f1s = [d['f1'] for d in gnn_fold_results]
+mccs = [d['mcc'] for d in gnn_fold_results]
+print(f"  Per-fold accuracy: {accs}")
+print(f"  Per-fold F1: {f1s}")
+print(f"  Per-fold MCC: {mccs}")
+print(f"  Mean accuracy: {np.mean(accs):.4f} (std: {np.std(accs):.4f})")
+print(f"  Mean F1: {np.mean(f1s):.4f} (std: {np.std(f1s):.4f})")
+print(f"  Mean MCC: {np.mean(mccs):.4f} (std: {np.std(mccs):.4f})")
+print("NA OKO:")
+print(cv_results["GaussianNB"]["accuracy"])
+print(cv_results["GaussianNB"]["recall"])
+print(cv_results["GaussianNB"]["precision"])
+print(cv_results["GaussianNB"]["f1"])
+#TODO remove redundancy 
+
+
+
+
+#==================================================Wersja 2.0=================================
+
+# container for results
+cv_results = {}  # will hold evaluation returned by helper
+
+
+
+
+# define evaluation helper that trains on pre and validates on post
+
+def evaluate_classifiers(X_train, y_train, X_val, y_val, prefix=''):
+    results = {}
+    # GaussianNB
+    gnb = GaussianNB()
+    gnb.fit(X_train, y_train)
+    y_pred_gnb = gnb.predict(X_val)
+    results['GaussianNB'] = {
+        'accuracy': accuracy_score(y_val, y_pred_gnb),
+        'precision': precision_score(y_val, y_pred_gnb),
+        'recall': recall_score(y_val, y_pred_gnb),
+        'f1': f1_score(y_val, y_pred_gnb)
+    }
+    gnb_metrics = {
+        'epochs': [1],
+        'train_acc': [accuracy_score(y_train, gnb.predict(X_train))],
+        'test_acc': [results['GaussianNB']['accuracy']],
+        'train_f1': [f1_score(y_train, gnb.predict(X_train), zero_division=0)],
+        'test_f1': [results['GaussianNB']['f1']],
+        'train_mcc': [matthews_corrcoef(y_train, gnb.predict(X_train))],
+        'test_mcc': [matthews_corrcoef(y_val, y_pred_gnb)]
+    }
+    plot_model_metrics_during_training(gnb_metrics, 'GaussianNB', save_path=f'gnb_metrics_{prefix}.png')
+
+    # SVM
+    scaler_fold = StandardScaler()
+    X_train_scaled = scaler_fold.fit_transform(X_train)
+    X_val_scaled = scaler_fold.transform(X_val)
+    clf = svm.SVC()
+    clf.fit(X_train_scaled, y_train)
+    y_pred_svm = clf.predict(X_val_scaled)
+    results['SVM'] = {
+        'accuracy': accuracy_score(y_val, y_pred_svm),
+        'precision': precision_score(y_val, y_pred_svm),
+        'recall': recall_score(y_val, y_pred_svm),
+        'f1': f1_score(y_val, y_pred_svm)
+    }
+    svm_metrics = {
+        'epochs': [1],
+        'train_acc': [accuracy_score(y_train, clf.predict(X_train_scaled))],
+        'test_acc': [results['SVM']['accuracy']],
+        'train_f1': [f1_score(y_train, clf.predict(X_train_scaled), zero_division=0)],
+        'test_f1': [results['SVM']['f1']],
+        'train_mcc': [matthews_corrcoef(y_train, clf.predict(X_train_scaled))],
+        'test_mcc': [matthews_corrcoef(y_val, y_pred_svm)]
+    }
+    plot_model_metrics_during_training(svm_metrics, 'SVM', save_path=f'svm_metrics_{prefix}.png')
+
+    print(f"\nEvaluation results ({prefix}):")
+    for name, metrics in results.items():
+        print(f"\n{name}:")
+        for m, v in metrics.items():
+            print(f"  {m}: {v:.4f}")
+    return results
+
+# perform evaluation using defined split
+cv_results = evaluate_classifiers(pre, y_pre, post, y_post, prefix='pre_post')
+
+
+# Keep standardized copy for GNN
+scaler = StandardScaler()
+df_std = pd.DataFrame(scaler.fit_transform(df))
+df_std.columns = df.columns
+
+# Build a graph-ready DataFrame (features, seq, label)
+seqs_series = pd.Series(seqs, name='seq')
+if len(seqs_series) > df_std.shape[0]:
+    seqs_series = seqs_series.iloc[: df_std.shape[0]].reset_index(drop=True)
+elif len(seqs_series) < df_std.shape[0]:
+    seqs_series = pd.Series([''] * df_std.shape[0], name='seq')
+
+# df_graph used later for GNN folds
+df_graph = df_std.reset_index(drop=True).copy()
+df_graph['seq'] = seqs_series
+df_graph['is_positive'] = y.reset_index(drop=True).astype(int)
+
+#GAUSSIAN BAYASES  # <- single-split block removed (using StratifiedKFold above)
+# old single-split code removed (replaced with StratifiedKFold above)
+# single-split fit removed; model is trained inside the StratifiedKFold loop above
+
+# single-split prediction removed; predictions are computed in the CV loop above
+
+# Single-split GNB evaluation removed — see cross-validation summary above
+
+df_d = df.copy()
+df_d['is_positive'] = y
+
+
+
+# Wykresy gęstości cech dla każdej klasy
+# for feature in list(df.columns):  # Pomijamy kolumnę 'label'
+#     plt.figure(figsize=(10, 6))
+#     sns.kdeplot(data=df_d, x=feature, hue='class', fill=True)
+#     plt.title(f'Feature Density Plot for {feature}')
+#     plt.show()
+
+# Per-fold statistics (means/stds and single-split diagnostics removed) — use CV summaries above for performance assessment
+
+# Single-split SVM evaluation removed — SVM results are reported above from StratifiedKFold cross-validation
+# df_std remains defined above and will be used to construct graph datasets for the GNN.
+
+# Removed single-split misclassification listing; use per-fold diagnostics if needed
+
+
+
+
+
+
+
+
+
+# GNN — train the graph network using the pre / post split
+# df_graph already has standardized features, sequence column and is_positive label
+print("\nUsing pre/post split for GNN training/evaluation...")
+
+# compute positional mappings from original df index to df_graph rows
+pos_pre = df.index.get_indexer(pre_indices)
+pos_post = df.index.get_indexer(post_indices)
+
+# construct graph-specific DataFrames for train and validation
+
+df_graph_pre = df_graph.iloc[pos_pre].reset_index(drop=True)
+df_graph_post = df_graph.iloc[pos_post].reset_index(drop=True)
+
+print(f"Number of graphs in pre (train): {len(df_graph_pre)}")
+print(f"Number of graphs in post (validation): {len(df_graph_post)}")
+
+cols = df_graph_pre.columns[:-1]  # drop label column
+train_dataset = df_graph_pre.apply(lambda x: get_graph_hot_encoding_continuity(x, cols), axis=1)
+test_dataset = df_graph_post.apply(lambda x: get_graph_hot_encoding_continuity(x, cols), axis=1)
+
+# DataLoaders
+train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+test_loader = DataLoader(test_dataset, batch_size=32)
+
+# Initialize model, optimizer, loss
+model = GCN(hidden_channels=64)
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+criterion = torch.nn.CrossEntropyLoss()
+
+# early stopping bookkeeping
+best_model_state = None
+best_acc = 0.0
+no_improve_counter = 0
+max_no_improve = 10
+
+# Tracking metrics
+epoch_metrics = {
+    'epochs': [],
+    'train_acc': [],
+    'test_acc': [],
+    'train_f1': [],
+    'test_f1': [],
+    'train_mcc': [],
+    'test_mcc': []
+}
+
+max_epochs = 200
+for epoch in range(1, max_epochs + 1):
+    train()
+    # predictions for metrics
+    train_acc, train_preds, train_labels = test(train_loader, return_predictions=True)
+    test_acc, test_preds, test_labels = test(test_loader, return_predictions=True)
+
+    train_f1 = f1_score(train_labels, train_preds, zero_division=0)
+    test_f1 = f1_score(test_labels, test_preds, zero_division=0)
+    train_mcc = matthews_corrcoef(train_labels, train_preds)
+    test_mcc = matthews_corrcoef(test_labels, test_preds)
+
+    epoch_metrics['epochs'].append(epoch)
+    epoch_metrics['train_acc'].append(train_acc)
+    epoch_metrics['test_acc'].append(test_acc)
+    epoch_metrics['train_f1'].append(train_f1)
+    epoch_metrics['test_f1'].append(test_f1)
+    epoch_metrics['train_mcc'].append(train_mcc)
+    epoch_metrics['test_mcc'].append(test_mcc)
+
+    if test_acc > best_acc:
+        best_acc = test_acc
+        best_model_state = copy.deepcopy(model.state_dict())
+        no_improve_counter = 0
+    else:
+        no_improve_counter += 1
+
+    print(f'Epoch: {epoch:03d}, Train Acc: {train_acc:.4f}, Test Acc: {test_acc:.4f}, Test F1: {test_f1:.4f}, Test MCC: {test_mcc:.4f}')
+
+    if no_improve_counter >= max_no_improve:
+        print("Early stopping due to no improvement")
+        break
+
+# restore best model weights
+if best_model_state:
+    model.load_state_dict(best_model_state)
+
+# plot training metrics
+plot_model_metrics_during_training(epoch_metrics, 'GNN', save_path='gnn_training_metrics_prepost.png')
+
+# final evaluation on validation set
+y_true = []
+y_pred = []
+model.eval()
+with torch.no_grad():
+    for data in test_loader:
+        edge_weight = data.edge_attr[:, 0]
+        out = model(data.x, data.edge_index, edge_weight, data.batch)
+        pred = out.argmax(dim=1)
+        y_true.extend(data.y.cpu().numpy().tolist())
+        y_pred.extend(pred.cpu().numpy().tolist())
+
+print('y_true dist:', np.bincount(y_true) if len(y_true)>0 else 'empty')
+print('y_pred dist:', np.bincount(y_pred) if len(y_pred)>0 else 'empty')
+print('confusion matrix:\n', confusion_matrix(y_true, y_pred))
+print('classification report:\n', classification_report(y_true, y_pred, zero_division=0))
+
+final_acc = accuracy_score(y_true, y_pred)
+final_f1 = f1_score(y_true, y_pred, zero_division=0)
+final_mcc = matthews_corrcoef(y_true, y_pred)
+print(f"Final validation metrics: Acc={final_acc:.4f}, F1={final_f1:.4f}, MCC={final_mcc:.4f}")
+ 
