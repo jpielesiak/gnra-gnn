@@ -1,3 +1,5 @@
+
+#Copied on 13.03.2026
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -319,14 +321,10 @@ class GCN(torch.nn.Module):
         # self.conv1 = GCNConv(1, hidden_channels)
         # self.conv2 = GCNConv(hidden_channels, hidden_channels)
         # self.conv3 = GCNConv(hidden_channels, 2) #hidden channels
-        
-        # self.conv1 = GCNConv(4, 64)
-        # self.conv2 = GCNConv(64, 128)
-        # self.conv3 = GCNConv(128, 2) #hidden channels
-        self.conv1 = GCNConv(4, 16)
-        self.conv2 = GCNConv(16, 32)
-        self.conv3 = GCNConv(32, 2)
-        #self.soft = Softmax()
+        self.conv1 = GCNConv(4, 64)
+        self.conv2 = GCNConv(64, 128)
+        self.conv3 = GCNConv(128, 2) #hidden channels
+        self.soft = Softmax()
 
     def forward(self, x, edge_index, edge_weight, batch):
         x = self.conv1(x, edge_index, edge_weight)
@@ -341,17 +339,14 @@ class GCN(torch.nn.Module):
 
         # 3. Apply a final classifier
         x = F.dropout(x, p=0.2, training=self.training)
-        #x = self.soft(x)
+        x = self.soft(x)
         
         return x
 def train():
     model.train()
     for data in train_loader:  # Iterate in batches over the training dataset.  Make France great again
          optimizer.zero_grad()  # Clear gradients.
-         #edge_weight = data.edge_attr[:, 0]  # Only use weights, ignore is_consecutive_flag
-         edge_weight = data.edge_attr[:, 0]
-         edge_weight = torch.abs(edge_weight)
-         
+         edge_weight = data.edge_attr[:, 0]  # Only use weights, ignore is_consecutive_flag
          out = model(data.x, data.edge_index, edge_weight, data.batch)  # Perform a single forward pass.
          #out= model(data.x, data.edge_index, data.edge_weight, data.batch)
         #  print(out)
@@ -371,10 +366,7 @@ def test(loader, return_predictions=False):
      
      with torch.no_grad():
          for data in loader:  # Iterate in batches over the training/test dataset.
-             #edge_weight = data.edge_attr[:, 0]  # Only use weights
-             edge_weight = data.edge_attr[:, 0]
-             edge_weight = torch.abs(edge_weight)
-             
+             edge_weight = data.edge_attr[:, 0]  # Only use weights
              out = model(data.x, data.edge_index, edge_weight, data.batch)  #data.edge_weight
              pred = out.argmax(dim=1)  # Use the class with highest probability.
              correct += int((pred == data.y).sum())  # Check against ground-truth labels.
@@ -779,7 +771,7 @@ print(f'Shapiro-Wilk Test: Statistic={stat}, p-value={p_value}')
 #DIVIDING DATASET BY DATES
 #pre,post = filter_script.filter_pandas_dataframe_by_date(df,'rna_pdb_release_dates.csv','2024-10-20T00:00:00+0000')
 #trying to see if the model just learns to say yes every time
-pre,post = filter_script.filter_pandas_dataframe_by_date(df,'rna_pdb_release_dates.csv','2024-10-20T00:00:00+0000')
+post,pre = filter_script.filter_pandas_dataframe_by_date(df,'rna_pdb_release_dates.csv','2010-10-20T00:00:00+0000')
 
 # keep the original row indices so we can map sequences/graphs later
 pre_indices = pre.index.copy()
@@ -791,9 +783,7 @@ print("============================================ DF POST selected date ======
 print(post)
 print("============================================ END ============================================")
 num_gnra_in_post_df= post["gnra"].value_counts()
-num_all_files_in_post_df = post.shape[0]
 num_gnra_in_pre_df= pre["gnra"].value_counts()
-num_all_files_in_pre_df = pre.shape[0]
 y = df['gnra']
 y_pre = pre['gnra']
 y_post = post['gnra']
@@ -939,40 +929,13 @@ df_d['is_positive'] = y
 print("\nUsing StratifiedKFold on pre for GNN training/evaluation, with post as validation set...")
 
 # compute positional mappings from original df index to df_graph rows
-# pos_pre = df.index.get_indexer(pre_indices)
-# pos_post = df.index.get_indexer(post_indices)
+pos_pre = df.index.get_indexer(pre_indices)
+pos_post = df.index.get_indexer(post_indices)
 
 # construct graph-specific DataFrames
-# df_graph_pre = df_graph.iloc[pos_pre].reset_index(drop=True)
-# df_graph_post = df_graph.iloc[pos_post].reset_index(drop=True)
-# pre and post are already the correct row subsets of df (features only, reset index)
-# y_pre and y_post are the corresponding labels (reset index)
+df_graph_pre = df_graph.iloc[pos_pre].reset_index(drop=True)
+df_graph_post = df_graph.iloc[pos_post].reset_index(drop=True)
 
-scaler_pre = StandardScaler()
-pre_std = pd.DataFrame(scaler_pre.fit_transform(pre), columns=pre.columns)
-
-scaler_post = StandardScaler()  
-post_std = pd.DataFrame(scaler_post.fit_transform(post), columns=post.columns)
-
-df_graph_pre = pre_std.copy()
-df_graph_pre['seq'] = [seqs[i] for i in pre_indices] if hasattr(pre_indices, '__iter__') else [''] * len(pre_std)
-df_graph_pre['is_positive'] = y_pre.values
-
-df_graph_post = post_std.copy()
-df_graph_post['seq'] = [seqs[i] for i in post_indices] if hasattr(post_indices, '__iter__') else [''] * len(post_std)
-df_graph_post['is_positive'] = y_post.values
-
-# Verify immediately
-print("df_graph_pre class balance:", df_graph_pre['is_positive'].value_counts())
-print("df_graph_post class balance:", df_graph_post['is_positive'].value_counts())
-
-
-
-print(f"previously gathered data \n gnra in post: {num_gnra_in_post_df} len post: {num_all_files_in_post_df} \n gnra in post: {num_gnra_in_pre_df} len post: {num_all_files_in_pre_df}")
-print("df_graph_pre class balance:")
-print(df_graph_pre['is_positive'].value_counts())
-print("df_graph_post class balance:")
-print(df_graph_post['is_positive'].value_counts())
 print(f"Total graphs in pre: {len(df_graph_pre)}")
 print(f"Total graphs in post (fixed validation): {len(df_graph_post)}")
 
@@ -1121,10 +1084,9 @@ else:
 for fold, (train_idx, val_idx) in enumerate(fold_splits):
     print(f"\n--- GNN Fold {fold + 1}/{n_splits} ---")
 
-    # df_train = df_graph.iloc[train_idx].reset_index(drop=True)
-    # df_test = df_graph.iloc[val_idx].reset_index(drop=True)
-    df_train = df_graph_pre.iloc[train_idx].reset_index(drop=True)
-    df_test  = df_graph_pre.iloc[val_idx].reset_index(drop=True)
+    df_train = df_graph.iloc[train_idx].reset_index(drop=True)
+    df_test = df_graph.iloc[val_idx].reset_index(drop=True)
+
     # After creating df_train, before initializing the model
     pos = (df_train['is_positive'] == 1).sum()
     neg = (df_train['is_positive'] == 0).sum()
@@ -1132,7 +1094,7 @@ for fold, (train_idx, val_idx) in enumerate(fold_splits):
     total = len(df_train)
 
     # Directly use the ratio as the positive class weight
-    pos_weight_value = (neg / pos)
+    pos_weight_value = neg / pos
     print(f"Positives: {pos}, Negatives: {neg}, Pos weight: {pos_weight_value:.2f}x")
 
     class_weights = torch.tensor([1.0, pos_weight_value], dtype=torch.float)
@@ -1158,7 +1120,6 @@ for fold, (train_idx, val_idx) in enumerate(fold_splits):
     # Per-fold early stopping
     best_model_state = None
     best_acc = 0.0
-    best_f1 = 0.0
     no_improve_counter = 0
     max_no_improve = 10
     
@@ -1198,18 +1159,12 @@ for fold, (train_idx, val_idx) in enumerate(fold_splits):
         epoch_metrics['train_mcc'].append(train_mcc)
         epoch_metrics['test_mcc'].append(test_mcc)
 
-        if test_f1 > best_f1:  # or test_mcc > best_mcc
-            best_f1 = test_f1
+        if test_acc > best_acc:
+            best_acc = test_acc
             best_model_state = copy.deepcopy(model.state_dict())
             no_improve_counter = 0
         else:
             no_improve_counter += 1
-        # if test_acc > best_acc:
-        #     best_acc = test_acc
-        #     best_model_state = copy.deepcopy(model.state_dict())
-        #     no_improve_counter = 0
-        # else:
-        #     no_improve_counter += 1
 
         print(f'Epoch: {epoch:03d}, Train Acc: {train_acc:.4f}, Test Acc: {test_acc:.4f}, Test F1: {test_f1:.4f}, Test MCC: {test_mcc:.4f}')
 

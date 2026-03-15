@@ -187,7 +187,7 @@ def filter_pandas_dataframe_by_date(df, dates_csv, cutoff_date):
     after_df = pd.concat([after_df, pd.DataFrame(after_rows)], ignore_index=True)
     print(f"Total entries in dataframe: {len(df)}")
     print(f"Entries before cutoff date: {len(pre_df)}")
-    print(f"Entries before cutoff date: {len(after_df)}")
+    print(f"Entries after cutoff date: {len(after_df)}")
     print(f"Lost IDs (not found in release dates): {lost_ids}")
     return pre_df, after_df
 
