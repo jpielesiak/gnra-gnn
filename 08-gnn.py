@@ -1109,7 +1109,7 @@ print("Graph DataFrame columns:")
 print(df_graph.columns)
 #print(df_graph['gnra'])
 gnn_fold_results = []#                                                        removed 'seq' from columns that are dropped
-USE_FULL_DATASET = True   # Set to False to use normal k-fold CV
+USE_FULL_DATASET = False   # Set to False to use normal k-fold CV
 # ────────────────────────────────────────────────────────────────────────────
 
 if USE_FULL_DATASET:
@@ -1157,6 +1157,7 @@ for fold, (train_idx, val_idx) in enumerate(fold_splits):
     
     # Per-fold early stopping
     best_model_state = None
+    best_model_state_by_acc = None
     best_acc = 0.0
     best_f1 = 0.0
     no_improve_counter = 0
@@ -1204,9 +1205,9 @@ for fold, (train_idx, val_idx) in enumerate(fold_splits):
             no_improve_counter = 0
         else:
             no_improve_counter += 1
-        # if test_acc > best_acc:
-        #     best_acc = test_acc
-        #     best_model_state = copy.deepcopy(model.state_dict())
+        if test_acc > best_acc:
+            best_acc = test_acc
+            best_model_state_by_acc = copy.deepcopy(model.state_dict())
         #     no_improve_counter = 0
         # else:
         #     no_improve_counter += 1
