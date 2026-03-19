@@ -282,8 +282,11 @@ def get_graph_hot_encoding_continuity(row, cols):
             if len(weights) == 0:
                 continue
             is_consecutive = 1.0 if abs(i - j) == 1 else 0.0
+            is_consecutive_vec = {1,0}
+            if is_consecutive == 0.0:
+                is_consecutive_vec = {0,1}
             avg_weight = sum(weights) / len(weights)
-            edge_attr.append([avg_weight, is_consecutive])
+            edge_attr.append(weights+[is_consecutive]) #[avg_weight, is_consecutive],
             edge_index_list.append([i, j])
 
         edge_attr = torch.tensor(edge_attr, dtype=torch.float32)
@@ -300,7 +303,7 @@ def get_graph_hot_encoding_continuity(row, cols):
             torch.tensor([d[n] for n in row['seq']], dtype=torch.long), 
             num_classes=num_classes
         ).to(torch.float32)
-
+        
         y = torch.tensor([row['is_positive']], dtype=torch.int64)
 
         graph = Data(edge_index=edge_index_symmetric, edge_attr=edge_attr_symmetric, y=y, x=x)
@@ -355,7 +358,12 @@ def train():
          out = model(data.x, data.edge_index, edge_weight, data.batch)  # Perform a single forward pass.
          #out= model(data.x, data.edge_index, data.edge_weight, data.batch)
         #  print(out)
+        #  print("??????????????????????????????")
+        #  print(data.x)
+        #  print(data.edge_index)
+        #  print(data.edge_weight)
         #  print(data.y)
+        #  print("??????????????????????????????")
          loss = criterion(out, data.y)  # Compute the loss.
         # print(loss)
          loss.backward()  # Derive gradients.
@@ -469,77 +477,6 @@ def plot_model_metrics_during_training(epoch_data, model_name, fold_number=None,
 
 
 
-
-
-
-
-
-
-
-# #MAIN
-# data = pd.read_csv("./database/database_C1'.csv", sep=',', index_col=0)
-# data= data.map(parse_point)
-# data['class'] = 1
-# data
-
-# #stems
-# d1 = pd.read_csv("./stems_database_C1'.csv", sep=',', index_col=0)
-# # for column in d1.columns[:-1]:
-# #     if d1[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
-# #         d1[column] = pd.to_numeric(d1[column])
-#     #d1[column] = d1[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
-# d1=d1.map(parse_point)
-# d1 = d1.reset_index(drop=True)
-
-# #hairpins
-# d2 = pd.read_csv("./hairpins_database_C1'.csv", index_col=0, sep=',')
-# # for column in d2.columns[:-1]:
-# #     if d2[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
-# #         d2[column] = pd.to_numeric(d2[column])
-# #     d2[column] = d2[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
-# d2=d2.map(parse_point)
-# d2 = d2.reset_index(drop=True)
-# d2
-
-# #internal loops
-# d3 = pd.read_csv("./loops_database_C1'.csv", sep=',', index_col=0)
-# # for column in d3.columns[:-1]:
-# #     if d3[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
-# #         d3[column] = pd.to_numeric(d3[column])
-#     #d3[column] = d3[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
-# d3=d3.map(parse_point)
-# d3 = d3.reset_index(drop=True)
-# d3
-
-# #ends
-# d4 = pd.read_csv("./ends_database_C1'.csv", sep=',', index_col=0)
-# # for column in d4.columns[:-1]:
-# #     if d4[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
-# #         d4[column] = pd.to_numeric(d4[column])
-# #     d4[column] = d4[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
-# d4=d4.map(parse_point)
-# d4 = d4.reset_index(drop=True)
-# d4
-
-# #mix
-# d5 = pd.read_csv("./mix_database_C1'.csv", sep=',', index_col=0)
-# # for column in d5.columns[:-1]:
-# #     if d5[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
-# #         d5[column] = pd.to_numeric(d5[column])
-#     #d5[column] = d5[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
-# d5=d5.map(parse_point)
-# d5 = d5.reset_index(drop=True)
-# d5
-
-# #mix_with_seqs_assigned
-# d5v2 = pd.read_csv("./mix_database_C1_v2'.csv", sep=',', index_col=0)
-# # for column in d5v2.columns[:-1]:
-# #     if d5v2[column].apply(lambda x: str(x).replace('.', '', 1).isdigit()).all():
-# #        d5v2[column] = pd.to_numeric(d5v2[column])
-#     #d5v2[column] = d5v2[column].apply(lambda x: np.array(list(map(float, x.split(',')))))
-# d5v2=d5v2.map(parse_point)
-# d5v2 = d5v2.reset_index(drop=True)
-# d5v2
 dpos = pd.read_csv("positve.csv", sep=',', index_col=None)#, index_col=0)
 
     
@@ -558,50 +495,6 @@ data_full = pd.concat([dneg, dpos])
 import csv
 seqs = []
 
-# with open("./database/database_C1'_seqs.csv", 'r') as csvfile:
-#     csvreader = csv.reader(csvfile)
-#     for row in csvreader:
-#         seqs.append(row[0])
-
-# with open("./stems_database_C1'_seqs.csv", 'r') as csvfile:
-#     csvreader = csv.reader(csvfile)
-#     for row in csvreader:
-#         seqs.append(row[0])
-
-# with open("./hairpins_database_C1'_seqs.csv", 'r') as csvfile:
-#     csvreader = csv.reader(csvfile)
-#     for row in csvreader:
-#         seqs.append(row[0])
-
-# with open("./loops_database_C1'_seqs.csv", 'r') as csvfile:
-#     csvreader = csv.reader(csvfile)
-#     for row in csvreader:
-#         seqs.append(row[0])
-
-# with open("./ends_database_C1'_seqs.csv", 'r') as csvfile:
-#     csvreader = csv.reader(csvfile)
-#     for row in csvreader:
-#         seqs.append(row[0])
-
-# with open("./mix_database_C1'_seqs_v2.csv", 'r') as csvfile:
-#     csvreader = csv.reader(csvfile)
-#     for row in csvreader:
-#         if len(seqs) == data_full.shape[0]:
-#             break
-#         seqs.append(row[0])
-# with open("positve_seq.csv", 'r') as csvfile:
-#     csvreader = csv.reader(csvfile)
-#     for row in csvreader:
-#         if len(seqs) == data_full.shape[0]:
-#             break
-#         seqs.append(row[0])
-# with open("negative_seq.csv", 'r') as csvfile:
-#     csvreader = csv.reader(csvfile)
-#     for row in csvreader:
-#         if len(seqs) == data_full.shape[0]:
-#             break
-#         seqs.append(row[0])        
-# Use shape[0] as maximum allowed
 max_len = data_full.shape[0]
 
 read_sequences("positve_seq.csv", max_len)
@@ -611,88 +504,13 @@ data_full['seq'] = seqs
 #print("DATA FULL WITH SEQS:")
 #print(data_full)
 
-
-
-
-# planar_angles_full = []
-# cols =[]
-# def is_bad(cell):
-#     return isinstance(cell, str) and (',' in cell or cell.startswith('['))
-
-# bad_cells = data_full.map(is_bad)
-# print("Bad cells:\n", bad_cells.any())  # Shows which columns have bad entries
-# print(data_full.map(lambda x: x.shape if isinstance(x, np.ndarray) else None))
-
-# for row in data_full.iloc[:, :-1].values:
-#     tmp = []
-#     for i in range(len(row) - 2):
-#         for j in range(i + 1, len(row) - 1):
-#             for k in range(j + 1, len(row)):
-#                 print(f'{row[i]} ]]] {row[j]} ]]] {row[k]} {i},{j},{k}')
-#                 tmp.append(count_planar_angle_piel(row[i], row[j], row[k]))
-#                 if len(cols) < 20:
-#                     cols.append((i, j, k))
-#     planar_angles_full.append(tmp)
-# # for row in data_full.iloc[:,:-1].iterrows():
-# #     tmp = []
-# #     for i in range(len(row[1]) - 2):
-# #         for j in range(i + 1, len(row[1]) - 1):
-# #             for k in range(j + 1, len(row[1])):
-# #                 print(f'{row[1][i]} ]]] {row[1][j]} ]]] {row[1][k]} {i} ,{j},{k}')
-# #                 tmp.append(count_planar_angle(row[1][i], row[1][j], row[1][k]))
-# #                 if len(cols) < 20:
-# #                     cols.append((i,j,k))
-# #     planar_angles_full.append(tmp)
-
-# planar_angles_full = pd.DataFrame(planar_angles_full)
-# planar_angles_full.columns=cols
-# print(planar_angles_full)
-
-
-# torsion_angles = []
-# cols=[]
-# for row in data_full.iloc[:,:-1].iterrows():
-#     tmp = []
-#     for i in range(len(row[1])-3):  
-#         for j in range(i+1, len(row[1])-2):  
-#             for k in range(j+1, len(row[1])-1):
-#                 for l in range(k+1, len(row[1])):
-#                     tmp.append(count_torsion_angle(row[1][i], row[1][j], row[1][k], row[1][l]))
-#                     if len(cols) < 15:
-#                         cols.append((i,j,k,l))
-#     # for combo in combinations(row[1], 4):
-#     #     tmp.append(count_torsion_angle(combo[0], combo[1], combo[2], combo[3]))
-#     torsion_angles.append(tmp)
-
-# torsion_angles_full = pd.DataFrame(torsion_angles)
-# torsion_angles_full.columns=cols
-
-# ### SKALOWANIE ZEBY NIE BYLO UJEMNYCH ###
-# for i in range(torsion_angles_full.shape[0]):
-#     torsion_angles_full.iloc[i] = torsion_angles_full.iloc[i].apply(lambda x: x+360 if x < 0 else x)
-    
-# print(torsion_angles_full)
-
-
-# distances_full = []
-# for row in data_full.iloc[:,:-1].iterrows():
-#     tmp = []
-#     for j in range(0,len(row[1])):
-#         for k in range(j+1, len(row[1])):
-#             tmp.append(count_euclid_dist(row[1][j], row[1][k]))
-#     distances_full.append(tmp)
-
-# distances_full = pd.DataFrame(distances_full)
-# distances_full.columns = [(j,k) for j in range(0, data.shape[1]-1) for k in range(j+1, data.shape[1]-1)]
-# print(distances_full)
-
 #CREATING THE DATAFRAME
 #CREATING THE DATAFRAME
 #CREATING THE DATAFRAME
 #CREATING THE DATAFRAME
 #CREATING THE DATAFRAME
 #CREATING THE DATAFRAME
-#df = pd.concat([planar_angles_full, torsion_angles_full, distances_full], axis=1)
+
 
 
 
@@ -982,88 +800,23 @@ test_dataset = df_graph_post.apply(lambda x: get_graph_hot_encoding_continuity(x
 test_loader = DataLoader(test_dataset, batch_size=32)
 
 gnn_fold_results = []
-#INSERT ---------------------------------------------------------------------------------------------------------
-
-# #when the dataset was not divided in two halves
-# for fold, (train_idx, test_idx) in enumerate(skf.split(df, y)):
-
-#     print(f"\n--- Fold {fold + 1}/{n_splits} ---")
-#     X_train, X_test = df.iloc[train_idx], df.iloc[test_idx]
-#     y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
-
-#     # --- Gaussian Naive Bayes ---
-#     gnb = GaussianNB()
-#     gnb.fit(X_train, y_train)
-#     y_pred_gnb = gnb.predict(X_test)
-
-#     # cv_results["GaussianNB"]["accuracy"].append(accuracy_score(y_test, y_pred_gnb))
-#     # cv_results["GaussianNB"]["precision"].append(precision_score(y_test, y_pred_gnb))
-#     # cv_results["GaussianNB"]["recall"].append(recall_score(y_test, y_pred_gnb))
-#     # cv_results["GaussianNB"]["f1"].append(f1_score(y_test, y_pred_gnb))
-
-#     # Per-epoch-like metrics for GNB (simulate as only one step per fold)
-#     gnb_metrics = {
-#         'epochs': [1],
-#         'train_acc': [accuracy_score(y_train, gnb.predict(X_train))],
-#         'test_acc': [accuracy_score(y_test, y_pred_gnb)],
-#         'train_f1': [f1_score(y_train, gnb.predict(X_train), zero_division=0)],
-#         'test_f1': [f1_score(y_test, y_pred_gnb, zero_division=0)],
-#         'train_mcc': [matthews_corrcoef(y_train, gnb.predict(X_train))],
-#         'test_mcc': [matthews_corrcoef(y_test, y_pred_gnb)]
-#     }
-#     plot_model_metrics_during_training(gnb_metrics, 'GaussianNB', fold_number=fold+1, save_path=f'gnb_metrics_fold_{fold+1}.png')
-
-#     # --- SVM (with StandardScaler per fold) ---
-#     scaler_fold = StandardScaler()
-#     X_train_scaled = scaler_fold.fit_transform(X_train)
-#     X_test_scaled = scaler_fold.transform(X_test)
-
-#     clf = svm.SVC()
-#     clf.fit(X_train_scaled, y_train)
-#     y_pred_svm = clf.predict(X_test_scaled)
-
-#     # cv_results["SVM"]["accuracy"].append(accuracy_score(y_test, y_pred_svm))
-#     # cv_results["SVM"]["precision"].append(precision_score(y_test, y_pred_svm))
-#     # cv_results["SVM"]["recall"].append(recall_score(y_test, y_pred_svm))
-#     # cv_results["SVM"]["f1"].append(f1_score(y_test, y_pred_svm))
-
-#     # Per-epoch-like metrics for SVM (simulate as only one step per fold)
-#     svm_metrics = {
-#         'epochs': [1],
-#         'train_acc': [accuracy_score(y_train, clf.predict(X_train_scaled))],
-#         'test_acc': [accuracy_score(y_test, y_pred_svm)],
-#         'train_f1': [f1_score(y_train, clf.predict(X_train_scaled), zero_division=0)],
-#         'test_f1': [f1_score(y_test, y_pred_svm, zero_division=0)],
-#         'train_mcc': [matthews_corrcoef(y_train, clf.predict(X_train_scaled))],
-#         'test_mcc': [matthews_corrcoef(y_test, y_pred_svm)]
-#     }
-#     plot_model_metrics_during_training(svm_metrics, 'SVM', fold_number=fold+1, save_path=f'svm_metrics_fold_{fold+1}.png')
-
-# # Show mean CV results
-# print("\nCross-validation results (mean over folds):")
-# for name, metrics in cv_results.items():
-#     print(f"\n{name}:")
-#     print(f"  Accuracy: {np.mean(metrics['accuracy']):.4f}")
-#     print(f"  Precision: {np.mean(metrics['precision']):.4f}")
-#     print(f"  Recall: {np.mean(metrics['recall']):.4f}")
-#     print(f"  F1: {np.mean(metrics['f1']):.4f}")
 
 # Keep standardized copy for GNN
-scaler = StandardScaler()
-df_std = pd.DataFrame(scaler.fit_transform(df))
-df_std.columns = df.columns
+# scaler = StandardScaler()
+# df_std = pd.DataFrame(scaler.fit_transform(df))
+# df_std.columns = df.columns
 
-# Build a graph-ready DataFrame (features, seq, label)
-seqs_series = pd.Series(seqs, name='seq')
-if len(seqs_series) > df_std.shape[0]:
-    seqs_series = seqs_series.iloc[: df_std.shape[0]].reset_index(drop=True)
-elif len(seqs_series) < df_std.shape[0]:
-    seqs_series = pd.Series([''] * df_std.shape[0], name='seq')
+# # Build a graph-ready DataFrame (features, seq, label)
+# seqs_series = pd.Series(seqs, name='seq')
+# if len(seqs_series) > df_std.shape[0]:
+#     seqs_series = seqs_series.iloc[: df_std.shape[0]].reset_index(drop=True)
+# elif len(seqs_series) < df_std.shape[0]:
+#     seqs_series = pd.Series([''] * df_std.shape[0], name='seq')
 
-# df_graph used later for GNN folds
-df_graph = df_std.reset_index(drop=True).copy()
-df_graph['seq'] = seqs_series
-df_graph['is_positive'] = y.reset_index(drop=True).astype(int)
+# # df_graph used later for GNN folds
+# df_graph = df_std.reset_index(drop=True).copy()
+# df_graph['seq'] = seqs_series
+# df_graph['is_positive'] = y.reset_index(drop=True).astype(int)
 
 #GAUSSIAN BAYASES  # <- single-split block removed (using StratifiedKFold above)
 # old single-split code removed (replaced with StratifiedKFold above)
@@ -1214,7 +967,7 @@ for fold, (train_idx, val_idx) in enumerate(fold_splits):
 
         print(f'Epoch: {epoch:03d}, Train Acc: {train_acc:.4f}, Test Acc: {test_acc:.4f}, Test F1: {test_f1:.4f}, Test MCC: {test_mcc:.4f}')
 
-        if no_improve_counter >= max_no_improve and epoch>60:
+        if no_improve_counter >= max_no_improve and epoch>190:
             print("Early stopping due to no improvement")
             break
 
