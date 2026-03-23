@@ -38,7 +38,10 @@ import torch.nn.functional as F
 from torch_geometric.nn import GCNConv
 from torch_geometric.nn import global_mean_pool
 import copy
+from torch_geometric.nn import GATv2Conv
 
+NODE_DIM = 49  # 4 one-hot + angle + torsion features
+EDGE_DIM = 2   # distance value + is_consecutive flag
 #chyba niepotrzebny:
 #import seaborn as sns
 
@@ -309,6 +312,77 @@ def get_graph_hot_encoding_continuity(row, cols):
         graph = Data(edge_index=edge_index_symmetric, edge_attr=edge_attr_symmetric, y=y, x=x)
         return graph
 
+def get_graph_hot_encoding_v3(row, cols):
+    NUM_NODES = 6  # we only care about nucleotides 1-6
+    d = {'A': 0, 'U': 1, 'C': 2, 'G': 3}
+    num_classes = len(d)
+
+    seq = row['seq'][:NUM_NODES]  # slice to first 6 nucleotides, ignore the rest
+
+    # one-hot base node features: shape [6, 4]
+    node_features = torch.nn.functional.one_hot(
+        torch.tensor([d[n] for n in seq], dtype=torch.long),
+        num_classes=num_classes
+    ).to(torch.float32)
+
+    edge_dict    = {}
+    node_angle   = {i: [] for i in range(NUM_NODES)}
+    node_torsion = {i: [] for i in range(NUM_NODES)}
+
+    feature_cols = [c for c in cols if c not in ('seq', 'is_positive')]
+
+    for col in feature_cols:
+        idxs = get_all_indexes_from_string(col)
+        val  = float(row[col]) if not pd.isna(row[col]) else 0.0
+
+        # skip anything that involves node 7 (1-based), i.e. index >= 6 (0-based)
+        if any(i > NUM_NODES for i in idxs):
+            continue
+
+        if len(idxs) == 2:
+            i, j = idxs[0] - 1, idxs[1] - 1
+            edge_dict.setdefault((i, j), []).append(val)
+
+        elif len(idxs) == 3:
+            middle = idxs[1] - 1
+            node_angle[middle].append(val)
+
+        elif len(idxs) == 4:
+            mid1, mid2 = idxs[1] - 1, idxs[2] - 1
+            node_torsion[mid1].append(val)
+            node_torsion[mid2].append(val)
+
+    # --- build node feature matrix ---
+    max_angle   = max((len(v) for v in node_angle.values()),   default=0)
+    max_torsion = max((len(v) for v in node_torsion.values()), default=0)
+
+    extra_node_feats = []
+    for i in range(NUM_NODES):
+        a_feats = node_angle[i]   + [0.0] * (max_angle   - len(node_angle[i]))
+        t_feats = node_torsion[i] + [0.0] * (max_torsion - len(node_torsion[i]))
+        extra_node_feats.append(a_feats + t_feats)
+
+    extra = torch.tensor(extra_node_feats, dtype=torch.float32)
+    x = torch.cat([node_features, extra], dim=1)
+
+    # --- build edges ---
+    edge_index_list = []
+    edge_attr_list  = []
+
+    for (i, j), weights in edge_dict.items():
+        is_consecutive = 1.0 if abs(i - j) == 1 else 0.0
+        edge_attr_list.append(weights + [is_consecutive])
+        edge_index_list.append([i, j])
+
+    edge_attr  = torch.tensor(edge_attr_list,  dtype=torch.float32)
+    edge_index = torch.tensor(edge_index_list, dtype=torch.int64).t().contiguous()
+
+    edge_index = torch.cat([edge_index, edge_index.flip(0)], dim=1)
+    edge_attr  = torch.cat([edge_attr,  edge_attr],          dim=0)
+
+    y = torch.tensor([int(row['is_positive'])], dtype=torch.int64)
+    return Data(edge_index=edge_index, edge_attr=edge_attr, x=x, y=y)
+
 def display_graph_and_weights(graph):
     print("Edge Index:")
     print(graph.edge_index)
@@ -318,85 +392,50 @@ def display_graph_and_weights(graph):
 class GCN(torch.nn.Module):
     def __init__(self, hidden_channels):
         super(GCN, self).__init__()
-        #torch.manual_seed(12345)
-        # self.conv1 = GCNConv(1, hidden_channels)
-        # self.conv2 = GCNConv(hidden_channels, hidden_channels)
-        # self.conv3 = GCNConv(hidden_channels, 2) #hidden channels
-        
-        # self.conv1 = GCNConv(4, 64)
-        # self.conv2 = GCNConv(64, 128)
-        # self.conv3 = GCNConv(128, 2) #hidden channels
-        self.conv1 = GCNConv(4, 16)
-        self.conv2 = GCNConv(16, 32)
-        self.conv3 = GCNConv(32, 2)
-        #self.soft = Softmax()
+        self.conv1 = GATv2Conv(NODE_DIM, 32, edge_dim=EDGE_DIM, heads=1)
+        self.conv2 = GATv2Conv(32, 64, edge_dim=EDGE_DIM, heads=1)
+        self.conv3 = GATv2Conv(64, 32, edge_dim=EDGE_DIM, heads=1)
+        self.lin   = torch.nn.Linear(32, 2)
 
-    def forward(self, x, edge_index, edge_weight, batch):
-        x = self.conv1(x, edge_index, edge_weight)
-        x = x.relu()
-        x = self.conv2(x, edge_index, edge_weight)
-        x = x.relu()
-        x = self.conv3(x, edge_index, edge_weight)
+    def forward(self, x, edge_index, edge_attr, batch):
+        x = self.conv1(x, edge_index, edge_attr=edge_attr).relu()
+        x = self.conv2(x, edge_index, edge_attr=edge_attr).relu()
+        x = self.conv3(x, edge_index, edge_attr=edge_attr).relu()
+        x = global_mean_pool(x, batch)
+        x = F.dropout(x, p=0.3, training=self.training)
+        return self.lin(x)
 
-        # 2. Readout layer
 
-        x = global_mean_pool(x, batch)  # [batch_size, hidden_channels]
 
-        # 3. Apply a final classifier
-        x = F.dropout(x, p=0.2, training=self.training)
-        #x = self.soft(x)
-        
-        return x
 def train():
     model.train()
-    for data in train_loader:  # Iterate in batches over the training dataset.  Make France great again
-         optimizer.zero_grad()  # Clear gradients.
-         #edge_weight = data.edge_attr[:, 0]  # Only use weights, ignore is_consecutive_flag
-         edge_weight = data.edge_attr[:, 0]
-         edge_weight = torch.abs(edge_weight)
-         
-         out = model(data.x, data.edge_index, edge_weight, data.batch)  # Perform a single forward pass.
-         #out= model(data.x, data.edge_index, data.edge_weight, data.batch)
-        #  print(out)
-        #  print("??????????????????????????????")
-        #  print(data.x)
-        #  print(data.edge_index)
-        #  print(data.edge_weight)
-        #  print(data.y)
-        #  print("??????????????????????????????")
-         loss = criterion(out, data.y)  # Compute the loss.
-        # print(loss)
-         loss.backward()  # Derive gradients.
-         optimizer.step()  # Update parameters based on gradients.
+    for data in train_loader:
+        optimizer.zero_grad()
+        out = model(data.x, data.edge_index, data.edge_attr, data.batch)  # full edge_attr
+        loss = criterion(out, data.y)
+        loss.backward()
+        optimizer.step()
          
 
 def test(loader, return_predictions=False):
-     model.eval()
+    model.eval()
+    correct = 0
+    all_preds, all_labels = [], []
 
-     correct = 0
-     all_preds = []
-     all_labels = []
-     
-     with torch.no_grad():
-         for data in loader:  # Iterate in batches over the training/test dataset.
-             #edge_weight = data.edge_attr[:, 0]  # Only use weights
-             edge_weight = data.edge_attr[:, 0]
-             edge_weight = torch.abs(edge_weight)
-             
-             out = model(data.x, data.edge_index, edge_weight, data.batch)  #data.edge_weight
-             pred = out.argmax(dim=1)  # Use the class with highest probability.
-             correct += int((pred == data.y).sum())  # Check against ground-truth labels.
-             
-             if return_predictions:
-                 all_preds.extend(pred.cpu().numpy().tolist())
-                 all_labels.extend(data.y.cpu().numpy().tolist())
-     
-     accuracy = correct / len(loader.dataset)
-     
-     if return_predictions:
-         return accuracy, np.array(all_preds), np.array(all_labels)
-     
-     return accuracy
+    with torch.no_grad():
+        for data in loader:
+            out  = model(data.x, data.edge_index, data.edge_attr, data.batch)  # full edge_attr
+            pred = out.argmax(dim=1)
+            correct += int((pred == data.y).sum())
+
+            if return_predictions:
+                all_preds.extend(pred.cpu().numpy().tolist())
+                all_labels.extend(data.y.cpu().numpy().tolist())
+
+    accuracy = correct / len(loader.dataset)
+    if return_predictions:
+        return accuracy, np.array(all_preds), np.array(all_labels)
+    return accuracy
 
 def plot_model_metrics_during_training(epoch_data, model_name, fold_number=None, save_path=None):
     """
@@ -796,7 +835,7 @@ print(f"Total graphs in post (fixed validation): {len(df_graph_post)}")
 
 # prepare post dataset once (shared across all folds)
 cols_post = df_graph_post.columns[:-1]
-test_dataset = df_graph_post.apply(lambda x: get_graph_hot_encoding_continuity(x, cols_post), axis=1)
+test_dataset = df_graph_post.apply(lambda x: get_graph_hot_encoding_v3(x, cols_post), axis=1)
 test_loader = DataLoader(test_dataset, batch_size=32)
 
 gnn_fold_results = []
@@ -892,8 +931,8 @@ for fold, (train_idx, val_idx) in enumerate(fold_splits):
     criterion = torch.nn.CrossEntropyLoss(weight=class_weights)
 
     cols = df_train.columns[:-1]  # all feature columns
-    train_dataset = df_train.apply(lambda x: get_graph_hot_encoding_continuity(x, cols), axis=1)
-    test_dataset = df_test.apply(lambda x: get_graph_hot_encoding_continuity(x, cols), axis=1)
+    train_dataset = df_train.apply(lambda x: get_graph_hot_encoding_v3(x, cols), axis=1)
+    test_dataset = df_test.apply(lambda x: get_graph_hot_encoding_v3(x, cols), axis=1)
 
     print(f'Number of training graphs: {len(train_dataset)}')
     print(f'Number of test graphs: {len(test_dataset)}')
