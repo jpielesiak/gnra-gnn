@@ -16,7 +16,7 @@ import importlib.util
 
 spec = importlib.util.spec_from_file_location(
     "generate_csv_module",  # arbitrary name
-    "06-generate-csv.py"
+    "04-generate-csv.py"
 )
 
 module = importlib.util.module_from_spec(spec)
@@ -32,7 +32,7 @@ def process_cif_files_for_c1_prime(directory: str, ids: List[List[int]] = None, 
     Args:
         directory: Path to directory containing .cif files
         ids: List of lists of integers, where each sublist contains starting positions 
-             of GNRA motifs for the corresponding file. If provided, marks groups as gnra=True/False.
+             of double tetrad motifs for the corresponding file. If provided, marks groups as double_tetrad=True/False.
         filepath: Optional path to a single .cif file to process instead of the whole directory
 
     Returns:
@@ -55,8 +55,8 @@ def process_cif_files_for_c1_prime(directory: str, ids: List[List[int]] = None, 
         ids = [[] for _ in range(len(cif_files))]
 
     for file_idx, cif_file in enumerate(cif_files):
-        # Get GNRA positions for this file, default to empty list if index out of range
-        gnra_positions = ids[file_idx] if file_idx < len(ids) else []
+        # Get double tetrad positions for this file, default to empty list if index out of range
+        dtetrad_positions = ids[file_idx] if file_idx < len(ids) else []
         
         try:
             # Parse the CIF file
@@ -93,8 +93,8 @@ def process_cif_files_for_c1_prime(directory: str, ids: List[List[int]] = None, 
                 group_of_8["source_file"] = f"{filename}_NT:{i}_{i+7}"
                 
                 # Mark as GNRA if this starting position is in the ids list for this file
-                is_gnra = i in gnra_positions
-                group_of_8["gnra"] = is_gnra
+                is_dtetrad = i in dtetrad_positions
+                group_of_8["double_tetrad"] = is_dtetrad
                 
                 # Extract nucleotide sequence (residue names) for this group of 8
                 # Get the residue names from the group using label_comp_id
@@ -131,7 +131,7 @@ def process_cif_files_for_c1_prime(directory: str, ids: List[List[int]] = None, 
                 group_of_8["seq"] = seq
 
                 all_dataframes.append(group_of_8)
-                print(f" {filename}: Saving {i} {i+7} C1' atoms (gnra={is_gnra}, seq={seq})")
+                print(f" {filename}: Saving {i} {i+7} C1' atoms (double_tetrad={is_dtetrad}, seq={seq})")
 
 
         except Exception as e:
@@ -151,8 +151,8 @@ def process_cif_files_for_c1_prime(directory: str, ids: List[List[int]] = None, 
 
 
 
-def load_gnra_motifs(
-    filename: str = "gnra_motifs_by_pdb.json",
+def load_dtetrad_motifs(
+    filename: str = "double_tetrad_motifs_by_pdb.json",
 ) -> Dict[str, List[Dict[str, Any]]]:
     """Load GNRA motifs from JSON file."""
     with open(filename, "r") as f:
@@ -480,37 +480,37 @@ if __name__ == "__main__":
     # Process positive examples (GNRA motifs)
 
     
-    ids = parse_and_process_mmcif_files("test_cif_files",load_gnra_motifs("hl_3.97.json"))#,"1JID.cif"
+    ids = parse_and_process_mmcif_files("motif_cif_files",load_dtetrad_motifs())#,"1JID.cif"
 
     
     print("Processing positive examples from motif_cif_files...")
-    dfs, numfiles = process_cif_files_for_c1_prime("test_cif_files",ids)
+    dfs, numfiles = process_cif_files_for_c1_prime("motif_cif_files",ids)
 
     features = []
     for df in dfs:
         if not df.empty:
-            # Extract seq and gnra from the input dataframe before calculating features
+            # Extract seq and double_tetrad from the input dataframe before calculating features
             seq_value = df["seq"].iloc[0] if "seq" in df.columns else ""
-            gnra_value = df["gnra"].iloc[0] if "gnra" in df.columns else False
+            dtetrad_value = df["double_tetrad"].iloc[0] if "double_tetrad" in df.columns else False
             
             feats = module.calculate_geometric_features(df)
-            # Add seq and gnra columns to the features dataframe
+            # Add seq and double_tetrad columns to the features dataframe
             feats["seq"] = seq_value
-            feats["gnra"] = gnra_value
+            feats["double_tetrad"] = dtetrad_value
             features.append(feats)
 
     if features:
         # Concatenate all feature dataframes
         final_df = pd.concat(features, ignore_index=True)
 
-        # Reorder columns: move 'seq' to second-to-last, 'gnra' to last
-        cols = [c for c in final_df.columns if c not in ('seq', 'gnra')]
-        cols.extend(['seq', 'gnra'])
+        # Reorder columns: move 'seq' to second-to-last, 'double_tetrad' to last
+        cols = [c for c in final_df.columns if c not in ('seq', 'double_tetrad')]
+        cols.extend(['seq', 'double_tetrad'])
         final_df = final_df[cols]
-        final_df = final_df.rename(columns={"gnra": "is_positive"})
+        final_df = final_df.rename(columns={"double_tetrad": "is_positive"})
 
         # Save to CSV
-        output_file = "geometric_features_to_test8.csv"
+        output_file = "geometric_features.csv"
         final_df.to_csv(output_file, index=False)
 
         print(f"\nSaved {len(final_df)} samples to {output_file}")

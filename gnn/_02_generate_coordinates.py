@@ -339,7 +339,7 @@ def filterOutIndexes(df: pd.DataFrame) -> pd.DataFrame:
 def processForSeqAndNtCords():
      # Process positive examples (GNRA motifs)
     print("Processing positive examples from motif_cif_files...")
-    positive_dfs = process_cif_files_for_c1_prime("motif_cif_files")
+    positive_dfs = process_cif_files_for_c1_prime("double_tetrad/motif_cif_files/")
 
     # Process negative examples
     print("\nProcessing negative examples from negative_cif_files...")

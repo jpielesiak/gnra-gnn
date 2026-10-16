@@ -23,10 +23,23 @@ from torch_geometric.loader import DataLoader
 from torch_geometric.nn import GATv2Conv, global_mean_pool
 _GAT_AVAILABLE = True
 
+# KD-tree based candidate enumeration (replaces sliding-window generation).
+# Falls back to a flat import if double_tetrad isn't installed as a package
+# and neighborhood.py simply lives alongside this script.
+try:
+    from double_tetrad.neighborhood import enumerate_tuples
+except ImportError:
+    from neighborhood import enumerate_tuples
+
 # Default number of nucleotides per window/graph. Overridable on the command
 # line with --nt-number; must match the window_size the loaded model bundle
-# was trained with (checked in load_model_bundle).
+# was trained with (checked in load_model_bundle). For the double-tetrad
+# model this is 8 (two stacked G-tetrads = 8 guanines).
 DEFAULT_NT_NUMBER = 8
+
+# Default KD-tree neighbourhood radius (Å) used to find spatially close
+# guanines when enumerating candidate 8-tuples.
+DEFAULT_RADIUS = 22.0
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -190,7 +203,8 @@ class GATPredictor:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Run a bundled classical or GAT model on all N-nt windows from a structure"
+            "Run a bundled classical or GAT model on candidate N-tuples of "
+            "spatially close guanines from a structure"
         )
     )
     parser.add_argument("structure", type=Path, help="Path to an input .cif or .pdb")
@@ -205,8 +219,26 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=DEFAULT_NT_NUMBER,
         help=(
-            "Number of nucleotides per window/graph (default: %(default)s). "
+            "Number of nucleotides per candidate tuple/graph (default: %(default)s). "
             "Must match the window_size the loaded model bundle was trained with."
+        ),
+    )
+    parser.add_argument(
+        "--radius",
+        type=float,
+        default=DEFAULT_RADIUS,
+        help=(
+            "KD-tree neighbourhood radius in Angstroms used to find spatially "
+            "close guanines when enumerating candidate tuples (default: %(default)s)"
+        ),
+    )
+    parser.add_argument(
+        "--max-distance",
+        type=float,
+        default=22.0,
+        help=(
+            "Optional maximum pairwise C1' distance (Angstroms) allowed within a "
+            "candidate tuple; tuples exceeding this are pruned before scoring"
         ),
     )
     parser.add_argument(
@@ -383,14 +415,16 @@ def select_structure_model(
     return filtered, selected_model
 
 
-def get_nucleotide_residues_by_chain(structure: Structure) -> dict[str, list[Residue]]:
-    residues_by_chain: dict[str, list[Residue]] = {}
-    for residue in structure.residues:
-        if not residue.is_nucleotide:
-            continue
-        chain_id = clean_text(residue.chain_id)
-        residues_by_chain.setdefault(chain_id, []).append(residue)
-    return residues_by_chain
+def get_guanine_residues(structure: Structure) -> list[Residue]:
+    """Collect every guanine nucleotide residue in the structure, across all
+    chains. Candidate tuples are formed spatially (via KD-tree) rather than
+    per-chain, since a G-tetrad/double-tetrad can be built from guanines on
+    different strands."""
+    return [
+        residue
+        for residue in structure.residues
+        if residue.is_nucleotide and residue.one_letter_name == "G"
+    ]
 
 
 def calculate_distance(
@@ -499,58 +533,82 @@ def calculate_window_features(
     return result
 
 
-def build_window_rows(
-    structure_path: Path, residues_by_chain: dict[str, list[Residue]], window_size: int
+def build_candidate_rows(
+    structure_path: Path,
+    guanine_residues: list[Residue],
+    tuple_size: int,
+    radius: float,
+    max_distance: Optional[float] = None,
 ) -> tuple[list[dict[str, Any]], pd.DataFrame, int]:
+    """Enumerate candidate N-tuples of spatially close guanines via KD-tree
+    (see double_tetrad/neighborhood.py) instead of sliding sequence windows.
+
+    Each candidate tuple is a set of `tuple_size` guanines (e.g. 8 for a
+    double tetrad) that lie within `radius` Angstroms of each other,
+    deduplicated by residue identity and optionally pruned by
+    `max_distance` (maximum pairwise C1' distance).
+    """
+    coords: list[tuple[float, float, float]] = []
+    residue_ids: list[tuple[str, int, str]] = []
+    valid_residues: list[Residue] = []
+    skipped_residues = 0
+
+    for residue in guanine_residues:
+        c1_prime_coords = first_c1_prime_coordinates(residue)
+        if c1_prime_coords is None:
+            skipped_residues += 1
+            continue
+        coords.append(c1_prime_coords)
+        residue_ids.append(
+            (
+                clean_text(residue.chain_id),
+                residue.residue_number,
+                clean_text(residue.insertion_code),
+            )
+        )
+        valid_residues.append(residue)
+
+    candidates = enumerate_tuples(
+        coords,
+        n=tuple_size,
+        radius=radius,
+        residue_ids=residue_ids,
+        max_distance=max_distance,
+        dedup=True,
+    )
+
     rows: list[dict[str, Any]] = []
     feature_rows: list[dict[str, float]] = []
-    skipped_windows = 0
-    global_window_index = 1
 
-    for chain_id, chain_residues in residues_by_chain.items():
-        if len(chain_residues) < window_size:
-            continue
+    for candidate_index, (indices, ordered_coords) in enumerate(candidates, start=1):
+        ordered_residues = [valid_residues[i] for i in indices]
+        start_residue = ordered_residues[0]
+        end_residue = ordered_residues[-1]
+        chain_ids = sorted({clean_text(r.chain_id) for r in ordered_residues})
 
-        for chain_window_index, start in enumerate(
-            range(len(chain_residues) - window_size + 1), start=1
-        ):
-            window_residues = chain_residues[start : start + window_size]
-            coords: list[tuple[float, float, float]] = []
-            for residue in window_residues:
-                c1_prime_coords = first_c1_prime_coordinates(residue)
-                if c1_prime_coords is None:
-                    skipped_windows += 1
-                    break
-                coords.append(c1_prime_coords)
-            else:
-                start_residue = window_residues[0]
-                end_residue = window_residues[-1]
-                rows.append(
-                    {
-                        "source_structure": structure_path.name,
-                        "window_index": global_window_index,
-                        "chain_id": chain_id,
-                        "chain_window_index": chain_window_index,
-                        "sequence": "".join(
-                            residue.one_letter_name for residue in window_residues
-                        ),
-                        "start_residue_number": start_residue.residue_number,
-                        "start_insertion_code": clean_text(
-                            start_residue.insertion_code
-                        ),
-                        "start_residue_name": start_residue.residue_name,
-                        "end_residue_number": end_residue.residue_number,
-                        "end_insertion_code": clean_text(end_residue.insertion_code),
-                        "end_residue_name": end_residue.residue_name,
-                        "residue_ids": ",".join(
-                            format_residue_id(residue) for residue in window_residues
-                        ),
-                    }
-                )
-                feature_rows.append(calculate_window_features(coords, window_size))
-                global_window_index += 1
+        rows.append(
+            {
+                "source_structure": structure_path.name,
+                "window_index": candidate_index,
+                "chain_id": ",".join(chain_ids),
+                "chain_window_index": candidate_index,
+                "sequence": "".join(
+                    residue.one_letter_name for residue in ordered_residues
+                ),
+                "start_residue_number": start_residue.residue_number,
+                "start_insertion_code": clean_text(start_residue.insertion_code),
+                "start_residue_name": start_residue.residue_name,
+                "end_residue_number": end_residue.residue_number,
+                "end_insertion_code": clean_text(end_residue.insertion_code),
+                "end_residue_name": end_residue.residue_name,
+                "residue_ids": ",".join(
+                    format_residue_id(residue) for residue in ordered_residues
+                ),
+            }
+        )
+        feature_rows.append(calculate_window_features(list(ordered_coords), tuple_size))
 
-    return rows, pd.DataFrame(feature_rows), skipped_windows
+    return rows, pd.DataFrame(feature_rows), skipped_residues
 
 
 def positive_class_probabilities(
@@ -585,7 +643,7 @@ def save_probability_plot(results_df: pd.DataFrame, output_plot: Path) -> None:
         linewidth=1.5,
         markersize=3,
     )
-    plt.xlabel("Window index")
+    plt.xlabel("Candidate index")
     plt.ylabel("Positive-class probability")
     plt.ylim(-0.05, 1.05)
     plt.grid(True, alpha=0.3)
@@ -607,16 +665,19 @@ def main() -> None:
     atoms_df = parse_structure_file(args.structure)
     atoms_df, selected_model = select_structure_model(atoms_df, args.structure_model)
     structure = Structure(atoms_df)
-    residues_by_chain = get_nucleotide_residues_by_chain(structure)
+    guanine_residues = get_guanine_residues(structure)
 
-    if not residues_by_chain:
-        raise ValueError(f"No nucleotide residues found in {args.structure}")
+    if not guanine_residues:
+        raise ValueError(f"No guanine residues found in {args.structure}")
 
-    row_metadata, features_df, skipped_windows = build_window_rows(
-        args.structure, residues_by_chain, window_size
+    row_metadata, features_df, skipped_residues = build_candidate_rows(
+        args.structure, guanine_residues, window_size, args.radius, args.max_distance
     )
     if features_df.empty:
-        raise ValueError(f"No valid {window_size}-nt windows found in {args.structure}")
+        raise ValueError(
+            f"No candidate {window_size}-guanine tuples found within radius "
+            f"{args.radius} in {args.structure}"
+        )
 
     missing_features = sorted(set(feature_columns).difference(features_df.columns))
     if missing_features:
@@ -654,10 +715,10 @@ def main() -> None:
     output_csv.parent.mkdir(parents=True, exist_ok=True)
     results_df.to_csv(output_csv, index=False)
 
-    print(f"Parsed {len(residues_by_chain)} nucleotide chains")
-    print(f"Generated {len(results_df)} valid windows")
-    if skipped_windows:
-        print(f"Skipped {skipped_windows} windows due to missing C1' coordinates")
+    print(f"Found {len(guanine_residues)} guanine residues")
+    print(f"Generated {len(results_df)} candidate {window_size}-guanine tuples")
+    if skipped_residues:
+        print(f"Skipped {skipped_residues} guanines due to missing C1' coordinates")
     print(f"Saved predictions to {output_csv}")
 
     if args.output_plot is not None:
