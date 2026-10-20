@@ -16,7 +16,7 @@ Place this file next to run_model.py and run_model_graph.py (and the
 features.py / neighborhood.py modules they import).
 
 Example:
-    uv run _13_test_all_models.py -model_folder test_cif_small/  -result_foldermodels_test/  -answers  double_tetrad_motifs_by_pdb.json 
+    uv run _13_test_all_models.py -structures test_cif_small/  -result_folder models_test/  -answers  double_tetrad_motifs_by_pdb.json 
 _13_test_all_models.py: error: the following arguments are required: structures
     """
 
@@ -56,7 +56,7 @@ def parse_args() -> argparse.Namespace:
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     p.add_argument(
-        "structures",
+        "-structures",
         type=Path,
         help="Folder containing the .cif / .cif.gz files to test against",
     )
