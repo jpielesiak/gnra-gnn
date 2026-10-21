@@ -21,6 +21,7 @@ double_tetrad/test_cif
 double_tetrad/test_cif_small
 double_tetrad/testy1
 double_tetrad/models_test
+double_tetrad/pliki_pkl.zip
 double_tetrad/test_results_approximate-affinity-propagation-gat_v10
 double_tetrad/test_results_approximate-facility-location-gat_v10
 double_tetrad/negative_cif_files
