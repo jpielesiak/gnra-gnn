@@ -1,0 +1,639 @@
+{
+  "clustering": {
+    "clusters": [
+      {
+        "representative": "motif_cif_files/HL_3NDB_002.cif",
+        "members": [
+          "motif_cif_files/HL_1MZP_001.cif",
+          "motif_cif_files/HL_3KTW_002.cif",
+          "motif_cif_files/HL_3P22_001.cif",
+          "motif_cif_files/HL_4BW0_001.cif",
+          "motif_cif_files/HL_4WF9_016.cif",
+          "motif_cif_files/HL_4Y1M_003.cif",
+          "motif_cif_files/HL_5B2T_003.cif",
+          "motif_cif_files/HL_5F9R_003.cif",
+          "motif_cif_files/HL_7A0S_016.cif",
+          "motif_cif_files/HL_7R97_001.cif",
+          "motif_cif_files/HL_7UZ0_002.cif",
+          "motif_cif_files/HL_7ZO1_003.cif",
+          "motif_cif_files/HL_8D28_002.cif",
+          "motif_cif_files/HL_8P9A_129.cif",
+          "motif_cif_files/HL_8X5V_001.cif",
+          "motif_cif_files/HL_9DFE_015.cif",
+          "motif_cif_files/HL_9DFE_044.cif",
+          "motif_cif_files/HL_9FN3_002.cif",
+          "motif_cif_files/HL_9FN3_004.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_5M0I_002.cif",
+        "members": [
+          "motif_cif_files/HL_1HMH_003.cif",
+          "motif_cif_files/HL_1KH6_002.cif",
+          "motif_cif_files/HL_1RLG_002.cif",
+          "motif_cif_files/HL_3LQX_001.cif",
+          "motif_cif_files/HL_3NMU_002.cif",
+          "motif_cif_files/HL_3NVI_002.cif",
+          "motif_cif_files/HL_4V9F_054.cif",
+          "motif_cif_files/HL_4Y1M_002.cif",
+          "motif_cif_files/HL_5B2P_001.cif",
+          "motif_cif_files/HL_5M0I_001.cif",
+          "motif_cif_files/HL_5M0J_001.cif",
+          "motif_cif_files/HL_5M0J_002.cif",
+          "motif_cif_files/HL_5X2G_001.cif",
+          "motif_cif_files/HL_6N2V_003.cif",
+          "motif_cif_files/HL_7ELQ_001.cif",
+          "motif_cif_files/HL_8HZL_002.cif",
+          "motif_cif_files/HL_8JOZ_003.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_7WIE_001.cif",
+        "members": [
+          "motif_cif_files/HL_1G1X_001.cif",
+          "motif_cif_files/HL_1HMH_001.cif",
+          "motif_cif_files/HL_3IWN_001.cif",
+          "motif_cif_files/HL_3MXH_001.cif",
+          "motif_cif_files/HL_4ENC_002.cif",
+          "motif_cif_files/HL_4V9F_023.cif",
+          "motif_cif_files/HL_5D5L_001.cif",
+          "motif_cif_files/HL_5VCI_001.cif",
+          "motif_cif_files/HL_6JDV_002.cif",
+          "motif_cif_files/HL_6JQ5_004.cif",
+          "motif_cif_files/HL_6TFF_001.cif",
+          "motif_cif_files/HL_7OZQ_004.cif",
+          "motif_cif_files/HL_8CRE_011.cif",
+          "motif_cif_files/HL_8HZE_002.cif",
+          "motif_cif_files/HL_8P9A_123.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_8ITS_002.cif",
+        "members": [
+          "motif_cif_files/HL_2OIU_001.cif",
+          "motif_cif_files/HL_4FRG_002.cif",
+          "motif_cif_files/HL_4JF2_001.cif",
+          "motif_cif_files/HL_4LFB_027.cif",
+          "motif_cif_files/HL_4PLX_001.cif",
+          "motif_cif_files/HL_4RUM_002.cif",
+          "motif_cif_files/HL_4W90_003.cif",
+          "motif_cif_files/HL_5TPY_004.cif",
+          "motif_cif_files/HL_5TPY_006.cif",
+          "motif_cif_files/HL_6N2V_002.cif",
+          "motif_cif_files/HL_6UFH_005.cif",
+          "motif_cif_files/HL_7D7W_001.cif",
+          "motif_cif_files/HL_8ITS_001.cif",
+          "motif_cif_files/HL_8Z8U_001.cif",
+          "motif_cif_files/HL_9L6X_002.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_4YAZ_003.cif",
+        "members": [
+          "motif_cif_files/HL_3W3S_003.cif",
+          "motif_cif_files/HL_4LFB_024.cif",
+          "motif_cif_files/HL_4V9F_065.cif",
+          "motif_cif_files/HL_4WF9_015.cif",
+          "motif_cif_files/HL_4WF9_059.cif",
+          "motif_cif_files/HL_5J7L_023.cif",
+          "motif_cif_files/HL_5J7L_027.cif",
+          "motif_cif_files/HL_5J7L_196.cif",
+          "motif_cif_files/HL_7A0S_015.cif",
+          "motif_cif_files/HL_7A0S_062.cif",
+          "motif_cif_files/HL_9DFE_030.cif",
+          "motif_cif_files/HL_9DFE_066.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_1L9A_002.cif",
+        "members": [
+          "motif_cif_files/HL_3E5C_001.cif",
+          "motif_cif_files/HL_3IGI_006.cif",
+          "motif_cif_files/HL_3V7E_003.cif",
+          "motif_cif_files/HL_4AOB_003.cif",
+          "motif_cif_files/HL_4OQU_003.cif",
+          "motif_cif_files/HL_5FJC_002.cif",
+          "motif_cif_files/HL_5FJC_003.cif",
+          "motif_cif_files/HL_6JDV_001.cif",
+          "motif_cif_files/HL_7ENI_001.cif",
+          "motif_cif_files/HL_9DXL_001.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_4V9F_020.cif",
+        "members": [
+          "motif_cif_files/HL_1U6B_001.cif",
+          "motif_cif_files/HL_2R8S_001.cif",
+          "motif_cif_files/HL_3RW6_001.cif",
+          "motif_cif_files/HL_5DDO_001.cif",
+          "motif_cif_files/HL_5DDP_001.cif",
+          "motif_cif_files/HL_6DVK_001.cif",
+          "motif_cif_files/HL_6JOO_001.cif",
+          "motif_cif_files/HL_7UQ6_002.cif",
+          "motif_cif_files/HL_8P9A_131.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_5B2T_001.cif",
+        "members": [
+          "motif_cif_files/HL_5F9F_003.cif",
+          "motif_cif_files/HL_5FQ5_001.cif",
+          "motif_cif_files/HL_5VW1_001.cif",
+          "motif_cif_files/HL_6N2V_001.cif",
+          "motif_cif_files/HL_6UFH_002.cif",
+          "motif_cif_files/HL_7QQP_001.cif",
+          "motif_cif_files/HL_7QQX_001.cif",
+          "motif_cif_files/HL_7QR0_001.cif",
+          "motif_cif_files/HL_7ZO1_001.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_8CRE_015.cif",
+        "members": [
+          "motif_cif_files/HL_4V9F_060.cif",
+          "motif_cif_files/HL_4WF9_020.cif",
+          "motif_cif_files/HL_5J7L_191.cif",
+          "motif_cif_files/HL_6CB3_006.cif",
+          "motif_cif_files/HL_7A0S_020.cif",
+          "motif_cif_files/HL_7JNH_001.cif",
+          "motif_cif_files/HL_8CRE_058.cif",
+          "motif_cif_files/HL_8P9A_128.cif",
+          "motif_cif_files/HL_8P9A_170.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_4PCJ_001.cif",
+        "members": [
+          "motif_cif_files/HL_1KXK_001.cif",
+          "motif_cif_files/HL_4K27_001.cif",
+          "motif_cif_files/HL_4K50_001.cif",
+          "motif_cif_files/HL_4LFB_022.cif",
+          "motif_cif_files/HL_5BTM_001.cif",
+          "motif_cif_files/HL_5M0H_001.cif",
+          "motif_cif_files/HL_6WPI_001.cif",
+          "motif_cif_files/HL_8XPP_001.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_9DFE_062.cif",
+        "members": [
+          "motif_cif_files/HL_1Q96_001.cif",
+          "motif_cif_files/HL_4NLF_001.cif",
+          "motif_cif_files/HL_4V9F_066.cif",
+          "motif_cif_files/HL_4WF9_060.cif",
+          "motif_cif_files/HL_5J7L_197.cif",
+          "motif_cif_files/HL_7A0S_063.cif",
+          "motif_cif_files/HL_8CRE_064.cif",
+          "motif_cif_files/HL_8P9A_176.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_5J7L_016.cif",
+        "members": [
+          "motif_cif_files/HL_1G1X_003.cif",
+          "motif_cif_files/HL_1G1X_005.cif",
+          "motif_cif_files/HL_4LFB_016.cif",
+          "motif_cif_files/HL_6SVS_001.cif",
+          "motif_cif_files/HL_6UFG_005.cif",
+          "motif_cif_files/HL_8CRE_211.cif",
+          "motif_cif_files/HL_8P9A_210.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_4LCK_004.cif",
+        "members": [
+          "motif_cif_files/HL_3AM1_003.cif",
+          "motif_cif_files/HL_3D0U_004.cif",
+          "motif_cif_files/HL_4LFB_019.cif",
+          "motif_cif_files/HL_5J7L_019.cif",
+          "motif_cif_files/HL_6UFG_004.cif",
+          "motif_cif_files/HL_7K16_001.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_4WFL_003.cif",
+        "members": [
+          "motif_cif_files/HL_3IGI_003.cif",
+          "motif_cif_files/HL_4LFB_028.cif",
+          "motif_cif_files/HL_4WF9_065.cif",
+          "motif_cif_files/HL_7KKV_001.cif",
+          "motif_cif_files/HL_8CRE_010.cif",
+          "motif_cif_files/HL_8P9A_122.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_9DID_001.cif",
+        "members": [
+          "motif_cif_files/HL_4LFB_010.cif",
+          "motif_cif_files/HL_5J7L_010.cif",
+          "motif_cif_files/HL_7U4A_003.cif",
+          "motif_cif_files/HL_9DFE_056.cif",
+          "motif_cif_files/HL_9DID_002.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_6JQ5_002.cif",
+        "members": [
+          "motif_cif_files/HL_359D_001.cif",
+          "motif_cif_files/HL_3NKB_002.cif",
+          "motif_cif_files/HL_3SUX_002.cif",
+          "motif_cif_files/HL_9DFE_061.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_8CRE_214.cif",
+        "members": [
+          "motif_cif_files/HL_4OQU_001.cif",
+          "motif_cif_files/HL_6CB3_005.cif",
+          "motif_cif_files/HL_6U8D_002.cif",
+          "motif_cif_files/HL_8P9A_213.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_8P9A_175.cif",
+        "members": [
+          "motif_cif_files/HL_2ZZM_003.cif",
+          "motif_cif_files/HL_5J7L_147.cif",
+          "motif_cif_files/HL_8CRE_063.cif",
+          "motif_cif_files/HL_9DFE_014.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_9DFE_018.cif",
+        "members": [
+          "motif_cif_files/HL_5J7L_152.cif",
+          "motif_cif_files/HL_7A0S_057.cif",
+          "motif_cif_files/HL_8CRE_046.cif",
+          "motif_cif_files/HL_8P9A_159.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_4LFB_020.cif",
+        "members": [
+          "motif_cif_files/HL_5J7L_020.cif",
+          "motif_cif_files/HL_8CRE_215.cif",
+          "motif_cif_files/HL_8P9A_214.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_5J7L_202.cif",
+        "members": [
+          "motif_cif_files/HL_1U9S_004.cif",
+          "motif_cif_files/HL_7A0S_068.cif",
+          "motif_cif_files/HL_7MKY_002.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_8CRE_218.cif",
+        "members": [
+          "motif_cif_files/HL_2NZ4_008.cif",
+          "motif_cif_files/HL_2Z75_004.cif",
+          "motif_cif_files/HL_8P9A_217.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_8P9A_142.cif",
+        "members": [
+          "motif_cif_files/HL_2OIU_003.cif",
+          "motif_cif_files/HL_3E5C_002.cif",
+          "motif_cif_files/HL_8CRE_029.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_8VU0_002.cif",
+        "members": [
+          "motif_cif_files/HL_3NPQ_001.cif",
+          "motif_cif_files/HL_4PQV_001.cif",
+          "motif_cif_files/HL_4QK9_002.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_1NBS_007.cif",
+        "members": [
+          "motif_cif_files/HL_3MOJ_001.cif",
+          "motif_cif_files/HL_5J7L_003.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_4V9F_015.cif",
+        "members": [
+          "motif_cif_files/HL_2BTE_003.cif",
+          "motif_cif_files/HL_4V9F_017.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_5J7L_007.cif",
+        "members": [
+          "motif_cif_files/HL_3RG5_007.cif",
+          "motif_cif_files/HL_4LFB_007.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_5J7L_167.cif",
+        "members": [
+          "motif_cif_files/HL_4WF9_034.cif",
+          "motif_cif_files/HL_9DFE_033.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_5UZ6_001.cif",
+        "members": [
+          "motif_cif_files/HL_2IL9_003.cif",
+          "motif_cif_files/HL_4R4V_004.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_5XTM_001.cif",
+        "members": [
+          "motif_cif_files/HL_5DCV_002.cif",
+          "motif_cif_files/HL_5XTM_002.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_6CU1_002.cif",
+        "members": [
+          "motif_cif_files/HL_4LVW_002.cif",
+          "motif_cif_files/HL_5J7L_190.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_7QQP_003.cif",
+        "members": [
+          "motif_cif_files/HL_7QQX_003.cif",
+          "motif_cif_files/HL_7QR0_003.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_8OI5_070.cif",
+        "members": [
+          "motif_cif_files/HL_4LFB_003.cif",
+          "motif_cif_files/HL_8CRE_018.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_8P9A_225.cif",
+        "members": [
+          "motif_cif_files/HL_5J7L_031.cif",
+          "motif_cif_files/HL_8CRE_225.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_9DFE_045.cif",
+        "members": [
+          "motif_cif_files/HL_7A0S_047.cif",
+          "motif_cif_files/HL_8P9A_125.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_1JID_001.cif",
+        "members": [
+          "motif_cif_files/HL_1MFQ_001.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_1MFQ_002.cif",
+        "members": [
+          "motif_cif_files/HL_4AOB_002.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_1UN6_004.cif",
+        "members": [
+          "motif_cif_files/HL_8P9A_185.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_3AGV_001.cif",
+        "members": [
+          "motif_cif_files/HL_5VW1_003.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_3CUL_001.cif",
+        "members": [
+          "motif_cif_files/HL_8Z8U_002.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_3PDR_001.cif",
+        "members": [
+          "motif_cif_files/HL_4V9F_009.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_4LFB_033.cif",
+        "members": [
+          "motif_cif_files/HL_5J7L_205.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_4OQU_004.cif",
+        "members": [
+          "motif_cif_files/HL_6M0X_001.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_4V9F_033.cif",
+        "members": [
+          "motif_cif_files/HL_6UFH_004.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_4V9F_048.cif",
+        "members": [
+          "motif_cif_files/HL_7A0S_070.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_4WF9_031.cif",
+        "members": [
+          "motif_cif_files/HL_5J7L_164.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_4WF9_054.cif",
+        "members": [
+          "motif_cif_files/HL_6DME_001.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_4Y1M_004.cif",
+        "members": [
+          "motif_cif_files/HL_6YMC_001.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_5DDO_003.cif",
+        "members": [
+          "motif_cif_files/HL_9L6Y_001.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_5FQ5_003.cif",
+        "members": [
+          "motif_cif_files/HL_8SYK_004.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_5J7L_004.cif",
+        "members": [
+          "motif_cif_files/HL_8KAJ_002.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_8CRE_032.cif",
+        "members": [
+          "motif_cif_files/HL_8P9A_145.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_8CRE_035.cif",
+        "members": [
+          "motif_cif_files/HL_8P9A_147.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_8CRE_222.cif",
+        "members": [
+          "motif_cif_files/HL_8P9A_221.cif"
+        ]
+      },
+      {
+        "representative": "motif_cif_files/HL_1G1X_004.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_1L9A_001.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_1M5K_003.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_1U6B_004.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_1U9S_002.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_3AM1_002.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_3KTW_001.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_4C7O_001.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_4KQY_002.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_4LFB_032.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_4QK9_001.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_4QLM_001.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_4V9F_022.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_4V9F_040.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_4V9F_070.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_4V9F_072.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_4WF9_071.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_5J7L_180.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_5U3G_002.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_5VSU_001.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_5Y7M_002.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_6AZ4_001.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_6CB3_004.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_6LAX_002.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_6MJ0_008.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_7A0S_005.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_7A0S_031.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_7A0S_034.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_7MRL_002.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_7QR8_001.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_7U4A_001.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_8CRE_199.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_8DP3_003.cif",
+        "members": []
+      },
+      {
+        "representative": "motif_cif_files/HL_9DFE_069.cif",
+        "members": []
+      }
+    ]
+  }
+}

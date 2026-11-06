@@ -10,8 +10,14 @@ Given a structure file and a bundled model pickle, this script:
    8-tuples within a radius (no coplanarity pruning — two stacked tetrads span
    two parallel planes).
 3. Canonicalises each candidate's order, computes the 280 geometric features,
-   applies the bundled scaler + classifier, and writes a CSV with per-candidate
-   prediction, positive-class probability and residue metadata.
+   and applies the bundled scaler + classifier.
+4. Runs non-maximum suppression: overlapping candidates (the true motif and
+   its near-copies) are reduced to the best-scoring one, so each double tetrad
+   is reported once. ``--no-nms`` turns this off.
+
+The CSV holds the reported motifs (``--all-candidates`` writes every
+candidate, with ``prediction`` = above threshold and ``final_prediction`` =
+reported after NMS).
 
 Predictions are derived from the positive-class probability at a 0.5 threshold
 (rather than ``clf.predict``) so that the label and the reported probability
@@ -36,6 +42,21 @@ from features import calculate_geometric_features
 from neighborhood import enumerate_tuples
 
 GUANINE_NAMES = {"G", "DG"}
+STANDARD_NUCLEOTIDES = {"A", "C", "G", "U", "DA", "DC", "DG", "DT", "DU"}
+
+
+def is_guanine(residue: Residue) -> bool:
+    """RNA G, DNA DG, or a modified guanine that rnapolis maps to G.
+    Shared rule with _11_run_inference.py so both pipelines see the same guanines."""
+    if not residue.is_nucleotide:
+        return False
+    name = (residue.residue_name or "").upper()
+    if name in GUANINE_NAMES:
+        return True
+    if name in STANDARD_NUCLEOTIDES:
+        return False
+    # Modified residue: trust rnapolis' atom-based mapping (lowercase g = DNA).
+    return (residue.one_letter_name or "").upper() == "G"
 DEFAULT_RADIUS = 22.0
 DEFAULT_MAX_DISTANCE = 22.0
 
@@ -49,6 +70,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--structure-model", type=int)
     p.add_argument("--radius", type=float, default=DEFAULT_RADIUS)
     p.add_argument("--max-distance", type=float, default=DEFAULT_MAX_DISTANCE)
+    add_nms_arguments(p)
     return p.parse_args()
 
 
@@ -129,9 +151,7 @@ def collect_guanines(structure: Structure) -> tuple[list[Residue], list[tuple[fl
     coords: list[tuple[float, float, float]] = []
     ids: list[tuple[str, int, str]] = []
     for r in structure.residues:
-        if not r.is_nucleotide:
-            continue
-        if (r.residue_name or "").upper() not in GUANINE_NAMES:
+        if not is_guanine(r):
             continue
         col_atom = r._col("atom_name")
         c1 = r.atoms[r.atoms[col_atom] == "C1'"]
@@ -156,6 +176,109 @@ def positive_class_probabilities(clf: Any, X: np.ndarray, positive_label: Any):
     else:
         return None
     return proba[:, idx]
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Non-maximum suppression
+# Overlapping candidates (the true double tetrad plus near-copies that swap one
+# or two guanines, or pair the wrong tetrads) all score high. Keep the best
+# candidate, drop the ones that overlap it, repeat.
+# ─────────────────────────────────────────────────────────────────────────────
+
+DEFAULT_THRESHOLD = 0.5
+# Two real double tetrads of one stack (tetrads 1+2 and 2+3) share one tetrad,
+# i.e. 4 residues, so picks may share up to 4 residues.
+DEFAULT_NMS_MAX_SHARED = 4
+
+
+def select_non_overlapping(
+    residue_sets: list,
+    scores,
+    threshold: float = DEFAULT_THRESHOLD,
+    max_shared: int = DEFAULT_NMS_MAX_SHARED,
+    suppress_covered: bool = False,
+) -> list[int]:
+    """Greedy NMS. Returns the indices of the kept candidates, best first.
+
+    A candidate is kept only if its score is >= threshold and it shares at
+    most ``max_shared`` residues with every candidate kept before it. With
+    ``suppress_covered`` it is also dropped when all of its residues already
+    belong to kept candidates (e.g. the tetrad 1 + tetrad 3 chimera once both
+    real pairs 1+2 and 2+3 have been kept).
+    """
+    scores = np.asarray(scores, dtype=float)
+    kept: list[int] = []
+    covered: set = set()
+    for i in np.argsort(-scores, kind="stable"):
+        if scores[i] < threshold:
+            break
+        candidate = residue_sets[i]
+        if any(len(candidate & residue_sets[j]) > max_shared for j in kept):
+            continue
+        if suppress_covered and candidate <= covered:
+            continue
+        kept.append(int(i))
+        covered |= candidate
+    return kept
+
+
+def apply_nms(results_df: pd.DataFrame, args: argparse.Namespace) -> pd.DataFrame:
+    """Add 'final_prediction' (and 'nms_rank') to the per-candidate table."""
+    if "probability" not in results_df:
+        print("Classifier has no predict_proba; NMS skipped, final_prediction = prediction.")
+        results_df["final_prediction"] = results_df["prediction"].astype(bool)
+        return results_df
+    if args.no_nms:
+        results_df["final_prediction"] = results_df["probability"] >= args.threshold
+        return results_df
+
+    residue_sets = [frozenset(ids.split(",")) for ids in results_df["residue_ids"]]
+    kept = select_non_overlapping(
+        residue_sets,
+        results_df["probability"].to_numpy(),
+        threshold=args.threshold,
+        max_shared=args.nms_max_shared,
+        suppress_covered=args.suppress_covered,
+    )
+    results_df["final_prediction"] = False
+    results_df["nms_rank"] = pd.array([pd.NA] * len(results_df), dtype="Int64")
+    for rank, i in enumerate(kept, start=1):
+        results_df.loc[results_df.index[i], "final_prediction"] = True
+        results_df.loc[results_df.index[i], "nms_rank"] = rank
+    return results_df
+
+
+def add_nms_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "--threshold", type=float, default=DEFAULT_THRESHOLD,
+        help="Probability threshold for a positive candidate (default: %(default)s)",
+    )
+    parser.add_argument(
+        "--nms-max-shared", type=int, default=DEFAULT_NMS_MAX_SHARED,
+        help="Residues two reported motifs may share (default: %(default)s = one tetrad)",
+    )
+    parser.add_argument(
+        "--suppress-covered", action="store_true",
+        help="Also drop candidates whose residues are all covered by motifs already reported",
+    )
+    parser.add_argument(
+        "--no-nms", action="store_true",
+        help="Report every candidate above the threshold (no suppression)",
+    )
+    parser.add_argument(
+        "--all-candidates", action="store_true",
+        help="Write every candidate to the CSV, not only the reported motifs",
+    )
+
+
+def report_motifs(results_df: pd.DataFrame) -> None:
+    final = results_df[results_df["final_prediction"]]
+    if "probability" in final:
+        final = final.sort_values("probability", ascending=False)
+    print(f"Reported {len(final)} double tetrad(s):")
+    for _, row in final.iterrows():
+        p = f"  p={row['probability']:.3f}" if "probability" in row else ""
+        print(f"  {row['residue_ids']}{p}")
 
 
 def save_probability_plot(df: pd.DataFrame, out: Path) -> None:
@@ -237,24 +360,29 @@ def main() -> None:
     transformed = scaler.transform(feature_matrix)
     probabilities = positive_class_probabilities(clf, transformed, positive_label)
     if probabilities is not None:
-        predictions = probabilities >= 0.5
+        predictions = probabilities >= args.threshold
     else:
-        predictions = clf.predict(transformed)
+        predictions = np.asarray(clf.predict(transformed)) == positive_label
 
     results = pd.DataFrame(metadata_rows)
     results["prediction"] = predictions
     if probabilities is not None:
         results["probability"] = probabilities
 
+    results = apply_nms(results, args)
+    to_write = results if args.all_candidates else results[results["final_prediction"]]
+
     out_csv = args.output_csv if args.output_csv is not None else args.structure.with_name(
         f"{args.structure.stem}-{args.model.stem}-predictions.csv"
     )
     out_csv.parent.mkdir(parents=True, exist_ok=True)
-    results.to_csv(out_csv, index=False)
+    to_write.to_csv(out_csv, index=False)
 
-    n_pos = int((predictions == positive_label).sum())
-    print(f"Parsed {len(residues)} guanines; generated {len(results)} candidates ({n_pos} predicted positive).")
-    print(f"Saved predictions to {out_csv}")
+    n_pos = int(np.asarray(predictions, dtype=bool).sum())
+    print(f"Parsed {len(residues)} guanines; generated {len(results)} candidates "
+          f"({n_pos} above threshold).")
+    report_motifs(results)
+    print(f"Saved {'all candidates' if args.all_candidates else 'reported motifs'} to {out_csv}")
 
     if args.output_plot is not None:
         if probabilities is None:

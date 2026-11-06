@@ -239,7 +239,8 @@ def main() -> None:
     if not args.no_augment:
         print(f"  phase positives:       {len(df) - len(pos_rows) - len(neg_rows) - n_shuffled_total}")
         print(f"  shuffled negatives:    {n_shuffled_total}")
-        print(f"  (mean phase variants per motif: {n_phases_total / len(pos_coords):.1f})")
+        if pos_coords != 0:
+            print(f"  (mean phase variants per motif: {n_phases_total / len(pos_coords):.1f})")
     print(f"Total columns: {len(df.columns)} "
           f"(4 bookkeeping + {len(df.columns) - 4} features)")
 

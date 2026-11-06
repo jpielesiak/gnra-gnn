@@ -1,0 +1,3 @@
+model,type,classifier,structures,windows,tp,fp,tn,fn,precision,recall,specificity,f1,accuracy,mcc,known_motifs,motifs_in_windows,motifs_detected,motif_recall,failed_structures
+approximate-hierarchical-gat_v10,GAT,GAT,165,75585,309,250,75023,3,0.5528,0.9904,0.9967,0.7095,0.9967,0.7386,349,312,309,0.8854,0
+approximate-affinity-propagation-gat_v10,GAT,GAT,165,75585,311,323,74950,1,0.4905,0.9968,0.9957,0.6575,0.9957,0.6977,349,312,311,0.8911,0
