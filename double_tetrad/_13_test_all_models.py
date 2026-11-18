@@ -16,7 +16,7 @@ Place this file next to run_model.py and run_model_graph.py (and the
 features.py / neighborhood.py modules they import).
 
 Example:
-    uv run _13_test_all_models.py -structures test_cif_small/  -result_folder models_test_23_10/  -answers  double_tetrad_motifs_by_pdb.json 
+    uv run _13_test_all_models.py -structures test_cif_small/  -result_folder models_test_11_11/  -answers  double_tetrad_motifs_by_pdb.json 
 _13_test_all_models.py: error: the following arguments are required: structures
     """
 

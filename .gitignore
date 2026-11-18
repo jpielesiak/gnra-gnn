@@ -37,7 +37,24 @@ gnn/*.pth
 gnn/*.png
 gnn/*.csv
 gnn/charts/
-
+gnn/cif_files/*
+gnn/fp_analysis/*
+gnn/window_test/*
+gnn/models_window_test/*
+gnn/models_test_11_11_summary/*
+gnn/window_test_summary/*
+gnn/window_test_dbns/*
+consensus/*
+double_tetrad/candidate_cif_files/*
+double_tetrad/models_test_11_11/*
+double_tetrad/models_test_11_11_summary/*
+double_tetrad/models_test_23_10/*
+double_tetrad/negative_cif_files_old/*
+double_tetrad/geometric_features_wrong.csv
+split_test/*
+split_test_dbns/*
+models_test_12_11_summary/*
+fp_analysis/*
 # Devenv
 .devenv*
 devenv.local.nix
@@ -48,5 +65,7 @@ devenv.local.yaml
 
 # pre-commit
 .pre-commit-config.yaml
+
+*.zip
 
 __pycache__/

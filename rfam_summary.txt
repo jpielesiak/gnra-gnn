@@ -1,0 +1,442 @@
+Rfam summary - all motifs
+=========================
+
+Source CSV files (1):
+  /mnt/c/Users/jmp/Downloads/rnative-competition-tests/gnra-gnn/approximate-affinity-propagation_rfam.csv
+
+Unique motif files:        315
+  with an Rfam family:     186
+  without an Rfam family:  129
+  in more than one family: 3
+Rfam families:             43
+
+FAMILY DISTRIBUTION
+-------------------
+rfam_acc         rfam_id             motifs       %  description
+RF02541          LSU_rRNA_bacteria       43   13.7%  Bacterial large subunit ribosomal RNA
+                 ##########
+RF02543          LSU_rRNA_eukarya        24    7.6%  Eukaryotic large subunit ribosomal RNA
+                 ######
+RF00177          SSU_rRNA_bacteria       23    7.3%  Bacterial small subunit ribosomal RNA
+                 #####
+RF02540          LSU_rRNA_archaea        14    4.4%  Archaeal large subunit ribosomal RNA
+                 ###
+RF01960          SSU_rRNA_eukarya        13    4.1%  Eukaryotic small subunit ribosomal RNA
+                 ###
+RF00005          tRNA                     8    2.5%  tRNA
+                 ##
+RF00162          SAM                      6    1.9%  SAM riboswitch aptamer (S box leader)
+                 #
+RF00001          5S_rRNA                  5    1.6%  5S ribosomal RNA
+                 #
+RF00017          Metazoa_SRP              4    1.3%  Metazoan signal recognition particle RNA
+                 #
+RF00379          c-di-AMP                 4    1.3%  c-di-AMP riboswitch aptamer (ydaO/yuaA leader)
+                 #
+RF00029          Intron_gpII              3    1.0%  Group II catalytic intron
+                 #
+RF01725          SAM-I-IV                 3    1.0%  SAM-I/IV (S-adenosyl methionine) riboswitch aptamer
+                 #
+RF00010          RNaseP_bact_a            2    0.6%  Bacterial RNase P class A
+                 #
+RF00234          glmS                     2    0.6%  glmS glucosamine-6-phosphate activated ribozyme aptamer
+                 #
+RF01344          CRISPR-DR34              2    0.6%  CRISPR RNA direct repeat element
+                 #
+RF01831          THF                      2    0.6%  THF (Tetrahydrofolate) riboswitch aptamer
+                 #
+RF01852          tRNA-Sec                 2    0.6%  Selenocysteine transfer RNA
+                 #
+RF01998          group-II-D1D4-1          2    0.6%  Group II catalytic intron D1-D4-1
+                 #
+RF02001          group-II-D1D4-3          2    0.6%  Group II catalytic intron D1-D4-3
+                 #
+RF02678          Hatchet                  2    0.6%  Hatchet ribozyme
+                 #
+RF03013          nadA                     2    0.6%  nadA riboswitch
+                 #
+RF03167          c-di-GMP-I-GGC           2    0.6%  c-di-GMP-I-GGC riboswitch aptamer
+                 #
+RF00011          RNaseP_bact_b            1    0.3%  Bacterial RNase P class B
+                 #
+RF00026          U6                       1    0.3%  U6 spliceosomal RNA
+                 #
+RF00168          Lysine                   1    0.3%  Lysine riboswitch aptamer
+                 #
+RF00233          Tymo_tRNA-like           1    0.3%  Tymovirus/Pomovirus/Furovirus tRNA-like 3' UTR element
+                 #
+RF00380          Magnesium                1    0.3%  M-box riboswitch aptamer (ykoK leader)
+                 #
+RF00386          Entero_5_CRE             1    0.3%  Enterovirus 5' cloverleaf cis-acting replication element
+                 #
+RF00390          TYMV_upPK                1    0.3%  turnip yellow mosaic virus upstream pseudo-knot (TYMV_upPK)
+                 #
+RF00442          Guanidine-I              1    0.3%  Guanidine-I riboswitch aptamer
+                 #
+RF00458          IRES_Cripavirus          1    0.3%  Cripavirus internal ribosome entry site (IRES)
+                 #
+RF01051          c-di-GMP-I               1    0.3%  c-di-GMP-I riboswitch aptamer
+                 #
+RF01057          SAH                      1    0.3%  SAH (S-adenosyl-L-homocysteine) riboswitch aptamer
+                 #
+RF01415          Flavivirus_SLIV          1    0.3%  Flavivirus 3'UTR stem loop IV
+                 #
+RF01689          AdoCbl-II                1    0.3%  AdoCbl-II (Cobalamin/B12) riboswitch aptamer
+                 #
+RF01734          Fluoride                 1    0.3%  Fluoride riboswitch aptamer (crcB RNA motif)
+                 #
+RF01739          Glutamine                1    0.3%  Glutamine riboswitch aptamer (glnA leader)
+                 #
+RF01854          Bacteria_large_SRP       1    0.3%  Bacterial large signal recognition particle RNA
+                 #
+RF01857          Archaea_SRP              1    0.3%  Archaeal signal recognition particle RNA
+                 #
+RF02683          NiCo                     1    0.3%  NiCo (Nickel/Cobalt) riboswitch aptamer
+                 #
+RF02977          THF-II                   1    0.3%  THF-II riboswitch (folE RNA)
+                 #
+RF03054          Xanthine                 1    0.3%  Xanthine riboswitch aptamer (NMT1 RNA)
+                 #
+RF04190          Hairpin-meta1            1    0.3%  Hairpin ribozyme 1 from viruses-like metatranscriptomes
+                 #
+(no Rfam match)                         129   41.0%  
+                 ##############################
+Note: some motifs belong to more than one family, so the percentages add up to more than 100%.
+
+EVENNESS (motifs without an Rfam family excluded)
+-------------------------------------------------
+Families compared:                 43
+Expected per family if equal:      4.44
+Observed range:                    1 - 43
+Largest / smallest family ratio:   43.00
+Coefficient of variation:          1.786   (0 = perfectly equal)
+Pielou's evenness J:               0.774   (1 = perfectly equal)
+Chi-square vs. equal split:        X2 = 609.34, df = 42, p = 1.01e-101
+-> The distribution differs significantly from an equal split (p < 0.05).
+   Note: fewer than 5 motifs expected per family, so the chi-square p-value is only approximate.
+
+MOTIFS
+------
+others_in_family = how many other unique motif files share that family
+
+motif_file       rfam_acc         rfam_id             others_in_family
+HL_1G1X_001.cif  (no Rfam match)                      128
+HL_1G1X_003.cif  (no Rfam match)                      128
+HL_1G1X_004.cif  (no Rfam match)                      128
+HL_1G1X_005.cif  (no Rfam match)                      128
+HL_1HMH_001.cif  (no Rfam match)                      128
+HL_1HMH_003.cif  (no Rfam match)                      128
+HL_1JID_001.cif  (no Rfam match)                      128
+HL_1KH6_002.cif  (no Rfam match)                      128
+HL_1KXK_001.cif  RF00029          Intron_gpII         2
+HL_1L9A_001.cif  RF00017          Metazoa_SRP         3
+HL_1L9A_002.cif  RF00017          Metazoa_SRP         3
+HL_1M5K_003.cif  RF04190          Hairpin-meta1       0
+HL_1MFQ_001.cif  RF00017          Metazoa_SRP         3
+HL_1MFQ_002.cif  RF00017          Metazoa_SRP         3
+HL_1MZP_001.cif  (no Rfam match)                      128
+HL_1NBS_007.cif  RF00011          RNaseP_bact_b       0
+HL_1Q96_001.cif  (no Rfam match)                      128
+HL_1RLG_002.cif  (no Rfam match)                      128
+HL_1U6B_001.cif  (no Rfam match)                      128
+HL_1U6B_004.cif  (no Rfam match)                      128
+HL_1U9S_002.cif  RF00010          RNaseP_bact_a       1
+HL_1U9S_004.cif  RF00010          RNaseP_bact_a       1
+HL_1UN6_004.cif  (no Rfam match)                      128
+HL_2BTE_003.cif  RF00005          tRNA                7
+HL_2IL9_003.cif  RF00458          IRES_Cripavirus     0
+HL_2NZ4_008.cif  RF00234          glmS                1
+HL_2OIU_001.cif  (no Rfam match)                      128
+HL_2OIU_003.cif  (no Rfam match)                      128
+HL_2R8S_001.cif  (no Rfam match)                      128
+HL_2Z75_004.cif  RF00234          glmS                1
+HL_2ZZM_003.cif  RF00005          tRNA                7
+HL_359D_001.cif  (no Rfam match)                      128
+HL_3AGV_001.cif  (no Rfam match)                      128
+HL_3AM1_002.cif  (no Rfam match)                      128
+HL_3AM1_003.cif  (no Rfam match)                      128
+HL_3CUL_001.cif  (no Rfam match)                      128
+HL_3D0U_004.cif  RF00168          Lysine              0
+HL_3E5C_001.cif  (no Rfam match)                      128
+HL_3E5C_002.cif  (no Rfam match)                      128
+HL_3IGI_003.cif  RF00029          Intron_gpII         2
+HL_3IGI_003.cif  RF01998          group-II-D1D4-1     1
+HL_3IGI_003.cif  RF02001          group-II-D1D4-3     1
+HL_3IGI_006.cif  RF00029          Intron_gpII         2
+HL_3IGI_006.cif  RF01998          group-II-D1D4-1     1
+HL_3IGI_006.cif  RF02001          group-II-D1D4-3     1
+HL_3IWN_001.cif  RF03167          c-di-GMP-I-GGC      1
+HL_3KTW_001.cif  (no Rfam match)                      128
+HL_3KTW_002.cif  (no Rfam match)                      128
+HL_3LQX_001.cif  (no Rfam match)                      128
+HL_3MOJ_001.cif  RF02541          LSU_rRNA_bacteria   42
+HL_3MXH_001.cif  RF03167          c-di-GMP-I-GGC      1
+HL_3NDB_002.cif  RF01857          Archaea_SRP         0
+HL_3NKB_002.cif  (no Rfam match)                      128
+HL_3NMU_002.cif  (no Rfam match)                      128
+HL_3NPQ_001.cif  RF01057          SAH                 0
+HL_3NVI_002.cif  (no Rfam match)                      128
+HL_3P22_001.cif  (no Rfam match)                      128
+HL_3PDR_001.cif  RF00380          Magnesium           0
+HL_3RG5_007.cif  RF01852          tRNA-Sec            1
+HL_3RW6_001.cif  (no Rfam match)                      128
+HL_3SUX_002.cif  RF01831          THF                 1
+HL_3V7E_003.cif  RF00162          SAM                 5
+HL_3W3S_003.cif  RF01852          tRNA-Sec            1
+HL_4AOB_002.cif  RF00162          SAM                 5
+HL_4AOB_003.cif  RF00162          SAM                 5
+HL_4BW0_001.cif  (no Rfam match)                      128
+HL_4C7O_001.cif  (no Rfam match)                      128
+HL_4ENC_002.cif  RF01734          Fluoride            0
+HL_4FRG_002.cif  RF01689          AdoCbl-II           0
+HL_4JF2_001.cif  (no Rfam match)                      128
+HL_4K27_001.cif  (no Rfam match)                      128
+HL_4K50_001.cif  (no Rfam match)                      128
+HL_4KQY_002.cif  RF00162          SAM                 5
+HL_4LCK_004.cif  RF00005          tRNA                7
+HL_4LFB_003.cif  RF00177          SSU_rRNA_bacteria   22
+HL_4LFB_007.cif  RF00177          SSU_rRNA_bacteria   22
+HL_4LFB_010.cif  RF00177          SSU_rRNA_bacteria   22
+HL_4LFB_016.cif  RF00177          SSU_rRNA_bacteria   22
+HL_4LFB_019.cif  RF00177          SSU_rRNA_bacteria   22
+HL_4LFB_020.cif  RF00177          SSU_rRNA_bacteria   22
+HL_4LFB_022.cif  RF00177          SSU_rRNA_bacteria   22
+HL_4LFB_024.cif  RF00177          SSU_rRNA_bacteria   22
+HL_4LFB_027.cif  RF00177          SSU_rRNA_bacteria   22
+HL_4LFB_028.cif  RF00177          SSU_rRNA_bacteria   22
+HL_4LFB_032.cif  RF00177          SSU_rRNA_bacteria   22
+HL_4LFB_033.cif  RF00177          SSU_rRNA_bacteria   22
+HL_4LVW_002.cif  RF01831          THF                 1
+HL_4NLF_001.cif  (no Rfam match)                      128
+HL_4OQU_001.cif  RF01725          SAM-I-IV            2
+HL_4OQU_003.cif  RF01725          SAM-I-IV            2
+HL_4OQU_004.cif  RF01725          SAM-I-IV            2
+HL_4PCJ_001.cif  (no Rfam match)                      128
+HL_4PLX_001.cif  (no Rfam match)                      128
+HL_4PQV_001.cif  RF01415          Flavivirus_SLIV     0
+HL_4QK9_001.cif  RF00379          c-di-AMP            3
+HL_4QK9_002.cif  RF00379          c-di-AMP            3
+HL_4QLM_001.cif  RF00379          c-di-AMP            3
+HL_4R4V_004.cif  (no Rfam match)                      128
+HL_4RUM_002.cif  RF02683          NiCo                0
+HL_4V9F_009.cif  RF02540          LSU_rRNA_archaea    13
+HL_4V9F_015.cif  RF02540          LSU_rRNA_archaea    13
+HL_4V9F_017.cif  RF02540          LSU_rRNA_archaea    13
+HL_4V9F_020.cif  RF02540          LSU_rRNA_archaea    13
+HL_4V9F_022.cif  RF02540          LSU_rRNA_archaea    13
+HL_4V9F_023.cif  RF02540          LSU_rRNA_archaea    13
+HL_4V9F_033.cif  RF02540          LSU_rRNA_archaea    13
+HL_4V9F_040.cif  RF02540          LSU_rRNA_archaea    13
+HL_4V9F_048.cif  RF02540          LSU_rRNA_archaea    13
+HL_4V9F_054.cif  RF02540          LSU_rRNA_archaea    13
+HL_4V9F_060.cif  RF02540          LSU_rRNA_archaea    13
+HL_4V9F_065.cif  RF02540          LSU_rRNA_archaea    13
+HL_4V9F_066.cif  RF02540          LSU_rRNA_archaea    13
+HL_4V9F_070.cif  RF02540          LSU_rRNA_archaea    13
+HL_4V9F_072.cif  RF00001          5S_rRNA             4
+HL_4W90_003.cif  RF00379          c-di-AMP            3
+HL_4WF9_015.cif  RF02541          LSU_rRNA_bacteria   42
+HL_4WF9_016.cif  RF02541          LSU_rRNA_bacteria   42
+HL_4WF9_020.cif  RF02541          LSU_rRNA_bacteria   42
+HL_4WF9_031.cif  RF02541          LSU_rRNA_bacteria   42
+HL_4WF9_034.cif  RF02541          LSU_rRNA_bacteria   42
+HL_4WF9_054.cif  RF02541          LSU_rRNA_bacteria   42
+HL_4WF9_059.cif  RF02541          LSU_rRNA_bacteria   42
+HL_4WF9_060.cif  RF02541          LSU_rRNA_bacteria   42
+HL_4WF9_065.cif  RF02541          LSU_rRNA_bacteria   42
+HL_4WF9_071.cif  RF02541          LSU_rRNA_bacteria   42
+HL_4WFL_003.cif  RF01854          Bacteria_large_SRP  0
+HL_4Y1M_002.cif  (no Rfam match)                      128
+HL_4Y1M_003.cif  (no Rfam match)                      128
+HL_4Y1M_004.cif  (no Rfam match)                      128
+HL_4YAZ_003.cif  RF01051          c-di-GMP-I          0
+HL_5B2P_001.cif  (no Rfam match)                      128
+HL_5B2T_001.cif  (no Rfam match)                      128
+HL_5B2T_003.cif  (no Rfam match)                      128
+HL_5BTM_001.cif  (no Rfam match)                      128
+HL_5D5L_001.cif  (no Rfam match)                      128
+HL_5DCV_002.cif  (no Rfam match)                      128
+HL_5DDO_001.cif  (no Rfam match)                      128
+HL_5DDO_003.cif  (no Rfam match)                      128
+HL_5DDP_001.cif  RF01739          Glutamine           0
+HL_5F9F_003.cif  (no Rfam match)                      128
+HL_5F9R_003.cif  (no Rfam match)                      128
+HL_5FJC_002.cif  RF00162          SAM                 5
+HL_5FJC_003.cif  RF00162          SAM                 5
+HL_5FQ5_001.cif  (no Rfam match)                      128
+HL_5FQ5_003.cif  (no Rfam match)                      128
+HL_5J7L_003.cif  RF00177          SSU_rRNA_bacteria   22
+HL_5J7L_004.cif  RF00177          SSU_rRNA_bacteria   22
+HL_5J7L_007.cif  RF00177          SSU_rRNA_bacteria   22
+HL_5J7L_010.cif  RF00177          SSU_rRNA_bacteria   22
+HL_5J7L_016.cif  RF00177          SSU_rRNA_bacteria   22
+HL_5J7L_019.cif  RF00177          SSU_rRNA_bacteria   22
+HL_5J7L_020.cif  RF00177          SSU_rRNA_bacteria   22
+HL_5J7L_023.cif  RF00177          SSU_rRNA_bacteria   22
+HL_5J7L_027.cif  RF00177          SSU_rRNA_bacteria   22
+HL_5J7L_031.cif  RF00177          SSU_rRNA_bacteria   22
+HL_5J7L_147.cif  RF02541          LSU_rRNA_bacteria   42
+HL_5J7L_152.cif  RF02541          LSU_rRNA_bacteria   42
+HL_5J7L_164.cif  RF02541          LSU_rRNA_bacteria   42
+HL_5J7L_167.cif  RF02541          LSU_rRNA_bacteria   42
+HL_5J7L_180.cif  RF02541          LSU_rRNA_bacteria   42
+HL_5J7L_190.cif  RF02541          LSU_rRNA_bacteria   42
+HL_5J7L_191.cif  RF02541          LSU_rRNA_bacteria   42
+HL_5J7L_196.cif  RF02541          LSU_rRNA_bacteria   42
+HL_5J7L_197.cif  RF02541          LSU_rRNA_bacteria   42
+HL_5J7L_202.cif  RF02541          LSU_rRNA_bacteria   42
+HL_5J7L_205.cif  RF00177          SSU_rRNA_bacteria   22
+HL_5M0H_001.cif  (no Rfam match)                      128
+HL_5M0I_001.cif  (no Rfam match)                      128
+HL_5M0I_002.cif  (no Rfam match)                      128
+HL_5M0J_001.cif  (no Rfam match)                      128
+HL_5M0J_002.cif  (no Rfam match)                      128
+HL_5TPY_004.cif  (no Rfam match)                      128
+HL_5TPY_006.cif  (no Rfam match)                      128
+HL_5U3G_002.cif  RF00442          Guanidine-I         0
+HL_5UZ6_001.cif  (no Rfam match)                      128
+HL_5VCI_001.cif  (no Rfam match)                      128
+HL_5VSU_001.cif  RF00026          U6                  0
+HL_5VW1_001.cif  (no Rfam match)                      128
+HL_5VW1_003.cif  (no Rfam match)                      128
+HL_5X2G_001.cif  (no Rfam match)                      128
+HL_5XTM_001.cif  (no Rfam match)                      128
+HL_5XTM_002.cif  (no Rfam match)                      128
+HL_5Y7M_002.cif  (no Rfam match)                      128
+HL_6AZ4_001.cif  (no Rfam match)                      128
+HL_6CB3_004.cif  (no Rfam match)                      128
+HL_6CB3_005.cif  (no Rfam match)                      128
+HL_6CB3_006.cif  (no Rfam match)                      128
+HL_6CU1_002.cif  (no Rfam match)                      128
+HL_6DME_001.cif  (no Rfam match)                      128
+HL_6DVK_001.cif  (no Rfam match)                      128
+HL_6JDV_001.cif  RF01344          CRISPR-DR34         1
+HL_6JDV_002.cif  RF01344          CRISPR-DR34         1
+HL_6JOO_001.cif  (no Rfam match)                      128
+HL_6JQ5_002.cif  RF02678          Hatchet             1
+HL_6JQ5_004.cif  RF02678          Hatchet             1
+HL_6LAX_002.cif  (no Rfam match)                      128
+HL_6M0X_001.cif  (no Rfam match)                      128
+HL_6MJ0_008.cif  RF00233          Tymo_tRNA-like      0
+HL_6MJ0_008.cif  RF00390          TYMV_upPK           0
+HL_6N2V_001.cif  (no Rfam match)                      128
+HL_6N2V_002.cif  (no Rfam match)                      128
+HL_6N2V_003.cif  (no Rfam match)                      128
+HL_6SVS_001.cif  (no Rfam match)                      128
+HL_6TFF_001.cif  RF03013          nadA                1
+HL_6U8D_002.cif  (no Rfam match)                      128
+HL_6UFG_004.cif  (no Rfam match)                      128
+HL_6UFG_005.cif  (no Rfam match)                      128
+HL_6UFH_002.cif  (no Rfam match)                      128
+HL_6UFH_004.cif  (no Rfam match)                      128
+HL_6UFH_005.cif  (no Rfam match)                      128
+HL_6WPI_001.cif  (no Rfam match)                      128
+HL_6YMC_001.cif  (no Rfam match)                      128
+HL_7A0S_005.cif  RF02541          LSU_rRNA_bacteria   42
+HL_7A0S_015.cif  RF02541          LSU_rRNA_bacteria   42
+HL_7A0S_016.cif  RF02541          LSU_rRNA_bacteria   42
+HL_7A0S_020.cif  RF02541          LSU_rRNA_bacteria   42
+HL_7A0S_031.cif  RF02541          LSU_rRNA_bacteria   42
+HL_7A0S_034.cif  RF02541          LSU_rRNA_bacteria   42
+HL_7A0S_047.cif  RF02541          LSU_rRNA_bacteria   42
+HL_7A0S_057.cif  RF02541          LSU_rRNA_bacteria   42
+HL_7A0S_062.cif  RF02541          LSU_rRNA_bacteria   42
+HL_7A0S_063.cif  RF02541          LSU_rRNA_bacteria   42
+HL_7A0S_068.cif  RF02541          LSU_rRNA_bacteria   42
+HL_7A0S_070.cif  RF00001          5S_rRNA             4
+HL_7D7W_001.cif  RF03013          nadA                1
+HL_7ELQ_001.cif  RF03054          Xanthine            0
+HL_7ENI_001.cif  (no Rfam match)                      128
+HL_7JNH_001.cif  (no Rfam match)                      128
+HL_7K16_001.cif  (no Rfam match)                      128
+HL_7KKV_001.cif  (no Rfam match)                      128
+HL_7MKY_002.cif  (no Rfam match)                      128
+HL_7MRL_002.cif  RF00005          tRNA                7
+HL_7OZQ_004.cif  (no Rfam match)                      128
+HL_7QQP_001.cif  (no Rfam match)                      128
+HL_7QQP_003.cif  (no Rfam match)                      128
+HL_7QQX_001.cif  (no Rfam match)                      128
+HL_7QQX_003.cif  (no Rfam match)                      128
+HL_7QR0_001.cif  (no Rfam match)                      128
+HL_7QR0_003.cif  (no Rfam match)                      128
+HL_7QR8_001.cif  (no Rfam match)                      128
+HL_7R97_001.cif  (no Rfam match)                      128
+HL_7U4A_001.cif  (no Rfam match)                      128
+HL_7U4A_003.cif  (no Rfam match)                      128
+HL_7UQ6_002.cif  RF00005          tRNA                7
+HL_7UZ0_002.cif  RF00005          tRNA                7
+HL_7WIE_001.cif  RF02977          THF-II              0
+HL_7ZO1_001.cif  (no Rfam match)                      128
+HL_7ZO1_003.cif  (no Rfam match)                      128
+HL_8CRE_010.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8CRE_011.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8CRE_015.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8CRE_018.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8CRE_029.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8CRE_032.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8CRE_035.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8CRE_046.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8CRE_058.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8CRE_063.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8CRE_064.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8CRE_199.cif  RF01960          SSU_rRNA_eukarya    12
+HL_8CRE_211.cif  RF01960          SSU_rRNA_eukarya    12
+HL_8CRE_214.cif  RF01960          SSU_rRNA_eukarya    12
+HL_8CRE_215.cif  RF01960          SSU_rRNA_eukarya    12
+HL_8CRE_218.cif  RF01960          SSU_rRNA_eukarya    12
+HL_8CRE_222.cif  RF01960          SSU_rRNA_eukarya    12
+HL_8CRE_225.cif  RF01960          SSU_rRNA_eukarya    12
+HL_8D28_002.cif  (no Rfam match)                      128
+HL_8DP3_003.cif  RF00386          Entero_5_CRE        0
+HL_8HZE_002.cif  (no Rfam match)                      128
+HL_8HZL_002.cif  (no Rfam match)                      128
+HL_8ITS_001.cif  (no Rfam match)                      128
+HL_8ITS_002.cif  (no Rfam match)                      128
+HL_8JOZ_003.cif  RF00005          tRNA                7
+HL_8KAJ_002.cif  (no Rfam match)                      128
+HL_8OI5_070.cif  RF00001          5S_rRNA             4
+HL_8P9A_122.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8P9A_123.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8P9A_125.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8P9A_128.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8P9A_129.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8P9A_131.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8P9A_142.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8P9A_145.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8P9A_147.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8P9A_159.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8P9A_170.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8P9A_175.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8P9A_176.cif  RF02543          LSU_rRNA_eukarya    23
+HL_8P9A_185.cif  RF00001          5S_rRNA             4
+HL_8P9A_210.cif  RF01960          SSU_rRNA_eukarya    12
+HL_8P9A_213.cif  RF01960          SSU_rRNA_eukarya    12
+HL_8P9A_214.cif  RF01960          SSU_rRNA_eukarya    12
+HL_8P9A_217.cif  RF01960          SSU_rRNA_eukarya    12
+HL_8P9A_221.cif  RF01960          SSU_rRNA_eukarya    12
+HL_8P9A_225.cif  RF01960          SSU_rRNA_eukarya    12
+HL_8SYK_004.cif  (no Rfam match)                      128
+HL_8VU0_002.cif  RF00005          tRNA                7
+HL_8X5V_001.cif  (no Rfam match)                      128
+HL_8XPP_001.cif  (no Rfam match)                      128
+HL_8Z8U_001.cif  (no Rfam match)                      128
+HL_8Z8U_002.cif  (no Rfam match)                      128
+HL_9DFE_014.cif  RF02541          LSU_rRNA_bacteria   42
+HL_9DFE_015.cif  RF02541          LSU_rRNA_bacteria   42
+HL_9DFE_018.cif  RF02541          LSU_rRNA_bacteria   42
+HL_9DFE_030.cif  RF02541          LSU_rRNA_bacteria   42
+HL_9DFE_033.cif  RF02541          LSU_rRNA_bacteria   42
+HL_9DFE_044.cif  RF02541          LSU_rRNA_bacteria   42
+HL_9DFE_045.cif  RF02541          LSU_rRNA_bacteria   42
+HL_9DFE_056.cif  RF02541          LSU_rRNA_bacteria   42
+HL_9DFE_061.cif  RF02541          LSU_rRNA_bacteria   42
+HL_9DFE_062.cif  RF02541          LSU_rRNA_bacteria   42
+HL_9DFE_066.cif  RF02541          LSU_rRNA_bacteria   42
+HL_9DFE_069.cif  RF00001          5S_rRNA             4
+HL_9DID_001.cif  (no Rfam match)                      128
+HL_9DID_002.cif  (no Rfam match)                      128
+HL_9DXL_001.cif  (no Rfam match)                      128
+HL_9FN3_002.cif  (no Rfam match)                      128
+HL_9FN3_004.cif  (no Rfam match)                      128
+HL_9L6X_002.cif  (no Rfam match)                      128
+HL_9L6Y_001.cif  (no Rfam match)                      128

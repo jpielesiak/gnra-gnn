@@ -1,0 +1,321 @@
+cluster_index,cluster_representative,motif_file,motif_id,pdb_id,is_representative,motif_chains,rfam_acc,rfam_id,rfam_description,rfam_chains,rfam_regions,match_level
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_6TFF_001.cif,HL_6TFF_001,6TFF,True,A,RF03013,nadA,nadA riboswitch,A,A:1-52,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_1G1X_001.cif,HL_1G1X_001,1G1X,False,D,,,,,,no Rfam match (chain)
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_1HMH_001.cif,HL_1HMH_001,1HMH,False,A,,,,,,no Rfam match (chain)
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_1KH6_002.cif,HL_1KH6_002,1KH6,False,A,,,,,,no Rfam match (chain)
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_1RLG_002.cif,HL_1RLG_002,1RLG,False,D,,,,,,no Rfam match (chain)
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_3KTW_002.cif,HL_3KTW_002,3KTW,False,C,,,,,,no Rfam match (chain)
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_3MXH_001.cif,HL_3MXH_001,3MXH,False,R,RF03167,c-di-GMP-I-GGC,c-di-GMP-I-GGC riboswitch aptamer,R,R:4-91,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_3NMU_002.cif,HL_3NMU_002,3NMU,False,E,,,,,,no Rfam match (chain)
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_3PDR_001.cif,HL_3PDR_001,3PDR,False,X,RF00380,Magnesium,M-box riboswitch aptamer (ykoK leader),X,X:2-159,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_3RG5_007.cif,HL_3RG5_007,3RG5,False,B,RF01852,tRNA-Sec,Selenocysteine transfer RNA,B,B:1-86,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_4BW0_001.cif,HL_4BW0_001,4BW0,False,A,,,,,,no Rfam match (chain)
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_4ENC_002.cif,HL_4ENC_002,4ENC,False,A,RF01734,Fluoride,Fluoride riboswitch aptamer (crcB RNA motif),A,A:2-52,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_4LFB_007.cif,HL_4LFB_007,4LFB,False,A,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,A,A:2-1520,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_4V9F_009.cif,HL_4V9F_009,4V9F,False,0,RF02540,LSU_rRNA_archaea,Archaeal large subunit ribosomal RNA,0,0:1-2910,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_4V9F_023.cif,HL_4V9F_023,4V9F,False,0,RF02540,LSU_rRNA_archaea,Archaeal large subunit ribosomal RNA,0,0:1-2910,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_4V9F_054.cif,HL_4V9F_054,4V9F,False,0,RF02540,LSU_rRNA_archaea,Archaeal large subunit ribosomal RNA,0,0:1-2910,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_5B2P_001.cif,HL_5B2P_001,5B2P,False,B,,,,,,no Rfam match (chain)
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_5D5L_001.cif,HL_5D5L_001,5D5L,False,A,,,,,,no Rfam match (chain)
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_5J7L_004.cif,HL_5J7L_004,5J7L,False,AA,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,AA,AA:1-1534,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_5J7L_007.cif,HL_5J7L_007,5J7L,False,AA,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,AA,AA:1-1534,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_5VCI_001.cif,HL_5VCI_001,5VCI,False,A,,,,,,no Rfam match (chain)
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_5X2G_001.cif,HL_5X2G_001,5X2G,False,B,,,,,,no Rfam match (chain)
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_6JDV_002.cif,HL_6JDV_002,6JDV,False,B,RF01344,CRISPR-DR34,CRISPR RNA direct repeat element,B,B:25-76,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_6JQ5_004.cif,HL_6JQ5_004,6JQ5,False,B,RF02678,Hatchet,Hatchet ribozyme,B,B:1-81,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_7OZQ_004.cif,HL_7OZQ_004,7OZQ,False,H,,,,,,no Rfam match (chain)
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_7UZ0_002.cif,HL_7UZ0_002,7UZ0,False,A,RF00005,tRNA,tRNA,A,A:1-87,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_7WIE_001.cif,HL_7WIE_001,7WIE,False,V,RF02977,THF-II,THF-II riboswitch (folE RNA),V,V:9-45,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_8CRE_011.cif,HL_8CRE_011,8CRE,False,1,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,1,1:1-3359,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_8HZE_002.cif,HL_8HZE_002,8HZE,False,B,,,,,,no Rfam match (chain)
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_8JOZ_003.cif,HL_8JOZ_003,8JOZ,False,B,RF00005,tRNA,tRNA,B,B:1-85,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_8P9A_123.cif,HL_8P9A_123,8P9A,False,AR,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,AR,AR:2-3149,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_8P9A_129.cif,HL_8P9A_129,8P9A,False,AR,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,AR,AR:2-3149,chain
+1,motif_cif_files/HL_6TFF_001.cif,motif_cif_files/HL_9DFE_044.cif,HL_9DFE_044,9DFE,False,1A,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,1A,1A:1-2912,chain
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_8ITS_002.cif,HL_8ITS_002,8ITS,True,A,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_2IL9_003.cif,HL_2IL9_003,2IL9,False,A,RF00458,IRES_Cripavirus,Cripavirus internal ribosome entry site (IRES),A,A:2-142,chain
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_2OIU_001.cif,HL_2OIU_001,2OIU,False,P,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_3AM1_003.cif,HL_3AM1_003,3AM1,False,B,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_3D0U_004.cif,HL_3D0U_004,3D0U,False,A,RF00168,Lysine,Lysine riboswitch aptamer,A,A:1-160,chain
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_4FRG_002.cif,HL_4FRG_002,4FRG,False,B,RF01689,AdoCbl-II,AdoCbl-II (Cobalamin/B12) riboswitch aptamer,B,B:1-83,chain
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_4JF2_001.cif,HL_4JF2_001,4JF2,False,A,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_4LCK_004.cif,HL_4LCK_004,4LCK,False,B,RF00005,tRNA,tRNA,B,B:1-68,chain
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_4LFB_010.cif,HL_4LFB_010,4LFB,False,A,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,A,A:2-1520,chain
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_4LFB_019.cif,HL_4LFB_019,4LFB,False,A,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,A,A:2-1520,chain
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_4LFB_027.cif,HL_4LFB_027,4LFB,False,A,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,A,A:2-1520,chain
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_4PLX_001.cif,HL_4PLX_001,4PLX,False,A,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_4R4V_004.cif,HL_4R4V_004,4R4V,False,A,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_4RUM_002.cif,HL_4RUM_002,4RUM,False,A,RF02683,NiCo,NiCo (Nickel/Cobalt) riboswitch aptamer,A,A:4-89,chain
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_4V9F_072.cif,HL_4V9F_072,4V9F,False,9,RF00001,5S_rRNA,5S ribosomal RNA,9,9:1-121,chain
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_4W90_003.cif,HL_4W90_003,4W90,False,C,RF00379,c-di-AMP,c-di-AMP riboswitch aptamer (ydaO/yuaA leader),C,C:4-116,chain
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_5J7L_010.cif,HL_5J7L_010,5J7L,False,AA,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,AA,AA:1-1534,chain
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_5J7L_019.cif,HL_5J7L_019,5J7L,False,AA,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,AA,AA:1-1534,chain
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_5TPY_004.cif,HL_5TPY_004,5TPY,False,A,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_5TPY_006.cif,HL_5TPY_006,5TPY,False,A,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_5UZ6_001.cif,HL_5UZ6_001,5UZ6,False,A,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_6N2V_002.cif,HL_6N2V_002,6N2V,False,A,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_6UFH_005.cif,HL_6UFH_005,6UFH,False,A,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_7D7W_001.cif,HL_7D7W_001,7D7W,False,A,RF03013,nadA,nadA riboswitch,A,A:1-51,chain
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_7K16_001.cif,HL_7K16_001,7K16,False,P,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_7U4A_003.cif,HL_7U4A_003,7U4A,False,A,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_8ITS_001.cif,HL_8ITS_001,8ITS,False,A,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_8Z8U_001.cif,HL_8Z8U_001,8Z8U,False,A,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_9DFE_056.cif,HL_9DFE_056,9DFE,False,1A,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,1A,1A:1-2912,chain
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_9DID_001.cif,HL_9DID_001,9DID,False,A,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_9DID_002.cif,HL_9DID_002,9DID,False,B,,,,,,no Rfam match (chain)
+2,motif_cif_files/HL_8ITS_002.cif,motif_cif_files/HL_9L6X_002.cif,HL_9L6X_002,9L6X,False,D,,,,,,no Rfam match (chain)
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_5J7L_147.cif,HL_5J7L_147,5J7L,True,DA,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,DA,DA:1-2904,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_1G1X_004.cif,HL_1G1X_004,1G1X,False,I,,,,,,no Rfam match (chain)
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_2OIU_003.cif,HL_2OIU_003,2OIU,False,P,,,,,,no Rfam match (chain)
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_2ZZM_003.cif,HL_2ZZM_003,2ZZM,False,B,RF00005,tRNA,tRNA,B,B:1-85,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_359D_001.cif,HL_359D_001,359D,False,B,,,,,,no Rfam match (chain)
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_3E5C_002.cif,HL_3E5C_002,3E5C,False,A,,,,,,no Rfam match (chain)
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_3NKB_002.cif,HL_3NKB_002,3NKB,False,B,,,,,,no Rfam match (chain)
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_3SUX_002.cif,HL_3SUX_002,3SUX,False,X,RF01831,THF,THF (Tetrahydrofolate) riboswitch aptamer,X,X:2-100,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_3W3S_003.cif,HL_3W3S_003,3W3S,False,B,RF01852,tRNA-Sec,Selenocysteine transfer RNA,B,B:1-95,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_4LFB_024.cif,HL_4LFB_024,4LFB,False,A,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,A,A:2-1520,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_4QK9_001.cif,HL_4QK9_001,4QK9,False,A,RF00379,c-di-AMP,c-di-AMP riboswitch aptamer (ydaO/yuaA leader),A,A:3-123,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_4V9F_048.cif,HL_4V9F_048,4V9F,False,0,RF02540,LSU_rRNA_archaea,Archaeal large subunit ribosomal RNA,0,0:1-2910,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_4V9F_065.cif,HL_4V9F_065,4V9F,False,0,RF02540,LSU_rRNA_archaea,Archaeal large subunit ribosomal RNA,0,0:1-2910,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_4WF9_015.cif,HL_4WF9_015,4WF9,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2923,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_4WF9_059.cif,HL_4WF9_059,4WF9,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2923,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_4YAZ_003.cif,HL_4YAZ_003,4YAZ,False,R,RF01051,c-di-GMP-I,c-di-GMP-I riboswitch aptamer,R,R:4-79,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_5J7L_023.cif,HL_5J7L_023,5J7L,False,AA,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,AA,AA:1-1534,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_5J7L_027.cif,HL_5J7L_027,5J7L,False,AA,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,AA,AA:1-1534,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_5J7L_196.cif,HL_5J7L_196,5J7L,False,DA,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,DA,DA:1-2904,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_6JQ5_002.cif,HL_6JQ5_002,6JQ5,False,A,RF02678,Hatchet,Hatchet ribozyme,A,A:1-81,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_7A0S_015.cif,HL_7A0S_015,7A0S,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2878,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_7A0S_062.cif,HL_7A0S_062,7A0S,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2878,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_7A0S_070.cif,HL_7A0S_070,7A0S,False,Y,RF00001,5S_rRNA,5S ribosomal RNA,Y,Y:5-121,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_8CRE_029.cif,HL_8CRE_029,8CRE,False,1,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,1,1:1-3359,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_8CRE_063.cif,HL_8CRE_063,8CRE,False,1,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,1,1:1-3359,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_8P9A_142.cif,HL_8P9A_142,8P9A,False,AR,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,AR,AR:2-3149,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_8P9A_175.cif,HL_8P9A_175,8P9A,False,AR,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,AR,AR:2-3149,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_9DFE_014.cif,HL_9DFE_014,9DFE,False,1A,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,1A,1A:1-2912,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_9DFE_030.cif,HL_9DFE_030,9DFE,False,1A,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,1A,1A:1-2912,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_9DFE_061.cif,HL_9DFE_061,9DFE,False,1A,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,1A,1A:1-2912,chain
+3,motif_cif_files/HL_5J7L_147.cif,motif_cif_files/HL_9DFE_066.cif,HL_9DFE_066,9DFE,False,1A,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,1A,1A:1-2912,chain
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_7ELQ_001.cif,HL_7ELQ_001,7ELQ,True,A,RF03054,Xanthine,Xanthine riboswitch aptamer (NMT1 RNA),A,A:1-44,chain
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_1HMH_003.cif,HL_1HMH_003,1HMH,False,E,,,,,,no Rfam match (chain)
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_3IWN_001.cif,HL_3IWN_001,3IWN,False,A,RF03167,c-di-GMP-I-GGC,c-di-GMP-I-GGC riboswitch aptamer,A,A:1-92,chain
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_3LQX_001.cif,HL_3LQX_001,3LQX,False,B,,,,,,no Rfam match (chain)
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_3NVI_002.cif,HL_3NVI_002,3NVI,False,F,,,,,,no Rfam match (chain)
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_4LFB_020.cif,HL_4LFB_020,4LFB,False,A,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,A,A:2-1520,chain
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_4OQU_004.cif,HL_4OQU_004,4OQU,False,A,RF01725,SAM-I-IV,SAM-I/IV (S-adenosyl methionine) riboswitch aptamer,A,A:1-93,chain
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_4WF9_054.cif,HL_4WF9_054,4WF9,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2923,chain
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_4Y1M_002.cif,HL_4Y1M_002,4Y1M,False,B,,,,,,no Rfam match (chain)
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_5J7L_020.cif,HL_5J7L_020,5J7L,False,AA,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,AA,AA:1-1534,chain
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_5M0I_001.cif,HL_5M0I_001,5M0I,False,E,,,,,,no Rfam match (chain)
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_5M0I_002.cif,HL_5M0I_002,5M0I,False,F,,,,,,no Rfam match (chain)
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_5M0J_001.cif,HL_5M0J_001,5M0J,False,E,,,,,,no Rfam match (chain)
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_5M0J_002.cif,HL_5M0J_002,5M0J,False,F,,,,,,no Rfam match (chain)
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_5U3G_002.cif,HL_5U3G_002,5U3G,False,B,RF00442,Guanidine-I,Guanidine-I riboswitch aptamer,B,B:1-85,chain
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_6DME_001.cif,HL_6DME_001,6DME,False,A,,,,,,no Rfam match (chain)
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_6M0X_001.cif,HL_6M0X_001,6M0X,False,B,,,,,,no Rfam match (chain)
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_6N2V_003.cif,HL_6N2V_003,6N2V,False,A,,,,,,no Rfam match (chain)
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_8CRE_215.cif,HL_8CRE_215,8CRE,False,CM,RF01960,SSU_rRNA_eukarya,Eukaryotic small subunit ribosomal RNA,CM,CM:1-1787,chain
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_8CRE_222.cif,HL_8CRE_222,8CRE,False,CM,RF01960,SSU_rRNA_eukarya,Eukaryotic small subunit ribosomal RNA,CM,CM:1-1787,chain
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_8HZL_002.cif,HL_8HZL_002,8HZL,False,B,,,,,,no Rfam match (chain)
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_8KAJ_002.cif,HL_8KAJ_002,8KAJ,False,I,,,,,,no Rfam match (chain)
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_8P9A_214.cif,HL_8P9A_214,8P9A,False,sR,RF01960,SSU_rRNA_eukarya,Eukaryotic small subunit ribosomal RNA,sR,sR:1-1800,chain
+4,motif_cif_files/HL_7ELQ_001.cif,motif_cif_files/HL_8P9A_221.cif,HL_8P9A_221,8P9A,False,sR,RF01960,SSU_rRNA_eukarya,Eukaryotic small subunit ribosomal RNA,sR,sR:1-1800,chain
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_5B2T_003.cif,HL_5B2T_003,5B2T,True,A,,,,,,no Rfam match (chain)
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_1MZP_001.cif,HL_1MZP_001,1MZP,False,B,,,,,,no Rfam match (chain)
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_3NDB_002.cif,HL_3NDB_002,3NDB,False,M,RF01857,Archaea_SRP,Archaeal signal recognition particle RNA,M,M:1-136,chain
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_3P22_001.cif,HL_3P22_001,3P22,False,A,,,,,,no Rfam match (chain)
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_4WF9_016.cif,HL_4WF9_016,4WF9,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2923,chain
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_4Y1M_003.cif,HL_4Y1M_003,4Y1M,False,B,,,,,,no Rfam match (chain)
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_5F9R_003.cif,HL_5F9R_003,5F9R,False,A,,,,,,no Rfam match (chain)
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_5FQ5_003.cif,HL_5FQ5_003,5FQ5,False,A,,,,,,no Rfam match (chain)
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_7A0S_005.cif,HL_7A0S_005,7A0S,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2878,chain
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_7A0S_016.cif,HL_7A0S_016,7A0S,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2878,chain
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_7QQP_003.cif,HL_7QQP_003,7QQP,False,A,,,,,,no Rfam match (chain)
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_7QQX_003.cif,HL_7QQX_003,7QQX,False,A,,,,,,no Rfam match (chain)
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_7QR0_003.cif,HL_7QR0_003,7QR0,False,A,,,,,,no Rfam match (chain)
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_7R97_001.cif,HL_7R97_001,7R97,False,C,,,,,,no Rfam match (chain)
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_7ZO1_003.cif,HL_7ZO1_003,7ZO1,False,A,,,,,,no Rfam match (chain)
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_8D28_002.cif,HL_8D28_002,8D28,False,B,,,,,,no Rfam match (chain)
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_8SYK_004.cif,HL_8SYK_004,8SYK,False,A,,,,,,no Rfam match (chain)
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_8X5V_001.cif,HL_8X5V_001,8X5V,False,B,,,,,,no Rfam match (chain)
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_9DFE_015.cif,HL_9DFE_015,9DFE,False,1A,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,1A,1A:1-2912,chain
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_9FN3_002.cif,HL_9FN3_002,9FN3,False,A,,,,,,no Rfam match (chain)
+5,motif_cif_files/HL_5B2T_003.cif,motif_cif_files/HL_9FN3_004.cif,HL_9FN3_004,9FN3,False,B,,,,,,no Rfam match (chain)
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_6JOO_001.cif,HL_6JOO_001,6JOO,True,B,,,,,,no Rfam match (chain)
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_1U6B_001.cif,HL_1U6B_001,1U6B,False,B,,,,,,no Rfam match (chain)
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_1U9S_002.cif,HL_1U9S_002,1U9S,False,A,RF00010,RNaseP_bact_a,Bacterial RNase P class A,A,A:1-161,chain
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_1UN6_004.cif,HL_1UN6_004,1UN6,False,F,,,,,,no Rfam match (chain)
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_2R8S_001.cif,HL_2R8S_001,2R8S,False,R,,,,,,no Rfam match (chain)
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_3RW6_001.cif,HL_3RW6_001,3RW6,False,H,,,,,,no Rfam match (chain)
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_4LFB_003.cif,HL_4LFB_003,4LFB,False,A,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,A,A:2-1520,chain
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_4V9F_020.cif,HL_4V9F_020,4V9F,False,0,RF02540,LSU_rRNA_archaea,Archaeal large subunit ribosomal RNA,0,0:1-2910,chain
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_5DCV_002.cif,HL_5DCV_002,5DCV,False,D,,,,,,no Rfam match (chain)
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_5DDO_001.cif,HL_5DDO_001,5DDO,False,A,,,,,,no Rfam match (chain)
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_5DDP_001.cif,HL_5DDP_001,5DDP,False,A,RF01739,Glutamine,Glutamine riboswitch aptamer (glnA leader),A,A:1-61,chain
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_5J7L_152.cif,HL_5J7L_152,5J7L,False,DA,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,DA,DA:1-2904,chain
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_5XTM_001.cif,HL_5XTM_001,5XTM,False,B,,,,,,no Rfam match (chain)
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_5XTM_002.cif,HL_5XTM_002,5XTM,False,D,,,,,,no Rfam match (chain)
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_6CB3_004.cif,HL_6CB3_004,6CB3,False,B,,,,,,no Rfam match (chain)
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_6DVK_001.cif,HL_6DVK_001,6DVK,False,H,,,,,,no Rfam match (chain)
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_7UQ6_002.cif,HL_7UQ6_002,7UQ6,False,B,RF00005,tRNA,tRNA,B,B:1-84,chain
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_8CRE_018.cif,HL_8CRE_018,8CRE,False,1,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,1,1:1-3359,chain
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_8OI5_070.cif,HL_8OI5_070,8OI5,False,3,RF00001,5S_rRNA,5S ribosomal RNA,3,3:1-121,chain
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_8P9A_131.cif,HL_8P9A_131,8P9A,False,AR,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,AR,AR:2-3149,chain
+6,motif_cif_files/HL_6JOO_001.cif,motif_cif_files/HL_8P9A_185.cif,HL_8P9A_185,8P9A,False,AS,RF00001,5S_rRNA,5S ribosomal RNA,AS,AS:1-121,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_5FJC_002.cif,HL_5FJC_002,5FJC,True,A,RF00162,SAM,SAM riboswitch aptamer (S box leader),A,A:1-93,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_1L9A_002.cif,HL_1L9A_002,1L9A,False,B,RF00017,Metazoa_SRP,Metazoan signal recognition particle RNA,B,B:3-126,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_1M5K_003.cif,HL_1M5K_003,1M5K,False,B,RF04190,Hairpin-meta1,Hairpin ribozyme 1 from viruses-like metatranscriptomes,B,B:1-68,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_1MFQ_002.cif,HL_1MFQ_002,1MFQ,False,A,RF00017,Metazoa_SRP,Metazoan signal recognition particle RNA,A,A:3-126,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_1NBS_007.cif,HL_1NBS_007,1NBS,False,B,RF00011,RNaseP_bact_b,Bacterial RNase P class B,B,B:1-154,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_3E5C_001.cif,HL_3E5C_001,3E5C,False,A,,,,,,no Rfam match (chain)
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_3IGI_006.cif,HL_3IGI_006,3IGI,False,A,RF01998,group-II-D1D4-1,Group II catalytic intron D1-D4-1,A,A:254-323,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_3IGI_006.cif,HL_3IGI_006,3IGI,False,A,RF02001,group-II-D1D4-3,Group II catalytic intron D1-D4-3,A,A:84-256,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_3IGI_006.cif,HL_3IGI_006,3IGI,False,A,RF00029,Intron_gpII,Group II catalytic intron,A,A:355-412,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_3MOJ_001.cif,HL_3MOJ_001,3MOJ,False,A,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,A,A:1-73,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_3V7E_003.cif,HL_3V7E_003,3V7E,False,C,RF00162,SAM,SAM riboswitch aptamer (S box leader),C,C:1-125,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_4AOB_002.cif,HL_4AOB_002,4AOB,False,A,RF00162,SAM,SAM riboswitch aptamer (S box leader),A,A:1-93,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_4AOB_003.cif,HL_4AOB_003,4AOB,False,A,RF00162,SAM,SAM riboswitch aptamer (S box leader),A,A:1-93,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_4OQU_003.cif,HL_4OQU_003,4OQU,False,A,RF01725,SAM-I-IV,SAM-I/IV (S-adenosyl methionine) riboswitch aptamer,A,A:1-93,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_5FJC_003.cif,HL_5FJC_003,5FJC,False,A,RF00162,SAM,SAM riboswitch aptamer (S box leader),A,A:1-93,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_5J7L_003.cif,HL_5J7L_003,5J7L,False,AA,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,AA,AA:1-1534,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_6JDV_001.cif,HL_6JDV_001,6JDV,False,B,RF01344,CRISPR-DR34,CRISPR RNA direct repeat element,B,B:25-76,chain
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_7ENI_001.cif,HL_7ENI_001,7ENI,False,B,,,,,,no Rfam match (chain)
+7,motif_cif_files/HL_5FJC_002.cif,motif_cif_files/HL_9DXL_001.cif,HL_9DXL_001,9DXL,False,A,,,,,,no Rfam match (chain)
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_6U8D_002.cif,HL_6U8D_002,6U8D,True,A,,,,,,no Rfam match (chain)
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_2NZ4_008.cif,HL_2NZ4_008,2NZ4,False,Q,RF00234,glmS,glmS glucosamine-6-phosphate activated ribozyme aptamer,Q,Q:1-141,chain
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_2Z75_004.cif,HL_2Z75_004,2Z75,False,B,RF00234,glmS,glmS glucosamine-6-phosphate activated ribozyme aptamer,B,B:1-125,chain
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_4OQU_001.cif,HL_4OQU_001,4OQU,False,A,RF01725,SAM-I-IV,SAM-I/IV (S-adenosyl methionine) riboswitch aptamer,A,A:1-93,chain
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_4Y1M_004.cif,HL_4Y1M_004,4Y1M,False,B,,,,,,no Rfam match (chain)
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_6CB3_005.cif,HL_6CB3_005,6CB3,False,B,,,,,,no Rfam match (chain)
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_6YMC_001.cif,HL_6YMC_001,6YMC,False,A,,,,,,no Rfam match (chain)
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_7A0S_057.cif,HL_7A0S_057,7A0S,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2878,chain
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_7MRL_002.cif,HL_7MRL_002,7MRL,False,A,RF00005,tRNA,tRNA,A,A:1-75,chain
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_8CRE_046.cif,HL_8CRE_046,8CRE,False,1,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,1,1:1-3359,chain
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_8CRE_214.cif,HL_8CRE_214,8CRE,False,CM,RF01960,SSU_rRNA_eukarya,Eukaryotic small subunit ribosomal RNA,CM,CM:1-1787,chain
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_8CRE_218.cif,HL_8CRE_218,8CRE,False,CM,RF01960,SSU_rRNA_eukarya,Eukaryotic small subunit ribosomal RNA,CM,CM:1-1787,chain
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_8P9A_159.cif,HL_8P9A_159,8P9A,False,AR,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,AR,AR:2-3149,chain
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_8P9A_213.cif,HL_8P9A_213,8P9A,False,sR,RF01960,SSU_rRNA_eukarya,Eukaryotic small subunit ribosomal RNA,sR,sR:1-1800,chain
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_8P9A_217.cif,HL_8P9A_217,8P9A,False,sR,RF01960,SSU_rRNA_eukarya,Eukaryotic small subunit ribosomal RNA,sR,sR:1-1800,chain
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_9DFE_018.cif,HL_9DFE_018,9DFE,False,1A,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,1A,1A:1-2912,chain
+8,motif_cif_files/HL_6U8D_002.cif,motif_cif_files/HL_9DFE_069.cif,HL_9DFE_069,9DFE,False,1B,RF00001,5S_rRNA,5S ribosomal RNA,1B,1B:3-119,chain
+9,motif_cif_files/HL_8CRE_015.cif,motif_cif_files/HL_8CRE_015.cif,HL_8CRE_015,8CRE,True,1,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,1,1:1-3359,chain
+9,motif_cif_files/HL_8CRE_015.cif,motif_cif_files/HL_4V9F_060.cif,HL_4V9F_060,4V9F,False,0,RF02540,LSU_rRNA_archaea,Archaeal large subunit ribosomal RNA,0,0:1-2910,chain
+9,motif_cif_files/HL_8CRE_015.cif,motif_cif_files/HL_4WF9_020.cif,HL_4WF9_020,4WF9,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2923,chain
+9,motif_cif_files/HL_8CRE_015.cif,motif_cif_files/HL_5J7L_190.cif,HL_5J7L_190,5J7L,False,DA,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,DA,DA:1-2904,chain
+9,motif_cif_files/HL_8CRE_015.cif,motif_cif_files/HL_5J7L_191.cif,HL_5J7L_191,5J7L,False,DA,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,DA,DA:1-2904,chain
+9,motif_cif_files/HL_8CRE_015.cif,motif_cif_files/HL_6CB3_006.cif,HL_6CB3_006,6CB3,False,B,,,,,,no Rfam match (chain)
+9,motif_cif_files/HL_8CRE_015.cif,motif_cif_files/HL_6UFG_004.cif,HL_6UFG_004,6UFG,False,A,,,,,,no Rfam match (chain)
+9,motif_cif_files/HL_8CRE_015.cif,motif_cif_files/HL_7A0S_020.cif,HL_7A0S_020,7A0S,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2878,chain
+9,motif_cif_files/HL_8CRE_015.cif,motif_cif_files/HL_7A0S_047.cif,HL_7A0S_047,7A0S,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2878,chain
+9,motif_cif_files/HL_8CRE_015.cif,motif_cif_files/HL_7JNH_001.cif,HL_7JNH_001,7JNH,False,B,,,,,,no Rfam match (chain)
+9,motif_cif_files/HL_8CRE_015.cif,motif_cif_files/HL_8CRE_058.cif,HL_8CRE_058,8CRE,False,1,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,1,1:1-3359,chain
+9,motif_cif_files/HL_8CRE_015.cif,motif_cif_files/HL_8P9A_125.cif,HL_8P9A_125,8P9A,False,AR,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,AR,AR:2-3149,chain
+9,motif_cif_files/HL_8CRE_015.cif,motif_cif_files/HL_8P9A_128.cif,HL_8P9A_128,8P9A,False,AR,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,AR,AR:2-3149,chain
+9,motif_cif_files/HL_8CRE_015.cif,motif_cif_files/HL_8P9A_170.cif,HL_8P9A_170,8P9A,False,AR,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,AR,AR:2-3149,chain
+9,motif_cif_files/HL_8CRE_015.cif,motif_cif_files/HL_9DFE_045.cif,HL_9DFE_045,9DFE,False,1A,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,1A,1A:1-2912,chain
+10,motif_cif_files/HL_3IGI_003.cif,motif_cif_files/HL_3IGI_003.cif,HL_3IGI_003,3IGI,True,A,RF01998,group-II-D1D4-1,Group II catalytic intron D1-D4-1,A,A:254-323,chain
+10,motif_cif_files/HL_3IGI_003.cif,motif_cif_files/HL_3IGI_003.cif,HL_3IGI_003,3IGI,True,A,RF02001,group-II-D1D4-3,Group II catalytic intron D1-D4-3,A,A:84-256,chain
+10,motif_cif_files/HL_3IGI_003.cif,motif_cif_files/HL_3IGI_003.cif,HL_3IGI_003,3IGI,True,A,RF00029,Intron_gpII,Group II catalytic intron,A,A:355-412,chain
+10,motif_cif_files/HL_3IGI_003.cif,motif_cif_files/HL_1U9S_004.cif,HL_1U9S_004,1U9S,False,A,RF00010,RNaseP_bact_a,Bacterial RNase P class A,A,A:1-161,chain
+10,motif_cif_files/HL_3IGI_003.cif,motif_cif_files/HL_4LFB_028.cif,HL_4LFB_028,4LFB,False,A,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,A,A:2-1520,chain
+10,motif_cif_files/HL_3IGI_003.cif,motif_cif_files/HL_4WF9_065.cif,HL_4WF9_065,4WF9,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2923,chain
+10,motif_cif_files/HL_3IGI_003.cif,motif_cif_files/HL_4WFL_003.cif,HL_4WFL_003,4WFL,False,A,RF01854,Bacteria_large_SRP,Bacterial large signal recognition particle RNA,A,A:3-105,chain
+10,motif_cif_files/HL_3IGI_003.cif,motif_cif_files/HL_5J7L_202.cif,HL_5J7L_202,5J7L,False,DA,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,DA,DA:1-2904,chain
+10,motif_cif_files/HL_3IGI_003.cif,motif_cif_files/HL_7A0S_068.cif,HL_7A0S_068,7A0S,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2878,chain
+10,motif_cif_files/HL_3IGI_003.cif,motif_cif_files/HL_7KKV_001.cif,HL_7KKV_001,7KKV,False,B,,,,,,no Rfam match (chain)
+10,motif_cif_files/HL_3IGI_003.cif,motif_cif_files/HL_7MKY_002.cif,HL_7MKY_002,7MKY,False,A,,,,,,no Rfam match (chain)
+10,motif_cif_files/HL_3IGI_003.cif,motif_cif_files/HL_8CRE_010.cif,HL_8CRE_010,8CRE,False,1,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,1,1:1-3359,chain
+10,motif_cif_files/HL_3IGI_003.cif,motif_cif_files/HL_8CRE_035.cif,HL_8CRE_035,8CRE,False,1,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,1,1:1-3359,chain
+10,motif_cif_files/HL_3IGI_003.cif,motif_cif_files/HL_8P9A_122.cif,HL_8P9A_122,8P9A,False,AR,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,AR,AR:2-3149,chain
+10,motif_cif_files/HL_3IGI_003.cif,motif_cif_files/HL_8P9A_147.cif,HL_8P9A_147,8P9A,False,AR,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,AR,AR:2-3149,chain
+11,motif_cif_files/HL_3NPQ_001.cif,motif_cif_files/HL_3NPQ_001.cif,HL_3NPQ_001,3NPQ,True,A,RF01057,SAH,SAH (S-adenosyl-L-homocysteine) riboswitch aptamer,A,A:1-54,chain
+11,motif_cif_files/HL_3NPQ_001.cif,motif_cif_files/HL_1U6B_004.cif,HL_1U6B_004,1U6B,False,B,,,,,,no Rfam match (chain)
+11,motif_cif_files/HL_3NPQ_001.cif,motif_cif_files/HL_2BTE_003.cif,HL_2BTE_003,2BTE,False,B,RF00005,tRNA,tRNA,B,B:1-80,chain
+11,motif_cif_files/HL_3NPQ_001.cif,motif_cif_files/HL_4LVW_002.cif,HL_4LVW_002,4LVW,False,A,RF01831,THF,THF (Tetrahydrofolate) riboswitch aptamer,A,A:1-89,chain
+11,motif_cif_files/HL_3NPQ_001.cif,motif_cif_files/HL_4PQV_001.cif,HL_4PQV_001,4PQV,False,A,RF01415,Flavivirus_SLIV,Flavivirus 3'UTR stem loop IV,A,A:3-68,chain
+11,motif_cif_files/HL_3NPQ_001.cif,motif_cif_files/HL_4QK9_002.cif,HL_4QK9_002,4QK9,False,A,RF00379,c-di-AMP,c-di-AMP riboswitch aptamer (ydaO/yuaA leader),A,A:3-123,chain
+11,motif_cif_files/HL_3NPQ_001.cif,motif_cif_files/HL_4V9F_015.cif,HL_4V9F_015,4V9F,False,0,RF02540,LSU_rRNA_archaea,Archaeal large subunit ribosomal RNA,0,0:1-2910,chain
+11,motif_cif_files/HL_3NPQ_001.cif,motif_cif_files/HL_4V9F_017.cif,HL_4V9F_017,4V9F,False,0,RF02540,LSU_rRNA_archaea,Archaeal large subunit ribosomal RNA,0,0:1-2910,chain
+11,motif_cif_files/HL_3NPQ_001.cif,motif_cif_files/HL_4V9F_033.cif,HL_4V9F_033,4V9F,False,0,RF02540,LSU_rRNA_archaea,Archaeal large subunit ribosomal RNA,0,0:1-2910,chain
+11,motif_cif_files/HL_3NPQ_001.cif,motif_cif_files/HL_6CU1_002.cif,HL_6CU1_002,6CU1,False,A,,,,,,no Rfam match (chain)
+11,motif_cif_files/HL_3NPQ_001.cif,motif_cif_files/HL_6UFH_004.cif,HL_6UFH_004,6UFH,False,A,,,,,,no Rfam match (chain)
+11,motif_cif_files/HL_3NPQ_001.cif,motif_cif_files/HL_8VU0_002.cif,HL_8VU0_002,8VU0,False,C,RF00005,tRNA,tRNA,C,C:1-73,chain
+12,motif_cif_files/HL_5BTM_001.cif,motif_cif_files/HL_5BTM_001.cif,HL_5BTM_001,5BTM,True,A,,,,,,no Rfam match (chain)
+12,motif_cif_files/HL_5BTM_001.cif,motif_cif_files/HL_1KXK_001.cif,HL_1KXK_001,1KXK,False,A,RF00029,Intron_gpII,Group II catalytic intron,A,A:18-70,chain
+12,motif_cif_files/HL_5BTM_001.cif,motif_cif_files/HL_3CUL_001.cif,HL_3CUL_001,3CUL,False,C,,,,,,no Rfam match (chain)
+12,motif_cif_files/HL_5BTM_001.cif,motif_cif_files/HL_4K27_001.cif,HL_4K27_001,4K27,False,U,,,,,,no Rfam match (chain)
+12,motif_cif_files/HL_5BTM_001.cif,motif_cif_files/HL_4K50_001.cif,HL_4K50_001,4K50,False,B,,,,,,no Rfam match (chain)
+12,motif_cif_files/HL_5BTM_001.cif,motif_cif_files/HL_4LFB_022.cif,HL_4LFB_022,4LFB,False,A,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,A,A:2-1520,chain
+12,motif_cif_files/HL_5BTM_001.cif,motif_cif_files/HL_4PCJ_001.cif,HL_4PCJ_001,4PCJ,False,A,,,,,,no Rfam match (chain)
+12,motif_cif_files/HL_5BTM_001.cif,motif_cif_files/HL_5M0H_001.cif,HL_5M0H_001,5M0H,False,A,,,,,,no Rfam match (chain)
+12,motif_cif_files/HL_5BTM_001.cif,motif_cif_files/HL_6AZ4_001.cif,HL_6AZ4_001,6AZ4,False,A,,,,,,no Rfam match (chain)
+12,motif_cif_files/HL_5BTM_001.cif,motif_cif_files/HL_6WPI_001.cif,HL_6WPI_001,6WPI,False,B,,,,,,no Rfam match (chain)
+12,motif_cif_files/HL_5BTM_001.cif,motif_cif_files/HL_8XPP_001.cif,HL_8XPP_001,8XPP,False,B,,,,,,no Rfam match (chain)
+12,motif_cif_files/HL_5BTM_001.cif,motif_cif_files/HL_8Z8U_002.cif,HL_8Z8U_002,8Z8U,False,B,,,,,,no Rfam match (chain)
+13,motif_cif_files/HL_5B2T_001.cif,motif_cif_files/HL_5B2T_001.cif,HL_5B2T_001,5B2T,True,A,,,,,,no Rfam match (chain)
+13,motif_cif_files/HL_5B2T_001.cif,motif_cif_files/HL_5F9F_003.cif,HL_5F9F_003,5F9F,False,F,,,,,,no Rfam match (chain)
+13,motif_cif_files/HL_5B2T_001.cif,motif_cif_files/HL_5FQ5_001.cif,HL_5FQ5_001,5FQ5,False,A,,,,,,no Rfam match (chain)
+13,motif_cif_files/HL_5B2T_001.cif,motif_cif_files/HL_5VW1_001.cif,HL_5VW1_001,5VW1,False,C,,,,,,no Rfam match (chain)
+13,motif_cif_files/HL_5B2T_001.cif,motif_cif_files/HL_6N2V_001.cif,HL_6N2V_001,6N2V,False,A,,,,,,no Rfam match (chain)
+13,motif_cif_files/HL_5B2T_001.cif,motif_cif_files/HL_6UFH_002.cif,HL_6UFH_002,6UFH,False,A,,,,,,no Rfam match (chain)
+13,motif_cif_files/HL_5B2T_001.cif,motif_cif_files/HL_7QQP_001.cif,HL_7QQP_001,7QQP,False,A,,,,,,no Rfam match (chain)
+13,motif_cif_files/HL_5B2T_001.cif,motif_cif_files/HL_7QQX_001.cif,HL_7QQX_001,7QQX,False,A,,,,,,no Rfam match (chain)
+13,motif_cif_files/HL_5B2T_001.cif,motif_cif_files/HL_7QR0_001.cif,HL_7QR0_001,7QR0,False,A,,,,,,no Rfam match (chain)
+13,motif_cif_files/HL_5B2T_001.cif,motif_cif_files/HL_7QR8_001.cif,HL_7QR8_001,7QR8,False,A,,,,,,no Rfam match (chain)
+13,motif_cif_files/HL_5B2T_001.cif,motif_cif_files/HL_7ZO1_001.cif,HL_7ZO1_001,7ZO1,False,A,,,,,,no Rfam match (chain)
+14,motif_cif_files/HL_7A0S_063.cif,motif_cif_files/HL_7A0S_063.cif,HL_7A0S_063,7A0S,True,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2878,chain
+14,motif_cif_files/HL_7A0S_063.cif,motif_cif_files/HL_1Q96_001.cif,HL_1Q96_001,1Q96,False,A,,,,,,no Rfam match (chain)
+14,motif_cif_files/HL_7A0S_063.cif,motif_cif_files/HL_4NLF_001.cif,HL_4NLF_001,4NLF,False,A,,,,,,no Rfam match (chain)
+14,motif_cif_files/HL_7A0S_063.cif,motif_cif_files/HL_4V9F_066.cif,HL_4V9F_066,4V9F,False,0,RF02540,LSU_rRNA_archaea,Archaeal large subunit ribosomal RNA,0,0:1-2910,chain
+14,motif_cif_files/HL_7A0S_063.cif,motif_cif_files/HL_4V9F_070.cif,HL_4V9F_070,4V9F,False,0,RF02540,LSU_rRNA_archaea,Archaeal large subunit ribosomal RNA,0,0:1-2910,chain
+14,motif_cif_files/HL_7A0S_063.cif,motif_cif_files/HL_4WF9_060.cif,HL_4WF9_060,4WF9,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2923,chain
+14,motif_cif_files/HL_7A0S_063.cif,motif_cif_files/HL_5J7L_197.cif,HL_5J7L_197,5J7L,False,DA,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,DA,DA:1-2904,chain
+14,motif_cif_files/HL_7A0S_063.cif,motif_cif_files/HL_5Y7M_002.cif,HL_5Y7M_002,5Y7M,False,D,,,,,,no Rfam match (chain)
+14,motif_cif_files/HL_7A0S_063.cif,motif_cif_files/HL_8CRE_064.cif,HL_8CRE_064,8CRE,False,1,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,1,1:1-3359,chain
+14,motif_cif_files/HL_7A0S_063.cif,motif_cif_files/HL_8P9A_176.cif,HL_8P9A_176,8P9A,False,AR,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,AR,AR:2-3149,chain
+14,motif_cif_files/HL_7A0S_063.cif,motif_cif_files/HL_9DFE_062.cif,HL_9DFE_062,9DFE,False,1A,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,1A,1A:1-2912,chain
+15,motif_cif_files/HL_5J7L_016.cif,motif_cif_files/HL_5J7L_016.cif,HL_5J7L_016,5J7L,True,AA,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,AA,AA:1-1534,chain
+15,motif_cif_files/HL_5J7L_016.cif,motif_cif_files/HL_1G1X_003.cif,HL_1G1X_003,1G1X,False,E,,,,,,no Rfam match (chain)
+15,motif_cif_files/HL_5J7L_016.cif,motif_cif_files/HL_1G1X_005.cif,HL_1G1X_005,1G1X,False,J,,,,,,no Rfam match (chain)
+15,motif_cif_files/HL_5J7L_016.cif,motif_cif_files/HL_4C7O_001.cif,HL_4C7O_001,4C7O,False,E,,,,,,no Rfam match (chain)
+15,motif_cif_files/HL_5J7L_016.cif,motif_cif_files/HL_4LFB_016.cif,HL_4LFB_016,4LFB,False,A,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,A,A:2-1520,chain
+15,motif_cif_files/HL_5J7L_016.cif,motif_cif_files/HL_6SVS_001.cif,HL_6SVS_001,6SVS,False,A,,,,,,no Rfam match (chain)
+15,motif_cif_files/HL_5J7L_016.cif,motif_cif_files/HL_6UFG_005.cif,HL_6UFG_005,6UFG,False,A,,,,,,no Rfam match (chain)
+15,motif_cif_files/HL_5J7L_016.cif,motif_cif_files/HL_8CRE_211.cif,HL_8CRE_211,8CRE,False,CM,RF01960,SSU_rRNA_eukarya,Eukaryotic small subunit ribosomal RNA,CM,CM:1-1787,chain
+15,motif_cif_files/HL_5J7L_016.cif,motif_cif_files/HL_8P9A_210.cif,HL_8P9A_210,8P9A,False,sR,RF01960,SSU_rRNA_eukarya,Eukaryotic small subunit ribosomal RNA,sR,sR:1-1800,chain
+16,motif_cif_files/HL_5J7L_167.cif,motif_cif_files/HL_5J7L_167.cif,HL_5J7L_167,5J7L,True,DA,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,DA,DA:1-2904,chain
+16,motif_cif_files/HL_5J7L_167.cif,motif_cif_files/HL_4LFB_032.cif,HL_4LFB_032,4LFB,False,A,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,A,A:2-1520,chain
+16,motif_cif_files/HL_5J7L_167.cif,motif_cif_files/HL_4WF9_034.cif,HL_4WF9_034,4WF9,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2923,chain
+16,motif_cif_files/HL_5J7L_167.cif,motif_cif_files/HL_7A0S_034.cif,HL_7A0S_034,7A0S,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2878,chain
+16,motif_cif_files/HL_5J7L_167.cif,motif_cif_files/HL_9DFE_033.cif,HL_9DFE_033,9DFE,False,1A,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,1A,1A:1-2912,chain
+17,motif_cif_files/HL_5VW1_003.cif,motif_cif_files/HL_5VW1_003.cif,HL_5VW1_003,5VW1,True,C,,,,,,no Rfam match (chain)
+17,motif_cif_files/HL_5VW1_003.cif,motif_cif_files/HL_3AGV_001.cif,HL_3AGV_001,3AGV,False,U,,,,,,no Rfam match (chain)
+17,motif_cif_files/HL_5VW1_003.cif,motif_cif_files/HL_5DDO_003.cif,HL_5DDO_003,5DDO,False,B,,,,,,no Rfam match (chain)
+17,motif_cif_files/HL_5VW1_003.cif,motif_cif_files/HL_6MJ0_008.cif,HL_6MJ0_008,6MJ0,False,B,RF00233,Tymo_tRNA-like,Tymovirus/Pomovirus/Furovirus tRNA-like 3' UTR element,B,B:24-104,chain
+17,motif_cif_files/HL_5VW1_003.cif,motif_cif_files/HL_6MJ0_008.cif,HL_6MJ0_008,6MJ0,False,B,RF00390,TYMV_upPK,turnip yellow mosaic virus upstream pseudo-knot (TYMV_upPK),B,B:1-23,chain
+17,motif_cif_files/HL_5VW1_003.cif,motif_cif_files/HL_9L6Y_001.cif,HL_9L6Y_001,9L6Y,False,B,,,,,,no Rfam match (chain)
+18,motif_cif_files/HL_4WF9_031.cif,motif_cif_files/HL_4WF9_031.cif,HL_4WF9_031,4WF9,True,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2923,chain
+18,motif_cif_files/HL_4WF9_031.cif,motif_cif_files/HL_3KTW_001.cif,HL_3KTW_001,3KTW,False,C,,,,,,no Rfam match (chain)
+18,motif_cif_files/HL_4WF9_031.cif,motif_cif_files/HL_5J7L_164.cif,HL_5J7L_164,5J7L,False,DA,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,DA,DA:1-2904,chain
+18,motif_cif_files/HL_4WF9_031.cif,motif_cif_files/HL_7A0S_031.cif,HL_7A0S_031,7A0S,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2878,chain
+19,motif_cif_files/HL_1JID_001.cif,motif_cif_files/HL_1JID_001.cif,HL_1JID_001,1JID,True,B,,,,,,no Rfam match (chain)
+19,motif_cif_files/HL_1JID_001.cif,motif_cif_files/HL_1L9A_001.cif,HL_1L9A_001,1L9A,False,B,RF00017,Metazoa_SRP,Metazoan signal recognition particle RNA,B,B:3-126,chain
+19,motif_cif_files/HL_1JID_001.cif,motif_cif_files/HL_1MFQ_001.cif,HL_1MFQ_001,1MFQ,False,A,RF00017,Metazoa_SRP,Metazoan signal recognition particle RNA,A,A:3-126,chain
+20,motif_cif_files/HL_4QLM_001.cif,motif_cif_files/HL_4QLM_001.cif,HL_4QLM_001,4QLM,True,A,RF00379,c-di-AMP,c-di-AMP riboswitch aptamer (ydaO/yuaA leader),A,A:5-124,chain
+20,motif_cif_files/HL_4QLM_001.cif,motif_cif_files/HL_4WF9_071.cif,HL_4WF9_071,4WF9,False,X,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,X,X:1-2923,chain
+20,motif_cif_files/HL_4QLM_001.cif,motif_cif_files/HL_6LAX_002.cif,HL_6LAX_002,6LAX,False,A,,,,,,no Rfam match (chain)
+21,motif_cif_files/HL_8P9A_225.cif,motif_cif_files/HL_8P9A_225.cif,HL_8P9A_225,8P9A,True,sR,RF01960,SSU_rRNA_eukarya,Eukaryotic small subunit ribosomal RNA,sR,sR:1-1800,chain
+21,motif_cif_files/HL_8P9A_225.cif,motif_cif_files/HL_5J7L_031.cif,HL_5J7L_031,5J7L,False,AA,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,AA,AA:1-1534,chain
+21,motif_cif_files/HL_8P9A_225.cif,motif_cif_files/HL_8CRE_225.cif,HL_8CRE_225,8CRE,False,CM,RF01960,SSU_rRNA_eukarya,Eukaryotic small subunit ribosomal RNA,CM,CM:1-1787,chain
+22,motif_cif_files/HL_3AM1_002.cif,motif_cif_files/HL_3AM1_002.cif,HL_3AM1_002,3AM1,True,B,,,,,,no Rfam match (chain)
+23,motif_cif_files/HL_4KQY_002.cif,motif_cif_files/HL_4KQY_002.cif,HL_4KQY_002,4KQY,True,A,RF00162,SAM,SAM riboswitch aptamer (S box leader),A,A:2-118,chain
+24,motif_cif_files/HL_4LFB_033.cif,motif_cif_files/HL_4LFB_033.cif,HL_4LFB_033,4LFB,True,A,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,A,A:2-1520,chain
+25,motif_cif_files/HL_4V9F_022.cif,motif_cif_files/HL_4V9F_022.cif,HL_4V9F_022,4V9F,True,0,RF02540,LSU_rRNA_archaea,Archaeal large subunit ribosomal RNA,0,0:1-2910,chain
+26,motif_cif_files/HL_4V9F_040.cif,motif_cif_files/HL_4V9F_040.cif,HL_4V9F_040,4V9F,True,0,RF02540,LSU_rRNA_archaea,Archaeal large subunit ribosomal RNA,0,0:1-2910,chain
+27,motif_cif_files/HL_5J7L_180.cif,motif_cif_files/HL_5J7L_180.cif,HL_5J7L_180,5J7L,True,DA,RF02541,LSU_rRNA_bacteria,Bacterial large subunit ribosomal RNA,DA,DA:1-2904,chain
+28,motif_cif_files/HL_5J7L_205.cif,motif_cif_files/HL_5J7L_205.cif,HL_5J7L_205,5J7L,True,AA,RF00177,SSU_rRNA_bacteria,Bacterial small subunit ribosomal RNA,AA,AA:1-1534,chain
+29,motif_cif_files/HL_5VSU_001.cif,motif_cif_files/HL_5VSU_001.cif,HL_5VSU_001,5VSU,True,I,RF00026,U6,U6 spliceosomal RNA,I,I:1-82,chain
+30,motif_cif_files/HL_7U4A_001.cif,motif_cif_files/HL_7U4A_001.cif,HL_7U4A_001,7U4A,True,A,,,,,,no Rfam match (chain)
+31,motif_cif_files/HL_8CRE_032.cif,motif_cif_files/HL_8CRE_032.cif,HL_8CRE_032,8CRE,True,1,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,1,1:1-3359,chain
+32,motif_cif_files/HL_8CRE_199.cif,motif_cif_files/HL_8CRE_199.cif,HL_8CRE_199,8CRE,True,CM,RF01960,SSU_rRNA_eukarya,Eukaryotic small subunit ribosomal RNA,CM,CM:1-1787,chain
+33,motif_cif_files/HL_8DP3_003.cif,motif_cif_files/HL_8DP3_003.cif,HL_8DP3_003,8DP3,True,R,RF00386,Entero_5_CRE,Enterovirus 5' cloverleaf cis-acting replication element,R,R:2-90,chain
+34,motif_cif_files/HL_8P9A_145.cif,motif_cif_files/HL_8P9A_145.cif,HL_8P9A_145,8P9A,True,AR,RF02543,LSU_rRNA_eukarya,Eukaryotic large subunit ribosomal RNA,AR,AR:2-3149,chain
